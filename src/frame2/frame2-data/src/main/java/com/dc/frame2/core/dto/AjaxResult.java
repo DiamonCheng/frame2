@@ -2,6 +2,11 @@ package com.dc.frame2.core.dto;
 
 import java.io.Serializable;
 
+/**
+ * Data transfer object for ajax response.
+ * Mostly used in a rest controller to return a response
+ * @author DC
+ */
 public class AjaxResult implements Serializable{
 	private static final long serialVersionUID = -6770538785772264261L;
 	private boolean success=true;

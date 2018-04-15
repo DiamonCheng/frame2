@@ -6,21 +6,45 @@ package com.dc.frame2.core.dao.conditions;
  * @author DC
  * @date 2018/4/14.
  */
-public enum CompareType {
+public enum CompareOperator {
     /**
      * use "=" compare this condition
      */
     EQ,
     /**
-     * use like compare this condition, will not contact "%" character
+     * use "like" compare this condition, will not contact "%" character
      */
     LIKE,
-    
+    /**
+     * use "like" compare this condition, will contact "%" after.  result "name%" , will escape % char
+     */
     PRE_LIKE,
+    /**
+     * use "like" compare this condition, will contact "%" before.  result "%name", will escape % char
+     */
     POST_LIKE,
-    BOTH_LIKE,
+    /**
+     * use "like" compare this condition, will contact "%" before and after.  result "%name%", will escape % char
+     */
+    DUP_LIKE,
+    /**
+     * use "&gt;" compare this condition.
+     */
     GT,
+    /**
+     * use "&lt;" compare this condition
+     */
     LT,
+    /**
+     * use "&gt;=" compare this condition.
+     */
     GTEQ,
-    LTEQ
+    /**
+     * use "&lt;=" compare this condition.
+     */
+    LTEQ,
+    /**
+     * use "!=" compare this condition.
+     */
+    NOT_EQ
 }

@@ -1,6 +1,6 @@
 package com.dc.frame2.core.dao.conditions;
 
-import javax.persistence.criteria.JoinType;
+
 import java.lang.annotation.*;
 
 /**
@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface CompareWith {
+public @interface Condition{
     /**
      * <p>specified this condition to compare witch field.
      * <p>use dot(.) to split join field</p>
@@ -24,11 +24,11 @@ public @interface CompareWith {
      * </code>
      * <br/>-------------<br/>
      * <code>
-     *     \@CompareWith("parent.name") <br/>
+     *     \@Condition("parent.name") <br/>
      *     private String parentName;
      * </code>
      */
-    String value();
+    String value() default "";
     
     /**
      * specified compare operator use this attr
@@ -49,8 +49,13 @@ public @interface CompareWith {
     
     /**
      * use witch join type to join foreign entity. just work for join field.
-     * @return default null.
+     * @return default NONE.
      */
-    JoinType joinType();
+    JoinType joinType() default JoinType.NONE;
     
+    /**
+     * define if this value will be a condition when this value is null
+     * @return default false
+     */
+    boolean nullResolve() default false;
 }

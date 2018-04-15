@@ -1,14 +1,26 @@
 package com.dc.frame2.core.dao.conditions;
 
 /**
- * <p>Descriptions...
+ * <p> Join type enum in condition.
  *
  * @author DC
  * @date 2018/4/14.
  */
-@Target({ElementType.FIELD, ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-@Documented
-public @interface JoinType {
+public enum JoinType {
+    /**
+     * not join
+     */
+    NONE,
+    /**
+     * Inner join
+     */
+    INNER,
+    /**
+     * Left join
+     */
+    LEFT,
+    /**
+     * Right join
+     */
+    RIGHT
 }

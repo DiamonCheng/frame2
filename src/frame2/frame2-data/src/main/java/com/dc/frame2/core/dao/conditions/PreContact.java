@@ -1,11 +1,14 @@
 package com.dc.frame2.core.dao.conditions;
 
 /**
- * <p>Descriptions...
+ * Use "and" or "or" to contact this condition
  *
  * @author DC
  * @date 2018/4/14.
  */
 public enum PreContact {
-    AND,OR;
+    /**use "and" default*/
+    AND,
+    /**use "or" */
+    OR;
 }
