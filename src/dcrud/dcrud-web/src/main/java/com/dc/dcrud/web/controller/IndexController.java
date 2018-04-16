@@ -45,4 +45,9 @@ public class IndexController {
     public Object searchUser(UserSearcher searcher){
         return userDao.searchPage(searcher);
     }
+    
+    @RequestMapping({"/index2"})
+    public Object index2() {
+        return "index2";
+    }
 }

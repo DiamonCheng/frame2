@@ -11,11 +11,11 @@
 
     <artifactId>dcrud-service</artifactId>
 
-        <dependencies>
-            <dependency>
-                <groupId>com.dc</groupId>
-                <artifactId>dcrud-dao</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-        </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.dc</groupId>
+            <artifactId>dcrud-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
