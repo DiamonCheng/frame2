@@ -4,6 +4,8 @@ import com.dc.dcrud.dao.UserDao;
 import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.frame2.core.dto.AjaxResult;
+import com.dc.frame2.view.engine.freemarker.FreeMarkerConfigurationManager;
+import com.dc.frame2.view.view.freemarker.SimpleContentView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,5 +51,14 @@ public class IndexController {
     @RequestMapping({"/index2"})
     public Object index2() {
         return "index2";
+    }
+    
+    
+    @Autowired
+    private FreeMarkerConfigurationManager freeMarkerConfigurationManager;
+    
+    @RequestMapping("/testF2")
+    public Object frame2(){
+        return new SimpleContentView().setConfiguration(freeMarkerConfigurationManager.getConfiguration()).setName("DCCCCCCCCCCCCCCCCCCCC");
     }
 }
