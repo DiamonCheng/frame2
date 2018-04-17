@@ -7,7 +7,8 @@
     <modules>
         <module>frame2-data-jpa</module>
         <module>frame2-model</module>
-        <module>frame2-views-thymeleaf</module>
+        <module>frame2-views</module>
+        <module>frame2-common</module>
     </modules>
     <groupId>com.dc</groupId>
     <artifactId>frame2</artifactId>

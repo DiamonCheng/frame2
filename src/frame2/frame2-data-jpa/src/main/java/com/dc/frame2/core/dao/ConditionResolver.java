@@ -59,7 +59,7 @@ public class ConditionResolver {
         }
         return predicate;
     }
-
+    
     private Predicate resolveOperator(Path path,Object value, Condition condition,CriteriaBuilder builder){
         try {
             switch (condition.operator()){

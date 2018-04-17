@@ -3,6 +3,7 @@ package com.dc.dcrud.dao;
 import com.dc.dcrud.domain.UserEntity;
 import com.dc.frame2.core.dao.SearcherJpaRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * <p>Descriptions...
