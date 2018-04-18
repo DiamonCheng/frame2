@@ -59,6 +59,6 @@ public class IndexController {
     
     @RequestMapping("/testF2")
     public Object frame2(){
-        return new SimpleContentView().setConfiguration(freeMarkerConfigurationManager.getConfiguration()).setName("DCCCCCCCCCCCCCCCCCCCC");
+        return new SimpleContentView().setConfiguration(freeMarkerConfigurationManager.getConfiguration()).setName("DCCCCCCCCC<><><><M><><><CCCCCCCCCCC");
     }
 }

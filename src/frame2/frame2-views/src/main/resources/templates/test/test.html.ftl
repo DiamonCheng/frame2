@@ -8,6 +8,12 @@
     <title>Document</title>
 </head>
 <body>
-    ${who.im}
+<#import "/spring.ftl" as spring />
+<#escape x as x?html>
+    ${frame2root.name}
+    <#assign n="message"/>
+    <#--<@spring.message code="???"/>-->
+</#escape>
+
 </body>
 </html>

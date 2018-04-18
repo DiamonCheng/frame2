@@ -1,11 +1,17 @@
 package com.dc.frame2.view.support;
 
+import com.dc.frame2.util.MapBuilder;
 import com.dc.frame2.view.engine.freemarker.FreeMarkerConfigurationManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
+import javax.servlet.ServletContext;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>Descriptions...
@@ -14,14 +20,22 @@ import java.util.Collections;
  * @date 2018/4/17.
  */
 @Configuration
-public class Frame2ViewSpringConfiguration {
+@EnableWebMvc
+public class Frame2ViewSpringConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public FreeMarkerConfigurationManager freeMarkerConfigurationManager(){
-        return new FreeMarkerConfigurationManager();
+        FreeMarkerConfigurationManager freeMarkerConfigurationManager=new FreeMarkerConfigurationManager();
+        freeMarkerConfigurationManager.getConfiguration().addAutoImport("spring","/spring.ftl");
+        return freeMarkerConfigurationManager;
     }
     @Bean
-    public RequestMappingHandlerAdapter addHandlers(RequestMappingHandlerAdapter requestMappingHandlerAdapter){
-        requestMappingHandlerAdapter.setCustomReturnValueHandlers(Collections.singletonList(new Frame2ViewHandler()));
-        return requestMappingHandlerAdapter;
+    public Frame2ViewHandler frame2ViewHandler(){
+        return new Frame2ViewHandler();
     }
+    
+    @Override
+    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
+        returnValueHandlers.add(frame2ViewHandler());
+    }
+
 }
