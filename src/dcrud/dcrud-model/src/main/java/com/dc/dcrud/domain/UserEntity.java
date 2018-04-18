@@ -13,30 +13,30 @@ import java.util.Set;
 public class UserEntity extends BaseConfigEntity {
     private static final long serialVersionUID = -6918259654521503874L;
     @Column(length = 63)
-    private String userName;
+    private String username;
     @Column(length = 63)
-    private String userPassword;
+    private String password;
     @Column(length = 63)
     private String nickName;
     @ManyToMany(targetEntity = RoleEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
     private Set<RoleEntity> roles;
     
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
     
-    public UserEntity setUserName(String userName) {
-        this.userName = userName;
+    public UserEntity setUsername(String username) {
+        this.username = username;
         return this;
     }
     
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
     
-    public UserEntity setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public UserEntity setPassword(String password) {
+        this.password = password;
         return this;
     }
     
@@ -64,8 +64,8 @@ public class UserEntity extends BaseConfigEntity {
     @Override
     public String toString() {
         return "UserEntity{" +
-                       "userName='" + userName + '\'' +
-                       ", userPassword='" + userPassword + '\'' +
+                       "username='" + username + '\'' +
+                       ", password='" + password + '\'' +
                        ", nickName='" + nickName + '\'' +
                        ", roles=" + roles +
                        "} " + super.toString();
