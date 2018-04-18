@@ -36,8 +36,8 @@ public class IndexController {
     public Object insertUser() {
         userDao.save(new UserEntity()
                                .setNickName("沈程辉_" + new Random().nextInt(2333))
-                               .setUserName("admin_" + new Random().nextInt(2333))
-                               .setUserPassword("2333")
+                               .setUsername("admin_" + new Random().nextInt(2333))
+                               .setPassword("2333")
         );
         return new AjaxResult();
     }
