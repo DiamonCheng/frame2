@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class MapBuilder<K,V> {
     private Map<K,V> map;
-    
+    private MapBuilder(){}
     public static <K,V> MapBuilder<K,V> hashMap(){
         MapBuilder<K,V> builder=new MapBuilder<>();
         builder.map=new HashMap<>(3);

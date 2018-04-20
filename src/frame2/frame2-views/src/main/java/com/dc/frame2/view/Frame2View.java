@@ -14,6 +14,6 @@ import java.util.Map;
  * @date 2018/4/17.
  */
 public interface Frame2View {
-    String ROOT_PARAM_NAME="frame2root";
-    void render(Locale locale, OutputStreamWriter writer,Object exModule) throws IOException, TemplateException;
+    String getTemplateName();
+    Map<String,Object> getParam();
 }

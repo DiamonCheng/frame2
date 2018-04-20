@@ -1,10 +1,4 @@
 
-<#assign x = frame2root/>
-
-<@frame2macro frame2root=x></@frame2macro>
-
-<#macro frame2macro frame2root>
-<#assign x=frame2root/>
 
 <!doctype html>
 <html lang="en">
@@ -18,24 +12,11 @@
 <body>
 <ul>
 
-    <#--frame2root = 2333 :-->
-    <#--${frame2root.toString()}<br/>-->
-    <#list x.viewList as view>
-        <#--frame2root=view :
-        <#assign frame2root=view/>
-    ${frame2root.toString()}<br/>
-        view:
-        ${view.toString()}<br/>
-        view.templateName:
-        ${view.templateName}<br/>
-        <#include view.templateName />-->
-        <#import view.templateName as n/>
-        <li>
-            <@n.frame2macro view/>
-        </li>
-    </#list>
+    In template: test3.html<br/>
+    <#--${view}-->
+    ${RENDER(view)}
+    <#--${}-->
 
 </ul>
 </body>
 </html>
-</#macro>

@@ -4,8 +4,9 @@ import com.dc.dcrud.dao.UserDao;
 import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.frame2.core.dto.AjaxResult;
-import com.dc.frame2.view.engine.freemarker.FreeMarkerConfigurationManager;
+import com.dc.frame2.view.view.freemarker.ListContentView;
 import com.dc.frame2.view.view.freemarker.SimpleContentView;
+import com.dc.frame2.view.view.freemarker.SimpleContentView2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,12 +54,13 @@ public class IndexController {
         return "index2";
     }
     
-    
-    @Autowired
-    private FreeMarkerConfigurationManager freeMarkerConfigurationManager;
-    
     @RequestMapping("/testF2")
     public Object frame2(){
-        return new SimpleContentView().setConfiguration(freeMarkerConfigurationManager.getConfiguration()).setName("DCCCCCCCCC<><><><M><><><CCCCCCCCCCC");
+        return new SimpleContentView2().setSimpleContentView(
+                new ListContentView().addView(new SimpleContentView().setName("DCCCCCCCCC<><><><M><><><CCCCCCCCCCC"))
+                        .addView(new SimpleContentView().setName("~~~~ List 2 content ~~~~~~"))
+                        .addView(new SimpleContentView().setName("~~~~ List 3 测试中文 ~~~~~~"))
+                        .addView(new SimpleContentView().setName("~~~~ List 4 测试中文2~~~~~~"))
+        );
     }
 }

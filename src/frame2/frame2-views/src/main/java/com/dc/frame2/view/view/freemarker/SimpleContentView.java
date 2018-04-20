@@ -20,24 +20,17 @@ import java.util.Map;
  */
 public class SimpleContentView implements Frame2View {
     private static final String TEMPLATE_NAME="test/test.html.ftl";
-    private  Configuration configuration;
     private String name;
+    
+    
     @Override
-    public void render(Locale locale, OutputStreamWriter writer,Object exModule) throws IOException, TemplateException {
-        Template template=configuration.getTemplate(TEMPLATE_NAME,locale);
-        if (exModule instanceof SimpleHash){
-            ((SimpleHash) exModule).put(ROOT_PARAM_NAME,this);
-            template.process(exModule,writer);
-        }else {
-            template.process(MapBuilder.<String, Object>hashMap()
-                                     .put(ROOT_PARAM_NAME,this)
-                                     .build(), writer);
-        }
+    public String getTemplateName() {
+        return TEMPLATE_NAME;
     }
     
-    public SimpleContentView setConfiguration(Configuration configuration) {
-        this.configuration = configuration;
-        return this;
+    @Override
+    public Map<String, Object> getParam() {
+        return MapBuilder.<String,Object>hashMap().put("name",name).build();
     }
     
     public SimpleContentView setName(String name) {
