@@ -22,7 +22,7 @@ import java.util.Locale;
  */
 @Configuration
 public class WebConfiguration extends WebMvcConfigurerAdapter {
-    private static final String[] MESSAGE_SOURCE_LOCATIONS={"classpath:/i18n/messages_page"};
+    private static final String[] MESSAGE_SOURCE_LOCATIONS = {"classpath:/i18n/messages_page", "classpath:/i18n/messages"};
     @Bean
     public MessageSource messageSource(){
         ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource=new ReloadableResourceBundleMessageSource();

@@ -1,6 +1,7 @@
 /** layuiAdmin.pro-v1.0.0-beta9 LPPL License By http://www.layui.com/admin/ */
 #LAY_app, body, html {
-    height: 100%
+    height: 100%;
+    background-color: #d2d2d2;
 }
 
 .layui-layout-body {
@@ -23,7 +24,10 @@
 .layadmin-user-login-main {
     width: 375px;
     margin: 0 auto;
-    box-sizing: border-box
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    border-color: #ccc;
+    border-radius: 10px;
 }
 
 .layadmin-user-login-box {
@@ -74,8 +78,9 @@
 .layadmin-user-login-other {
     position: relative;
     font-size: 0;
-    line-height: 38px;
-    padding-top: 0px
+    /* line-height: 38px; */
+    padding-top: 0px;
+    margin-bottom: 0;
 }
 
 .layadmin-user-login-other > * {

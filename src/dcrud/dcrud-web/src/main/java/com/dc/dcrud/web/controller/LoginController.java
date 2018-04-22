@@ -2,11 +2,14 @@ package com.dc.dcrud.web.controller;
 
 import com.dc.dcrud.domain.UserEntity;
 import com.dc.frame2.util.web.MessageResolver;
+import com.dc.frame2.util.web.WebContextBinder;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +37,21 @@ public class LoginController {
     }
     
     @RequestMapping(value="/login",method = RequestMethod.POST)
-    public Object login(UserEntity userEntity){
-        UsernamePasswordToken token = new UsernamePasswordToken(userEntity.getUsername(), new SimpleHash("sha1", userEntity.getPassword(), userEntity.getUsername()).toHex());
+    public Object login(UserEntity userEntity, boolean rememberMe) {
+        UsernamePasswordToken token = new UsernamePasswordToken(userEntity.getUsername(), userEntity.getPassword());
+        token.setRememberMe(rememberMe);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
-            return "redirect:index";
+            SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(WebContextBinder.getRequest());
+            if (savedRequest != null && savedRequest.getMethod().equalsIgnoreCase(AccessControlFilter.GET_METHOD)) {
+                return "redirect:" + savedRequest.getRequestUrl();
+            } else {
+                return "redirect:/index";
+            }
         } catch (AuthenticationException e) {
             LOGGER.error(String.format("User %s login failed.", userEntity.getUsername()), e);
-            return new ModelAndView("common/login").addObject("failedMessage", messageResolver.getMessage("login.failed.message"));
+            return new ModelAndView("common/login").addObject("username", userEntity.getUsername()).addObject("failedMessage", messageResolver.getMessage("login.failed.message"));
         }
-        
     }
 }
