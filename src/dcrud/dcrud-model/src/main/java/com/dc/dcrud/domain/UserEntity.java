@@ -9,7 +9,7 @@ import java.util.Set;
  * @author DC
  */
 @Entity
-@Table(name = "sys_user", uniqueConstraints = @UniqueConstraint(columnNames = {"userName"}))
+@Table(name = "sys_user", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 public class UserEntity extends BaseConfigEntity {
     private static final long serialVersionUID = -6918259654521503874L;
     @Column(length = 63)

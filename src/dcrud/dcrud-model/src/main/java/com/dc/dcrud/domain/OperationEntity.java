@@ -8,26 +8,27 @@ import java.util.List;
 /**
  * @author DC
  */
-@Table(name = "sys_menu")
+@Table(name = "sys_operation")
 @Entity
-public class MenuEntity extends BaseConfigEntity {
+public class OperationEntity extends BaseConfigEntity {
     private static final long serialVersionUID = 2283028973673917967L;
-    private String displayName;
+    private String code;
     private String requestURI;
-    private boolean hidden;
+    private Boolean isMenu;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
-    private MenuEntity parent;
+    private OperationEntity parent;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "none"))
-    private List<MenuEntity> children;
+    private List<OperationEntity> children;
     
-    public String getDisplayName() {
-        return displayName;
+    public String getCode() {
+        
+        return code;
     }
     
-    public MenuEntity setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public OperationEntity setCode(String code) {
+        this.code = code;
         return this;
     }
     
@@ -35,50 +36,36 @@ public class MenuEntity extends BaseConfigEntity {
         return requestURI;
     }
     
-    public MenuEntity setRequestURI(String requestURI) {
+    public OperationEntity setRequestURI(String requestURI) {
         this.requestURI = requestURI;
         return this;
     }
     
-    public boolean isHidden() {
-        return hidden;
+    public Boolean getIsMenu() {
+        return isMenu;
     }
     
-    public MenuEntity setHidden(boolean hidden) {
-        this.hidden = hidden;
+    public OperationEntity setIsMenu(Boolean isMenu) {
+        this.isMenu = isMenu;
         return this;
     }
     
-    public MenuEntity getParent() {
+    public OperationEntity getParent() {
         return parent;
     }
     
-    public MenuEntity setParent(MenuEntity parent) {
+    public OperationEntity setParent(OperationEntity parent) {
         this.parent = parent;
         return this;
     }
     
-    public List<MenuEntity> getChildren() {
+    public List<OperationEntity> getChildren() {
         return children;
     }
     
-    public MenuEntity setChildren(List<MenuEntity> children) {
+    public OperationEntity setChildren(List<OperationEntity> children) {
         this.children = children;
         return this;
-    }
-    
-    /**
-     * toString
-     */
-    @Override
-    public String toString() {
-        return "MenuEntity{" +
-                       "displayName='" + displayName + '\'' +
-                       ", requestURI='" + requestURI + '\'' +
-                       ", hidden=" + hidden +
-                       ", parent=" + parent +
-                       ", children=" + children +
-                       "} " + super.toString();
     }
     
     @Override
@@ -89,5 +76,19 @@ public class MenuEntity extends BaseConfigEntity {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+    
+    /**
+     * toString
+     */
+    @Override
+    public String toString() {
+        return "OperationEntity{" +
+                       "code='" + code + '\'' +
+                       ", requestURI='" + requestURI + '\'' +
+                       ", isMenu='" + isMenu + '\'' +
+                       ", parent=" + parent +
+                       ", children=" + children +
+                       "} " + super.toString();
     }
 }

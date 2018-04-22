@@ -18,9 +18,9 @@ public class RoleEntity extends BaseConfigEntity {
     private String name;
     @Column(length = 255)
     private String description;
-    @ManyToMany(targetEntity = MenuEntity.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = OperationEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
-    private Set<MenuEntity> alowMenus;
+    private Set<OperationEntity> permissions;
     
     public String getCode() {
         return code;
@@ -49,12 +49,12 @@ public class RoleEntity extends BaseConfigEntity {
         return this;
     }
     
-    public Set<MenuEntity> getAlowMenus() {
-        return alowMenus;
+    public Set<OperationEntity> getPermissions() {
+        return permissions;
     }
     
-    public RoleEntity setAlowMenus(Set<MenuEntity> alowMenus) {
-        this.alowMenus = alowMenus;
+    public RoleEntity setPermissions(Set<OperationEntity> permissions) {
+        this.permissions = permissions;
         return this;
     }
     
@@ -67,7 +67,7 @@ public class RoleEntity extends BaseConfigEntity {
                        "code='" + code + '\'' +
                        ", name='" + name + '\'' +
                        ", description='" + description + '\'' +
-                       ", alowMenus=" + alowMenus +
+                       ", permissions=" + permissions +
                        "} " + super.toString();
     }
     
