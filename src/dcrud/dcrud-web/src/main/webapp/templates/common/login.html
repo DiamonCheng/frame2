@@ -6,6 +6,9 @@
     <script src="resources/layui/layui.all.js"></script>
     <script src="resources/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="resources/js/common/common.js"></script>
+    <script src="resources/js/common/validator.js"></script>
+    <script th:src="|resources/js/lang_#{common.lang}.js|"></script>
+    <script src="resources/js/common/validator.list.js"></script>
     <link rel="stylesheet" href="resources/layui/css/layui.css"/>
     <link rel="stylesheet" href="resources/css/common/login.css"/>
     <link rel="stylesheet" href="resources/css/theme/app.css"/>
@@ -24,15 +27,24 @@
                 <div class="layui-form-item">
                     <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
                     <input th:placeholder="#{login.page.username}" type="text" name="username" th:value="${username}"
-                           id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
+                           autocomplete="off"
+                           id="LAY-user-login-username" validator="required" placeholder="用户名" class="layui-input">
                 </div>
                 <div class="layui-form-item">
                     <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
                     <input th:placeholder="#{login.page.password}" type="password" name="password"
-                           id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="layui-input">
+                           id="LAY-user-login-password" validator="required" placeholder="密码" class="layui-input">
+                    <!--<div class="danger-tip">
+                        <span class="layui-badge">!</span> <span class="danger-text" th:utext="${failedMessage}"></span>
+                    </div>-->
                 </div>
-                <div class="layui-form-item" th:if="${failedMessage != null}">
+                <div class="layui-form-item failedMessage" th:if="${failedMessage != null}">
                     <span class="layui-badge">!</span> <span class="danger-text" th:utext="${failedMessage}"></span>
+                    <script>$(function () {
+                        validator.onValidate = function () {
+                            $(".failedMessage").remove()
+                        }
+                    })</script>
                 </div>
                 <div class="layui-form-item">
                     <input th:title="#{login.page.rememberMe}" type="checkbox" name="rememberMe" lay-skin="primary"

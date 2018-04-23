@@ -46,4 +46,7 @@ $(function () {
             , laydate = layui.laydate;
         form.render();
     });
+
+    //***  validator  ***//
+    validator.register();
 });

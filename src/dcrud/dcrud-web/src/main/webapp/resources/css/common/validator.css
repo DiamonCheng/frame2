@@ -1,0 +1,15 @@
+
+form .danger select,
+form .danger input,
+form .danger textarea {
+    border-color: #FF5722 !important
+}
+
+form .danger-text {
+    color: #FF5722 !important;
+}
+
+form .danger-tip {
+    margin-top: 1px;
+    line-height: 18px;
+}
