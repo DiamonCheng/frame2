@@ -29,12 +29,13 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/resources/**", "anon");
+        filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**", "user");
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/resources/error/403.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

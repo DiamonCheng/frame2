@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Defferson.Cheng
  * @date 2018/4/19.
  */
-public class ListContentView implements Frame2View{
+public class ListContentView implements FreemarkerView {
     private static final String TEMPLATE_NAME="/test/test2.html.ftl";
     private List<Frame2View> list=new ArrayList<>();
     @Override

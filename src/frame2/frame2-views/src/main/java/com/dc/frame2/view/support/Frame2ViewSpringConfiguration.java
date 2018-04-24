@@ -1,5 +1,6 @@
 package com.dc.frame2.view.support;
 
+import com.dc.frame2.view.engine.freemarker.FreemarkerViewRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,14 +30,21 @@ public class Frame2ViewSpringConfiguration  {
     }
     
     @Bean
-    public Frame2ViewHandler frame2ViewHandler(Frame2ServletContextResolver frame2ServletContextResolver){
-        if (configuration==null){
-            configuration=frame2ViewConfiguration.buildConfiguration();
+    public FreemarkerViewRender freemarkerViewRender(Frame2ServletContextResolver frame2ServletContextResolver) {
+        if (configuration == null) {
+            configuration = frame2ViewConfiguration.buildConfiguration();
         }
-        return new Frame2ViewHandler()
+        return new FreemarkerViewRender().setConfiguration(configuration)
                        .setFrame2ServletContextResolver(frame2ServletContextResolver)
-                       .setConfiguration(configuration)
                        .setFrame2ViewConfiguration(frame2ViewConfiguration);
+    }
+    
+    @Bean
+    public Frame2ViewHandler frame2ViewHandler(FreemarkerViewRender freemarkerViewRender) {
+        return new Frame2ViewHandler()
+                       .setFrame2ViewRender(
+                               new Frame2ViewRenderHub().addFrame2ViewRender(freemarkerViewRender)
+                       );
     }
     
     
