@@ -2,6 +2,9 @@ package com.dc.dcrud.web;
 
 import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
+import org.sitemesh.builder.SiteMeshFilterBuilder;
+import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -64,4 +67,19 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         registry.addInterceptor(localeChangeInterceptor());
     }
     
+    @Bean
+    public FilterRegistrationBean getConfigurableSiteMeshFilter(){
+        FilterRegistrationBean registrationBean=new FilterRegistrationBean();
+        registrationBean.setFilter(new ConfigurableSiteMeshFilter(){
+            @Override
+            protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
+                builder.addDecoratorPath("/**", "/decorator")
+                        .addExcludedPath("/resources**")
+                        .addExcludedPath("**ajax**")
+                        .addExcludedPath("/login");
+            }
+        });
+        registrationBean.addUrlPatterns("/*");
+        return registrationBean;
+    }
 }

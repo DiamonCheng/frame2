@@ -1,47 +1,47 @@
+<!--
+
+NOTICE:
+网页样式参考于 http://www.layui.com/admin/std/dist/views/
+
+如有新功能添加可参考上述网址
+
+
+-->
+
+
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sitemesh="http://www.sitemesh3.org">
 <head>
     <meta charset="utf-8">
-    <title>layuiAdmin std - 通用后台管理模板系统（iframe标准版）</title>
+    <title th:utext="#{app.name}"></title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <script src="resources/layui/layui.all.js"></script>
-    <script src="resources/js/jquery/jquery-1.12.4.min.js"></script>
-    <script src="resources/js/common/common.js"></script>
-    <script src="resources/js/common/validator.js"></script>
-    <script th:src="|resources/js/lang_#{common.lang}.js|"></script>
-    <script src="resources/js/common/validator.list.js"></script>
-    <link rel="stylesheet" href="resources/layui/css/layui.css"/>
-    <link rel="stylesheet" href="resources/css/common/login.css"/>
-    <link rel="stylesheet" href="resources/css/theme/app.css"/>
-    <link rel="stylesheet" href="resources/css/common/validator.css"/>
-
-    <script>
-        /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
-    </script>
+    <script src="/resources/js/jquery/jquery-1.12.4.min.js"></script>
+    <script src="/resources/js/common/common.js"></script>
+    <script src="/resources/js/common/validator.js"></script>
+    <script th:src="|/resources/js/lang_#{common.lang}.js|"></script>
+    <script src="/resources/js/common/validator.list.js"></script>
+    <link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/resources/css/common/decorator.css"/>
+    <link rel="stylesheet" href="/resources/css/theme/app.css"/>
+    <link rel="stylesheet" href="/resources/css/common/validator.css"/>
+    <sitemesh:write property='head' />
 </head>
 <body class="layui-layout-body">
-
-<div id="LAY_app">
+<div id="frame2_app">
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
+            <div class="layui-logo" lay-href="home/console.html">
+                <span>layuiAdmin</span>
+            </div>
             <!-- 头部区域 -->
             <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item layadmin-flexible" lay-unselect>
-                    <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
-                        <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
-                    </a>
-                </li>
-                <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="http://www.layui.com/admin/" target="_blank" title="前台">
-                        <i class="layui-icon layui-icon-website"></i>
-                    </a>
-                </li>
-                <li class="layui-nav-item" lay-unselect>
-                    <a href="javascript:;" layadmin-event="refresh" title="刷新">
-                        <i class="layui-icon layui-icon-refresh-3"></i>
+                <li class="layui-nav-item layadmin-flexible" >
+                    <a href="javascript:;"  title="侧边伸缩" id="frame2_app_flexible">
+                        <i class="layui-icon layui-icon-shrink-right" ></i>
+                        <i class="layui-icon layui-icon-spread-left" ></i>
                     </a>
                 </li>
             </ul>
@@ -60,11 +60,6 @@
                         <i class="layui-icon layui-icon-theme"></i>
                     </a>
                 </li>
-                <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="note">
-                        <i class="layui-icon layui-icon-note"></i>
-                    </a>
-                </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;">
                         <cite>贤心</cite>
@@ -81,22 +76,15 @@
                     <a href="javascript:;" layadmin-event="about"><i
                             class="layui-icon layui-icon-more-vertical"></i></a>
                 </li>
-                <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
-                    <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
-                </li>
             </ul>
         </div>
 
         <!-- 侧边菜单 -->
-        <div class="layui-side layui-side-menu">
+        <div class="layui-side-menu">
             <div class="layui-side-scroll">
-                <div class="layui-logo" lay-href="home/console.html">
-                    <span>layuiAdmin</span>
-                </div>
-
-                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
+                <dl class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
                     lay-filter="layadmin-system-side-menu">
-                    <li data-name="home" class="layui-nav-item">
+                    <dd data-name="home" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="主页" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>主页</cite>
@@ -106,8 +94,8 @@
                                 <a lay-href="home/console.html">控制台</a>
                             </dd>
                         </dl>
-                    </li>
-                    <li data-name="component" class="layui-nav-item">
+                    </dd>
+                    <dd data-name="component" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="组件" lay-direction="2">
                             <i class="layui-icon layui-icon-component"></i>
                             <cite>组件</cite>
@@ -285,8 +273,8 @@
                                 <a lay-href="component/code/index.html">代码修饰</a>
                             </dd>
                         </dl>
-                    </li>
-                    <li data-name="template" class="layui-nav-item">
+                    </dd>
+                    <dd data-name="template" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="模板" lay-direction="2">
                             <i class="layui-icon layui-icon-template"></i>
                             <cite>模板</cite>
@@ -303,8 +291,8 @@
                             <dd><a lay-href="http://www.layui.com/">layui官网</a></dd>
                             <dd><a lay-href="http://www.layui.com/admin/">layuiAdmin官网</a></dd>
                         </dl>
-                    </li>
-                    <li data-name="app" class="layui-nav-item">
+                    </dd>
+                    <dd data-name="app" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="应用" lay-direction="2">
                             <i class="layui-icon layui-icon-app"></i>
                             <cite>应用</cite>
@@ -314,8 +302,8 @@
                                 <a lay-href="app/message/index.html">消息中心</a>
                             </dd>
                         </dl>
-                    </li>
-                    <li data-name="senior" class="layui-nav-item">
+                    </dd>
+                    <dd data-name="senior" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="高级" lay-direction="2">
                             <i class="layui-icon layui-icon-senior"></i>
                             <cite>高级</cite>
@@ -325,8 +313,8 @@
                                 <a layadmin-event="im">LayIM 通讯系统</a>
                             </dd>
                         </dl>
-                    </li>
-                    <li data-name="user" class="layui-nav-item">
+                    </dd>
+                    <dd data-name="user" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="用户" lay-direction="2">
                             <i class="layui-icon layui-icon-user"></i>
                             <cite>用户</cite>
@@ -342,8 +330,8 @@
                                 <a href="javascript:;" onclick="layer.tips('即将开放', this);">角色管理</a>
                             </dd>
                         </dl>
-                    </li>
-                    <li data-name="set" class="layui-nav-item">
+                    </dd>
+                    <dd data-name="set" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="设置" lay-direction="2">
                             <i class="layui-icon layui-icon-set"></i>
                             <cite>设置</cite>
@@ -364,60 +352,29 @@
                                 </dl>
                             </dd>
                         </dl>
-                    </li>
-                    <li data-name="get" class="layui-nav-item">
+                    </dd>
+                    <dd data-name="get" class="layui-nav-item">
                         <a href="javascript:;" lay-href="system/get.html" lay-tips="授权" lay-direction="2">
                             <i class="layui-icon layui-icon-auz"></i>
                             <cite>授权</cite>
                         </a>
-                    </li>
-                </ul>
+                    </dd>
+                </dl>
             </div>
         </div>
-
-        <!-- 页面标签 -->
-        <div class="layadmin-pagetabs" id="LAY_app_tabs">
-            <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
-            <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
-            <div class="layui-icon layadmin-tabs-control layui-icon-down">
-                <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
-                    <li class="layui-nav-item" lay-unselect>
-                        <a href="javascript:;"></a>
-                        <dl class="layui-nav-child layui-anim-fadein">
-                            <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
-                            <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
-                            <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-            <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
-                <ul class="layui-tab-title" id="LAY_app_tabsheader">
-                    <li lay-id="home/console.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
-                </ul>
-            </div>
-        </div>
-
 
         <!-- 主体内容 -->
-        <div class="layui-body" id="LAY_app_body">
+        <div class="layui-body">
             <div class="layadmin-tabsbody-item layui-show">
-                <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+                <sitemesh:write property='body' />
             </div>
         </div>
-
         <!-- 辅助元素，一般用于移动设备下遮罩 -->
         <div class="layadmin-body-shade" layadmin-event="shade"></div>
+        <script src="/resources/layui/layui.all.js"></script>
     </div>
 </div>
-
-<script src="../layuiadmin/layui/layui.js"></script>
 <script>
-    layui.config({
-        base: '../layuiadmin/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use('index');
 </script>
 </body>
 </html>
