@@ -24,14 +24,17 @@
  *
  */
 
-$(function menu_option(){
-    $(document).on("click","dd.menu-item>a",function(){
-       console.log(this);
-       var $dd=$(this).parent();
-       if ($dd.hasClass("open")){
-           $dd.removeClass("open");
-       }else{
-           $dd.addClass("open");
-       }
+$(function menu_option() {
+    $(document).on("click", "dd.menu-item>a", function () {
+        // console.log(this);
+        var $dd = $(this).parent();
+        if ($(this).next("a").length === 0) {
+            $dd.addClass("active");
+        }
+        if ($dd.hasClass("open")) {
+            $dd.removeClass("open");
+        } else {
+            $dd.addClass("open");
+        }
     });
 });

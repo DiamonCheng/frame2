@@ -58,6 +58,11 @@ html{
     bottom: 0;
     overflow:  auto;
 }
+
+#frame2_app > .layout > .side-menu > .menu-container > .menu > .menu-item {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
 .side-menu>div>.menu>.menu-item {
     padding-left:0;
 }
@@ -66,8 +71,27 @@ html{
     color:#e6e6e6;
 }
 
+.side-menu dd.menu-item > a:not(:only-child):after {
+    /*     background-color:#fff; */
+    content: "<";
+    position: absolute;
+    right: 15px;
+}
+
+.side-menu dd.menu-item.open > a:not(:only-child):after {
+    /*     background-color:#fff; */
+    /*     content:"+";
+        position:absolute;
+        right:15px; */
+    transform: rotate(-90deg);
+}
 .side-menu .menu-item {
     padding-left:20px;
+}
+
+.side-menu * {
+    transition: all .3s;
+    -webkit-transition: all .3s;
 }
 .side-menu .menu .menu-item a{
     line-height:28px;
@@ -77,8 +101,6 @@ html{
     overflow: hidden;
     white-space: nowrap;
     display: block;
-    transition: all .3s;
-    -webkit-transition: all .3s;
     /*margin-top:1px;*/
     /*box-shadow:0px -1px 0px 0 rgba(0,0,0,.1);*/
     margin-right:15px

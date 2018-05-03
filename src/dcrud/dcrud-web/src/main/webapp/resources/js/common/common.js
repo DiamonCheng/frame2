@@ -45,6 +45,10 @@ $(function () {
             , layedit = layui.layedit
             , laydate = layui.laydate;
         form.render();
+        // layer.render();
+        //layedit.render();
+        //laydate.render();
+
     });
 
     //***  validator  ***//

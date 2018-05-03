@@ -33,31 +33,22 @@ public class FreemarkerViewRender implements Frame2ViewRender {
         private Writer writer;
         
         public void render(Frame2View frame2View) throws IOException, TemplateException {
-            moduleContext.putAll(frame2View.getParam());
+            if (frame2View.getParam() != null) {
+                moduleContext.putAll(frame2View.getParam());
+            }
             Template template = configuration.getTemplate(frame2View.getTemplateName());
             template.process(moduleContext, writer);
         }
         
-        public SimpleHash getModuleContext() {
-            return moduleContext;
-        }
         
         public FreemarkerViewRenderContext setModuleContext(SimpleHash moduleContext) {
             this.moduleContext = moduleContext;
             return this;
         }
         
-        public Configuration getConfiguration() {
-            return configuration;
-        }
-        
         public FreemarkerViewRenderContext setConfiguration(Configuration configuration) {
             this.configuration = configuration;
             return this;
-        }
-        
-        public Writer getWriter() {
-            return writer;
         }
         
         public FreemarkerViewRenderContext setWriter(Writer writer) {
