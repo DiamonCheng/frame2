@@ -13,42 +13,42 @@ NOTICE:
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sitemesh="http://www.sitemesh3.org">
 <head>
     <meta charset="utf-8">
-    <title th:utext="#{app.name}"></title>
+    <title th:utext="#{app.title.name}"></title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script src="/resources/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="/resources/js/common/common.js"></script>
+    <script src="/resources/js/common/decorator.js"></script>
     <script src="/resources/js/common/validator.js"></script>
     <script th:src="|/resources/js/lang_#{common.lang}.js|"></script>
     <script src="/resources/js/common/validator.list.js"></script>
     <link rel="stylesheet" href="/resources/layui/css/layui.css"/>
-    <link rel="stylesheet" href="/resources/css/common/decorator.css"/>
     <link rel="stylesheet" href="/resources/css/theme/app.css"/>
     <link rel="stylesheet" href="/resources/css/common/validator.css"/>
     <sitemesh:write property='head' />
 </head>
 <body class="layui-layout-body">
-<div id="frame2_app">
-    <div class="layui-layout layui-layout-admin">
-        <div class="layui-header">
-            <div class="layui-logo" lay-href="home/console.html">
-                <span>layuiAdmin</span>
+<div id="frame2_app" class="">
+    <div class="layout layui-layout layui-layout-admin">
+        <div class="header layui-header">
+            <div class="layui-logo logo" lay-href="/index">
+                <span th:utext="#{app.name}"></span>
             </div>
             <!-- 头部区域 -->
             <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item layadmin-flexible" >
+                <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;"  title="侧边伸缩" id="frame2_app_flexible">
                         <i class="layui-icon layui-icon-shrink-right" ></i>
                         <i class="layui-icon layui-icon-spread-left" ></i>
                     </a>
                 </li>
             </ul>
-            <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+            <ul class="layui-nav layui-layout-right">
 
                 <li class="layui-nav-item" lay-unselect>
-                    <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
+                    <a lay-href="app/message/index.html" lay-text="消息中心">
                         <i class="layui-icon layui-icon-notice"></i>
 
                         <!-- 如果有新消息，则显示小圆点 -->
@@ -56,7 +56,7 @@ NOTICE:
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="theme">
+                    <a href="javascript:;">
                         <i class="layui-icon layui-icon-theme"></i>
                     </a>
                 </li>
@@ -68,22 +68,21 @@ NOTICE:
                         <dd><a lay-href="set/user/info.html">基本资料</a></dd>
                         <dd><a lay-href="set/user/password.html">修改密码</a></dd>
                         <hr>
-                        <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        <dd style="text-align: center;"><a href="/logout">退出</a></dd>
                     </dl>
                 </li>
 
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="about"><i
-                            class="layui-icon layui-icon-more-vertical"></i></a>
+                    <a href="javascript:;" layadmin-event="about">
+                        <i class="layui-icon layui-icon-more-vertical"></i></a>
                 </li>
             </ul>
         </div>
 
         <!-- 侧边菜单 -->
         <div class="layui-side-menu">
-            <div class="layui-side-scroll">
-                <dl class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
-                    lay-filter="layadmin-system-side-menu">
+            <div class="layui-side-scroll menu-container">
+                <dl class="layui-nav layui-nav-tree menu" lay-shrink="all">
                     <dd data-name="home" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="主页" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
@@ -362,15 +361,117 @@ NOTICE:
                 </dl>
             </div>
         </div>
+        <div class="side-menu">
+            <div class="menu-container">
+                <dl class="menu">
+                    <dd class="menu-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>主页</cite>
+                        </a>
+                        <dl class="menu">
+                            <dd class="menu-item">
+                                <a href="home/console.html">控制台</a>
+                            </dd>
+                        </dl>
+                    </dd>
+                    <dd class="menu-item">
+                        <a href="javascript:;" >
+                            <i class="layui-icon layui-icon-component"></i>
+                            <cite>组件</cite>
+                        </a>
+                        <dl class="menu">
+                            <dd class="menu-item">
+                                <a href="javascript:;">栅格</a>
+                                <dl class="menu">
+                                    <dd class="menu-item"><a href="component/grid/list.html">等比例列表排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile.html">按移动端排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile-pc.html">移动桌面端组合</a> </dd>
+                                    <dd class="menu-item"><a href="component/grid/all.html">全端复杂组合</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/stack.html">低于桌面堆叠排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/speed-dial.html">九宫格</a></dd>
+                                </dl>
+                            </dd>
+                            <dd class="menu-item">
+                                <a href="component/button/index.html">
+                                    按钮
+                                </a>
+                            </dd>
+                        </dl>
 
-        <!-- 主体内容 -->
-        <div class="layui-body">
-            <div class="layadmin-tabsbody-item layui-show">
-                <sitemesh:write property='body' />
+                    </dd>
+                    <dd class="menu-item">
+                        <a href="javascript:;" >
+                            <i class="layui-icon layui-icon-component"></i>
+                            <cite>组件</cite>
+                        </a>
+                        <dl class="menu">
+                            <dd class="menu-item">
+                                <a href="javascript:;">栅格</a>
+                                <dl class="menu">
+                                    <dd class="menu-item"><a href="component/grid/list.html">等比例列表排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile.html">按移动端排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile-pc.html">移动桌面端组合</a> </dd>
+                                    <dd class="menu-item"><a href="component/grid/all.html">全端复杂组合</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/stack.html">低于桌面堆叠排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/speed-dial.html">九宫格</a></dd>
+                                </dl>
+                            </dd>
+                            <dd class="menu-item">
+                                <a href="component/button/index.html">
+                                    按钮
+                                </a>
+                            </dd>
+                            <dd class="menu-item">
+                                <a href="javascript:;">栅格</a>
+                                <dl class="menu">
+                                    <dd class="menu-item"><a href="component/grid/list.html">等比例列表排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile.html">按移动端排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile-pc.html">移动桌面端组合</a> </dd>
+                                    <dd class="menu-item"><a href="component/grid/all.html">全端复杂组合</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/stack.html">低于桌面堆叠排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/speed-dial.html">九宫格</a></dd>
+                                </dl>
+                            </dd>
+                            <dd class="menu-item">
+                                <a href="component/button/index.html">
+                                    按钮
+                                </a>
+                            </dd>
+                            <dd class="menu-item">
+                                <a href="javascript:;">栅格</a>
+                                <dl class="menu">
+                                    <dd class="menu-item"><a href="component/grid/list.html">等比例列表排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile.html">按移动端排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/mobile-pc.html">移动桌面端组合</a> </dd>
+                                    <dd class="menu-item"><a href="component/grid/all.html">全端复杂组合</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/stack.html">低于桌面堆叠排列</a></dd>
+                                    <dd class="menu-item"><a href="component/grid/speed-dial.html">九宫格</a></dd>
+                                </dl>
+                            </dd>
+                            <dd class="menu-item">
+                                <a href="component/button/index.html">
+                                    按钮
+                                </a>
+                            </dd>
+                        </dl>
+
+                    </dd>
+                    <dd class="menu-item">
+                        <a href="javascript:;" href="system/get.html">
+                            <i class="layui-icon layui-icon-auz"></i>
+                            <cite>授权</cite>
+                        </a>
+                    </dd>
+                </dl>
             </div>
         </div>
+        <!-- 主体内容 -->
+        <div class="content layui-body">
+            <sitemesh:write property='body' />
+        </div>
         <!-- 辅助元素，一般用于移动设备下遮罩 -->
-        <div class="layadmin-body-shade" layadmin-event="shade"></div>
+        <div class="shade"></div>
         <script src="/resources/layui/layui.all.js"></script>
     </div>
 </div>

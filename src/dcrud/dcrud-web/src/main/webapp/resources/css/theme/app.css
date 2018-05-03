@@ -1,6 +1,117 @@
-
+@charset "UTF-8";
 
 html{
     color: #666;
     background-color: #d2d2d2;
+}
+
+/*
+    默认主题
+*/
+
+#frame2_app>.layout{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}
+#frame2_app>.layout>.header{
+    height:49px;
+    background-color:  #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+}
+#frame2_app>.layout>.header>*>*,#frame2_app>.layout>.header>*{
+    line-height:49px;
+    color:#333;
+}
+#frame2_app>.layout>.header>*>*>*{
+    color:#333;
+}
+#frame2_app>.layout>.header>.logo{
+
+}
+#frame2_app>.layout>.content{
+    position: absolute;
+    left: 200px;
+    top:49px;
+    bottom: 0;
+    right: 0;
+}
+
+
+#frame2_app>.layout>.side-menu{
+    position: absolute;
+    left: 0;
+    top:49px;
+    bottom: 0;
+    width: 200px;
+    overflow: hidden;
+    background-color: #24a896;;
+    z-index: 1001;
+}
+#frame2_app>.layout>.side-menu>.menu-container{
+    width: 216px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow:  auto;
+}
+.side-menu>div>.menu>.menu-item {
+    padding-left:0;
+}
+.side-menu>div>.menu a {
+    padding-left:15px;
+    color:#e6e6e6;
+}
+
+.side-menu .menu-item {
+    padding-left:20px;
+}
+.side-menu .menu .menu-item a{
+    line-height:28px;
+    position: relative;
+    height: 28px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    /*margin-top:1px;*/
+    /*box-shadow:0px -1px 0px 0 rgba(0,0,0,.1);*/
+    margin-right:15px
+}
+.menu-container > dl.menu > dd.menu-item >dl{
+    background-color:#00897d;
+}
+.menu-container>dl>dd dl{
+    display: none;
+}
+.menu-container>dl dd.open>dl{
+    display: block;
+}
+/*.layui-nav-tree {
+    width: 200px;
+    padding: 0;
+}
+.layui-nav {
+    position: relative;
+    padding: 0 20px;
+    background-color: #393D49;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 0;
+    box-sizing: border-box;
+}*/
+
+
+
+.layui-side-menu{
+    position: absolute;
+    top:49px;
+    bottom: 0;
+    left: 220px;
+    z-index: 10001;
 }
