@@ -6,7 +6,7 @@ html{
 }
 
 /*
-    默认主题
+    default theme
 */
 
 #frame2_app>.layout{
@@ -16,38 +16,65 @@ html{
     top:0;
     bottom:0;
 }
+
+#frame2_app > .layout > .content {
+    position: absolute;
+    left: 200px;
+    top: 39px;
+    bottom: 0;
+    right: 0;
+}
+
+/* header */
 #frame2_app>.layout>.header{
-    height:49px;
+    height: 39px;
     background-color:  #fff;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
 }
+
+#frame2_app * {
+    transition: all 0.3s;
+}
 #frame2_app>.layout>.header>*>*,#frame2_app>.layout>.header>*{
-    line-height:49px;
+    line-height: 39px;
     color:#333;
 }
 #frame2_app>.layout>.header>*>*>*{
     color:#333;
 }
 #frame2_app>.layout>.header>.logo{
-
-}
-#frame2_app>.layout>.content{
-    position: absolute;
-    left: 200px;
-    top:49px;
-    bottom: 0;
-    right: 0;
+    overflow: hidden;
 }
 
+.header > .layui-nav {
+    padding: 0 0;
+}
 
+.header .layui-nav-child {
+    top: 39px;
+}
+
+.header > .head-left a, .header > .layui-nav .layui-nav-item a {
+    padding: 0 15px;
+}
+
+.header .layui-nav-child {
+    top: 39px;
+}
+
+#frame2_app_flexible > i:after {
+    content: "\e668";
+}
+
+/* side menu */
 #frame2_app>.layout>.side-menu{
     position: absolute;
     left: 0;
-    top:49px;
+    top: 39px;
     bottom: 0;
     width: 200px;
     overflow: hidden;
-    background-color: #24a896;;
+    background-color: #24a896;
     z-index: 1001;
 }
 #frame2_app>.layout>.side-menu>.menu-container{
@@ -59,9 +86,13 @@ html{
     overflow:  auto;
 }
 
-#frame2_app > .layout > .side-menu > .menu-container > .menu > .menu-item {
-    margin-top: 4px;
-    margin-bottom: 4px;
+#frame2_app > .layout > .side-menu > .menu-container > .menu > .menu-item > a {
+    line-height: 32px;
+    height: 32px;
+}
+
+.side-menu > div > dl.menu {
+    width: 200px;
 }
 .side-menu>div>.menu>.menu-item {
     padding-left:0;
@@ -103,16 +134,50 @@ html{
     display: block;
     /*margin-top:1px;*/
     /*box-shadow:0px -1px 0px 0 rgba(0,0,0,.1);*/
-    margin-right:15px
+    /* margin-right:15px */
+}
+
+.side-menu .menu .menu-item.active a {
+    color: #fff;
+    background-color: #0acab8;
+}
+
+.side-menu .menu .menu-item a:hover {
+    color: #fff;
+    background-color: #2be3d5;
+}
+
+.side-menu .menu .menu-item a:before {
+    content: "|";
+    position: absolute;
+    left: -2px;
+    /*     right:0px;
+        bottom:0px;
+        height:2px; */
+    color: #fff;
+    background-color: rgba(0, 0, 0, .2);
+    opacity: 0;
+}
+
+.side-menu .menu .menu-item > a:hover:before {
+    opacity: 1;
+    left: 0;
 }
 .menu-container > dl.menu > dd.menu-item >dl{
     background-color:#00897d;
 }
-.menu-container>dl>dd dl{
-    display: none;
+
+#frame2_app .menu-container > dl > dd dl > dd > a {
+    /*     display: none; */
+    /* height: 0; */
+    /*     overflow: hidden; */
+    height: 0;
 }
-.menu-container>dl dd.open>dl{
-    display: block;
+
+#frame2_app .menu-container > dl dd.open > dl > dd > a {
+    /*     display: block; */
+    /* height: 28px; */
+    height: 28px;
 }
 /*.layui-nav-tree {
     width: 200px;
@@ -129,11 +194,43 @@ html{
 }*/
 
 
-
 .layui-side-menu{
     position: absolute;
-    top:49px;
+    top: 39px;
     bottom: 0;
     left: 220px;
     z-index: 10001;
+}
+
+/* shrink */
+.shrink #frame2_app_flexible > i:after {
+    content: "\e66b";
+}
+
+#frame2_app.shrink > .layout {
+    left: -200px;
+}
+
+@media screen and (max-width: 768px) {
+    #frame2_app > .layout {
+        right: -200px;
+    }
+
+    #frame2_app.shrink > .layout {
+        right: 0;
+    }
+
+    #shade {
+        position: absolute;
+        top: 39px;
+        bottom: 0;
+        left: 200px;
+        right: 0;
+        z-index: 100003;
+        background-color: #00000059;
+    }
+
+    #frame2_app.shrink #shade {
+        display: none;
+    }
 }

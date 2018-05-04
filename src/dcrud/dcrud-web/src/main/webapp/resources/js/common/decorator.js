@@ -25,16 +25,37 @@
  */
 
 $(function menu_option() {
-    $(document).on("click", "dd.menu-item>a", function () {
+    $(document).on("click", ".side-menu dd.menu-item>a", function () {
         // console.log(this);
         var $dd = $(this).parent();
-        if ($(this).next("a").length === 0) {
+        if ($(this).next("dl.menu").length === 0) {
+            $('.side-menu dd.menu-item>a').removeClass("active");
             $dd.addClass("active");
-        }
-        if ($dd.hasClass("open")) {
-            $dd.removeClass("open");
         } else {
-            $dd.addClass("open");
+            if ($dd.hasClass("open")) {
+                $dd.removeClass("open");
+            } else {
+                $dd.addClass("open");
+            }
         }
     });
+    $('#frame2_app_flexible').click(function () {
+        var $app = $("#frame2_app");
+        if ($app.hasClass("shrink")) {
+            $app.removeClass("shrink");
+        } else {
+            $app.addClass("shrink");
+        }
+    });
+    $(window).on("resize", function () {
+        console.log("resize - ", window.innerWidth);
+        var $app = $("#frame2_app");
+        if (window.innerWidth > 768) {
+            if ($app.hasClass("shrink")) {
+                $app.removeClass("shrink");
+            }
+        } else if (!$app.hasClass("shrink")) {
+            $app.addClass("shrink");
+        }
+    }).trigger("resize");
 });

@@ -2,7 +2,9 @@ package com.dc.dcrud.service.shiro;
 
 import com.dc.dcrud.domain.RoleEntity;
 import com.dc.dcrud.domain.UserEntity;
+import com.dc.dcrud.pojo.User;
 import com.dc.dcrud.service.rbac.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -53,6 +55,8 @@ public class SecurityRealm extends AuthorizingRealm {
         if (userEntity == null) {
             return null;
         }
+        User user = new User().setUsername(username).setNickName(userEntity.getNickName());
+        SecurityUtils.getSubject().getSession().setAttribute(User.USER_KEY, user);
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userEntity.getUsername(), userEntity.getPassword(), "**");
         authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(userEntity.getUsername()));
         return authenticationInfo;
