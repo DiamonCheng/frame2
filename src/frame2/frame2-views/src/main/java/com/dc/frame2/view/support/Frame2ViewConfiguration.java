@@ -13,9 +13,11 @@ public class Frame2ViewConfiguration {
     private static final String DEFAULT_CHARSET="UTF-8";
     private static final String DATE_FORMAT="yyyy-MM-dd";
     private static final String DATE_TIME_FORMAT="yyyy-MM-dd HH:mm:ss";
+    private static final String DEFAULT_CONTENT_TYPE = "text/html";
     private String charset=DEFAULT_CHARSET;
     private String dateFormat=DATE_FORMAT;
     private String dateTimeFormat=DATE_TIME_FORMAT;
+    private String contentType = DEFAULT_CONTENT_TYPE;
     
     
     public Configuration buildConfiguration() {
@@ -48,5 +50,14 @@ public class Frame2ViewConfiguration {
     
     public String getCharset() {
         return charset;
+    }
+    
+    public String getContentType() {
+        return contentType;
+    }
+    
+    public Frame2ViewConfiguration setContentType(String contentType) {
+        this.contentType = contentType;
+        return this;
     }
 }

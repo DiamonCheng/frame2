@@ -56,7 +56,7 @@ NOTICE:
                         <span class="layui-badge-dot"></span>
                     </a>
                 </li>
-                <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <li class="layui-nav-item layui-hide-xs">
                     <a href="javascript:;">
                         <i class="layui-icon layui-icon-theme"></i>
                     </a>
@@ -64,7 +64,6 @@ NOTICE:
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;">
                         <cite th:utext="${session['USER'].nickName}">贤心</cite>
-                        <span class="layui-nav-more"></span>
                     </a>
                     <dl class="layui-nav-child">
                         <!--<dd><a lay-href="set/user/info.html">基本资料</a></dd>
@@ -73,7 +72,22 @@ NOTICE:
                         <dd style="text-align: center;"><a href="/logout">退出</a></dd>
                     </dl>
                 </li>
-
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;">
+                        <cite th:utext="#{decorator.btn.lang}">语言</cite>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <!--<dd><a lay-href="set/user/info.html">基本资料</a></dd>
+                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                        <hr>-->
+                        <dd th:if="#{common.lang}!='en'" style="text-align: center;"><a href="javascript:" class="lang"
+                                                                                        lang="en"
+                                                                                        th:utext="English"></a></dd>
+                        <dd th:if="#{common.lang}!='zh'" style="text-align: center;"><a href="javascript:" class="lang"
+                                                                                        lang="zh" th:utext="中文"></a>
+                        </dd>
+                    </dl>
+                </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
                     <a href="javascript:;" layadmin-event="about">
                         <i class="layui-icon layui-icon-more-vertical"></i></a>

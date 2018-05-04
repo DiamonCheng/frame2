@@ -44,7 +44,7 @@ public class Frame2ViewSpringConfiguration  {
         return new Frame2ViewHandler()
                        .setFrame2ViewRender(
                                new Frame2ViewRenderHub().addFrame2ViewRender(freemarkerViewRender)
-                       );
+                       ).setFrame2ViewConfiguration(frame2ViewConfiguration);
     }
     
     

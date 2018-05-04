@@ -19,9 +19,8 @@ import java.util.Map;
  * @date 2018/4/17.
  */
 public class Frame2ViewHandler implements HandlerMethodReturnValueHandler {
-    private static final String CONTENT_TYPE = "text/html";
     private Frame2ViewRender frame2ViewRender;
-    
+    private Frame2ViewConfiguration frame2ViewConfiguration;
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
         return frame2ViewRender.supportType().isAssignableFrom(returnType.getParameterType());
@@ -38,11 +37,13 @@ public class Frame2ViewHandler implements HandlerMethodReturnValueHandler {
             
             @Override
             public String getContentType() {
-                return CONTENT_TYPE;
+                return frame2ViewConfiguration.getContentType();
             }
             
             @Override
             public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+                response.setCharacterEncoding(frame2ViewConfiguration.getCharset());
+                response.addHeader("Content-Type", frame2ViewConfiguration.getContentType() + ";charset=" + frame2ViewConfiguration.getCharset());
                 frame2ViewRender.render(frame2View, model, request, response);
             }
         });
@@ -51,6 +52,11 @@ public class Frame2ViewHandler implements HandlerMethodReturnValueHandler {
     
     public Frame2ViewHandler setFrame2ViewRender(Frame2ViewRender frame2ViewRender) {
         this.frame2ViewRender = frame2ViewRender;
+        return this;
+    }
+    
+    public Frame2ViewHandler setFrame2ViewConfiguration(Frame2ViewConfiguration frame2ViewConfiguration) {
+        this.frame2ViewConfiguration = frame2ViewConfiguration;
         return this;
     }
 }

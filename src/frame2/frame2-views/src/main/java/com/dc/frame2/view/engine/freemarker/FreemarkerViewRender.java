@@ -81,7 +81,6 @@ public class FreemarkerViewRender implements Frame2ViewRender {
     @Override
     public void render(Frame2View frame2View, Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         SimpleHash fmModel = frame2ServletContextResolver.buildContextModule(model, request, response);
-        response.setCharacterEncoding(frame2ViewConfiguration.getCharset());
         FreemarkerViewRenderContext context = new FreemarkerViewRenderContext()
                                                       .setConfiguration(configuration)
                                                       .setModuleContext(fmModel)
