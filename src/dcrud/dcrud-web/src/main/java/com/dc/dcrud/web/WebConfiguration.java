@@ -1,5 +1,6 @@
 package com.dc.dcrud.web;
 
+import com.dc.dcrud.web.interceptor.DcrudInterceptor;
 import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
@@ -61,10 +62,16 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         return localeChangeInterceptor;
     }
     
+    @Bean
+    public DcrudInterceptor dcrudInterceptor() {
+        return new DcrudInterceptor();
+    }
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(webContextBinder());
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(dcrudInterceptor());
     }
     
     @Bean

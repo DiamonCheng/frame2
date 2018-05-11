@@ -48,7 +48,7 @@ $(function menu_option() {
         }
     });
     $(window).on("resize", function () {
-        console.log("resize - ", window.innerWidth);
+        // console.log("resize - ", window.innerWidth);
         var $app = $("#frame2_app");
         if (window.innerWidth > 768) {
             if ($app.hasClass("shrink")) {

@@ -18,7 +18,7 @@ public class MapBuilder<K,V> {
         return builder;
     }
     
-    public MapBuilder put(K key,V value){
+    public MapBuilder<K, V> put(K key, V value) {
         map.put(key,value);
         return this;
     }

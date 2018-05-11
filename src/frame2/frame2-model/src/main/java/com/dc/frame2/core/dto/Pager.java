@@ -2,8 +2,11 @@ package com.dc.frame2.core.dto;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>Custom a pager with no default constructor
@@ -14,11 +17,15 @@ import java.io.Serializable;
 public class Pager implements Pageable, Serializable, Cloneable {
     private static final int DEFAULT_PAGE_SIZE = 20;
     private static final int DEFAULT_PAGE = 0;
+    private static final String DESC = "DESC";
+    private static final String ASC = "ASC";
+    private static final String DEFAULT_DIRECTION = DESC;
+    private static final String ORDER_SPLIT_CHAR = " ";
     
     private int pageNo = DEFAULT_PAGE;
     private int pageSize = DEFAULT_PAGE_SIZE;
     
-    private Sort sort;
+    private List<String> orderBy = new ArrayList<>();
     
     @Override
     public int getPageNumber() {
@@ -37,7 +44,27 @@ public class Pager implements Pageable, Serializable, Cloneable {
     
     @Override
     public Sort getSort() {
-        return sort;
+        if (orderBy == null) {
+            return null;
+        }
+        List<Sort.Order> orders = new ArrayList<>(orderBy.size());
+        for (String orderString : orderBy) {
+            String[] orderSplit = orderString.split(ORDER_SPLIT_CHAR);
+            if (StringUtils.isEmpty(orderSplit[0])) {
+                continue;
+            }
+            String propertyName = orderSplit[0];
+            String direction = DEFAULT_DIRECTION;
+            if (orderSplit.length > 1) {
+                direction = orderSplit[1];
+            }
+            if (ASC.equalsIgnoreCase(direction)) {
+                orders.add(new Sort.Order(Sort.Direction.ASC, propertyName));
+            } else if (DESC.equalsIgnoreCase(direction)) {
+                orders.add(new Sort.Order(Sort.Direction.DESC, propertyName));
+            }
+        }
+        return new Sort(orders);
     }
     
     @Override
@@ -87,9 +114,13 @@ public class Pager implements Pageable, Serializable, Cloneable {
         return this;
     }
     
-    public Pager setSort(Sort sort) {
-        this.sort = sort;
+    public Pager setOrderBy(List<String> orderBy) {
+        this.orderBy = orderBy;
         return this;
+    }
+    
+    public List<String> getOrderBy() {
+        return orderBy;
     }
     
     @Override
