@@ -95,8 +95,8 @@
             var f = e[0]
                 , m = 0;
             if (l = l || [],
-                n.host = n.host || (p.match(/\/\/([\s\S]+?)\//) || ["//" + location.host + "/"])[0],
-            0 === e.length || layui["layui.all"] && u[f] || !layui["layui.all"] && layui["layui.mobile"] && u[f])
+                    n.host = n.host || (p.match(/\/\/([\s\S]+?)\//) || ["//" + location.host + "/"])[0],
+                0 === e.length || layui["layui.all"] && u[f] || !layui["layui.all"] && layui["layui.mobile"] && u[f])
                 return c(),
                     y;
             if (n.modules[f])
@@ -218,8 +218,8 @@
         ,
         o.prototype.data = function (t, n, o) {
             if (t = t || "layui",
-                o = o || localStorage,
-            e.JSON && e.JSON.parse) {
+                    o = o || localStorage,
+                e.JSON && e.JSON.parse) {
                 if (null === n)
                     return delete o[t];
                 n = "object" == typeof n ? n : {
@@ -274,7 +274,7 @@
             if ("function" != typeof t)
                 return o;
             if (e = e || [],
-            e.constructor === Object) {
+                e.constructor === Object) {
                 for (n in e)
                     if (t.call(e[n], n, e[n]))
                         break
@@ -702,7 +702,7 @@ layui.define(function (e) {
             if ("function" != typeof t)
                 return a;
             if (e = e || [],
-            e.constructor === Object) {
+                e.constructor === Object) {
                 for (n in e)
                     if (t.call(e[n], n, e[n]))
                         break
@@ -992,95 +992,95 @@ layui.define(function (e) {
                 "class": p
             });
             if (t.zIndex && (i.style.zIndex = t.zIndex),
-                w.each(new Array(2), function (e) {
-                    if (!t.range && e > 0)
-                        return !0;
-                    var a = w.elem("div", {
-                        "class": "layui-laydate-header"
-                    })
-                        , i = [function () {
-                        var e = w.elem("i", {
-                            "class": "layui-icon laydate-icon laydate-prev-y"
-                        });
-                        return e.innerHTML = "&#xe65a;",
-                            e
-                    }(), function () {
-                        var e = w.elem("i", {
-                            "class": "layui-icon laydate-icon laydate-prev-m"
-                        });
-                        return e.innerHTML = "&#xe603;",
-                            e
-                    }(), function () {
-                        var e = w.elem("div", {
-                            "class": "laydate-set-ym"
+                    w.each(new Array(2), function (e) {
+                        if (!t.range && e > 0)
+                            return !0;
+                        var a = w.elem("div", {
+                            "class": "layui-laydate-header"
                         })
-                            , t = w.elem("span")
-                            , n = w.elem("span");
-                        return e.appendChild(t),
-                            e.appendChild(n),
-                            e
-                    }(), function () {
-                        var e = w.elem("i", {
-                            "class": "layui-icon laydate-icon laydate-next-m"
-                        });
-                        return e.innerHTML = "&#xe602;",
-                            e
-                    }(), function () {
-                        var e = w.elem("i", {
-                            "class": "layui-icon laydate-icon laydate-next-y"
-                        });
-                        return e.innerHTML = "&#xe65b;",
-                            e
-                    }()]
-                        , d = w.elem("div", {
-                        "class": "layui-laydate-content"
-                    })
-                        , c = w.elem("table")
-                        , m = w.elem("thead")
-                        , u = w.elem("tr");
-                    w.each(i, function (e, t) {
-                        a.appendChild(t)
-                    }),
-                        m.appendChild(u),
-                        w.each(new Array(6), function (e) {
-                            var t = c.insertRow(0);
-                            w.each(new Array(7), function (a) {
-                                if (0 === e) {
-                                    var i = w.elem("th");
-                                    i.innerHTML = n.weeks[a],
-                                        u.appendChild(i)
-                                }
-                                t.insertCell(a)
+                            , i = [function () {
+                            var e = w.elem("i", {
+                                "class": "layui-icon laydate-icon laydate-prev-y"
+                            });
+                            return e.innerHTML = "&#xe65a;",
+                                e
+                        }(), function () {
+                            var e = w.elem("i", {
+                                "class": "layui-icon laydate-icon laydate-prev-m"
+                            });
+                            return e.innerHTML = "&#xe603;",
+                                e
+                        }(), function () {
+                            var e = w.elem("div", {
+                                "class": "laydate-set-ym"
                             })
+                                , t = w.elem("span")
+                                , n = w.elem("span");
+                            return e.appendChild(t),
+                                e.appendChild(n),
+                                e
+                        }(), function () {
+                            var e = w.elem("i", {
+                                "class": "layui-icon laydate-icon laydate-next-m"
+                            });
+                            return e.innerHTML = "&#xe602;",
+                                e
+                        }(), function () {
+                            var e = w.elem("i", {
+                                "class": "layui-icon laydate-icon laydate-next-y"
+                            });
+                            return e.innerHTML = "&#xe65b;",
+                                e
+                        }()]
+                            , d = w.elem("div", {
+                            "class": "layui-laydate-content"
+                        })
+                            , c = w.elem("table")
+                            , m = w.elem("thead")
+                            , u = w.elem("tr");
+                        w.each(i, function (e, t) {
+                            a.appendChild(t)
                         }),
-                        c.insertBefore(m, c.children[0]),
-                        d.appendChild(c),
-                        r[e] = w.elem("div", {
-                            "class": "layui-laydate-main laydate-main-list-" + e
-                        }),
-                        r[e].appendChild(a),
-                        r[e].appendChild(d),
-                        o.push(i),
-                        s.push(d),
-                        l.push(c)
-                }),
-                w(d).html(function () {
-                    var e = []
-                        , i = [];
-                    return "datetime" === t.type && e.push('<span lay-type="datetime" class="laydate-btns-time">' + n.timeTips + "</span>"),
-                        w.each(t.btns, function (e, r) {
-                            var o = n.tools[r] || "btn";
-                            t.range && "now" === r || (a && "clear" === r && (o = "cn" === t.lang ? "重置" : "Reset"),
-                                i.push('<span lay-type="' + r + '" class="laydate-btns-' + r + '">' + o + "</span>"))
-                        }),
-                        e.push('<div class="laydate-footer-btns">' + i.join("") + "</div>"),
-                        e.join("")
-                }()),
-                w.each(r, function (e, t) {
-                    i.appendChild(t)
-                }),
-            t.showBottom && i.appendChild(d),
-                /^#/.test(t.theme)) {
+                            m.appendChild(u),
+                            w.each(new Array(6), function (e) {
+                                var t = c.insertRow(0);
+                                w.each(new Array(7), function (a) {
+                                    if (0 === e) {
+                                        var i = w.elem("th");
+                                        i.innerHTML = n.weeks[a],
+                                            u.appendChild(i)
+                                    }
+                                    t.insertCell(a)
+                                })
+                            }),
+                            c.insertBefore(m, c.children[0]),
+                            d.appendChild(c),
+                            r[e] = w.elem("div", {
+                                "class": "layui-laydate-main laydate-main-list-" + e
+                            }),
+                            r[e].appendChild(a),
+                            r[e].appendChild(d),
+                            o.push(i),
+                            s.push(d),
+                            l.push(c)
+                    }),
+                    w(d).html(function () {
+                        var e = []
+                            , i = [];
+                        return "datetime" === t.type && e.push('<span lay-type="datetime" class="laydate-btns-time">' + n.timeTips + "</span>"),
+                            w.each(t.btns, function (e, r) {
+                                var o = n.tools[r] || "btn";
+                                t.range && "now" === r || (a && "clear" === r && (o = "cn" === t.lang ? "重置" : "Reset"),
+                                    i.push('<span lay-type="' + r + '" class="laydate-btns-' + r + '">' + o + "</span>"))
+                            }),
+                            e.push('<div class="laydate-footer-btns">' + i.join("") + "</div>"),
+                            e.join("")
+                    }()),
+                    w.each(r, function (e, t) {
+                        i.appendChild(t)
+                    }),
+                t.showBottom && i.appendChild(d),
+                    /^#/.test(t.theme)) {
                 var m = w.elem("style")
                     ,
                     u = ["#{{id}} .layui-laydate-header{background-color:{{theme}};}", "#{{id}} .layui-this{background-color:{{theme}} !important;}"].join("").replace(/{{id}}/g, e.elemID).replace(/{{theme}}/g, t.theme);
@@ -1282,52 +1282,52 @@ layui.define(function (e) {
                 u = "date" !== s.type && "datetime" !== s.type, h = e ? 1 : 0, y = w(r.table[h]).find("td"),
                 f = w(r.elemHeader[h][2]).find("span");
             if (l.year < d[0] && (l.year = d[0],
-                r.hint("最低只能支持到公元" + d[0] + "年")),
-            l.year > d[1] && (l.year = d[1],
-                r.hint("最高只能支持到公元" + d[1] + "年")),
-            r.firstDate || (r.firstDate = w.extend({}, l)),
-                c.setFullYear(l.year, l.month, 1),
-                t = c.getDay(),
-                a = n.getEndDate(l.month || 12, l.year),
-                i = n.getEndDate(l.month + 1, l.year),
-                w.each(y, function (e, n) {
-                    var d = [l.year, l.month]
-                        , c = 0;
-                    n = w(n),
-                        n.removeAttr("class"),
-                        e < t ? (c = a - t + e,
-                            n.addClass("laydate-day-prev"),
-                            d = r.getAsYM(l.year, l.month, "sub")) : e >= t && e < i + t ? (c = e - t,
-                        s.range || c + 1 === l.date && n.addClass(o)) : (c = e - i - t,
-                            n.addClass("laydate-day-next"),
-                            d = r.getAsYM(l.year, l.month)),
-                        d[1]++,
-                        d[2] = c + 1,
-                        n.attr("lay-ymd", d.join("-")).html(d[2]),
-                        r.mark(n, d).limit(n, {
-                            year: d[0],
-                            month: d[1] - 1,
-                            date: d[2]
-                        }, e)
-                }),
-                w(f[0]).attr("lay-ym", l.year + "-" + (l.month + 1)),
-                w(f[1]).attr("lay-ym", l.year + "-" + (l.month + 1)),
-                "cn" === s.lang ? (w(f[0]).attr("lay-type", "year").html(l.year + "年"),
-                    w(f[1]).attr("lay-type", "month").html(l.month + 1 + "月")) : (w(f[0]).attr("lay-type", "month").html(m.month[l.month]),
-                    w(f[1]).attr("lay-type", "year").html(l.year)),
-            u && (s.range && (e ? r.endDate = r.endDate || {
-                year: l.year + ("year" === s.type ? 1 : 0),
-                month: l.month + ("month" === s.type ? 0 : -1)
-            } : r.startDate = r.startDate || {
-                year: l.year,
-                month: l.month
-            },
-            e && (r.listYM = [[r.startDate.year, r.startDate.month + 1], [r.endDate.year, r.endDate.month + 1]],
-                r.list(s.type, 0).list(s.type, 1),
-                "time" === s.type ? r.setBtnStatus("时间", w.extend({}, r.systemDate(), r.startTime), w.extend({}, r.systemDate(), r.endTime)) : r.setBtnStatus(!0))),
-            s.range || (r.listYM = [[l.year, l.month + 1]],
-                r.list(s.type, 0))),
-            s.range && !e) {
+                    r.hint("最低只能支持到公元" + d[0] + "年")),
+                l.year > d[1] && (l.year = d[1],
+                    r.hint("最高只能支持到公元" + d[1] + "年")),
+                r.firstDate || (r.firstDate = w.extend({}, l)),
+                    c.setFullYear(l.year, l.month, 1),
+                    t = c.getDay(),
+                    a = n.getEndDate(l.month || 12, l.year),
+                    i = n.getEndDate(l.month + 1, l.year),
+                    w.each(y, function (e, n) {
+                        var d = [l.year, l.month]
+                            , c = 0;
+                        n = w(n),
+                            n.removeAttr("class"),
+                            e < t ? (c = a - t + e,
+                                n.addClass("laydate-day-prev"),
+                                d = r.getAsYM(l.year, l.month, "sub")) : e >= t && e < i + t ? (c = e - t,
+                            s.range || c + 1 === l.date && n.addClass(o)) : (c = e - i - t,
+                                n.addClass("laydate-day-next"),
+                                d = r.getAsYM(l.year, l.month)),
+                            d[1]++,
+                            d[2] = c + 1,
+                            n.attr("lay-ymd", d.join("-")).html(d[2]),
+                            r.mark(n, d).limit(n, {
+                                year: d[0],
+                                month: d[1] - 1,
+                                date: d[2]
+                            }, e)
+                    }),
+                    w(f[0]).attr("lay-ym", l.year + "-" + (l.month + 1)),
+                    w(f[1]).attr("lay-ym", l.year + "-" + (l.month + 1)),
+                    "cn" === s.lang ? (w(f[0]).attr("lay-type", "year").html(l.year + "年"),
+                        w(f[1]).attr("lay-type", "month").html(l.month + 1 + "月")) : (w(f[0]).attr("lay-type", "month").html(m.month[l.month]),
+                        w(f[1]).attr("lay-type", "year").html(l.year)),
+                u && (s.range && (e ? r.endDate = r.endDate || {
+                    year: l.year + ("year" === s.type ? 1 : 0),
+                    month: l.month + ("month" === s.type ? 0 : -1)
+                } : r.startDate = r.startDate || {
+                    year: l.year,
+                    month: l.month
+                },
+                e && (r.listYM = [[r.startDate.year, r.startDate.month + 1], [r.endDate.year, r.endDate.month + 1]],
+                    r.list(s.type, 0).list(s.type, 1),
+                    "time" === s.type ? r.setBtnStatus("时间", w.extend({}, r.systemDate(), r.startTime), w.extend({}, r.systemDate(), r.endTime)) : r.setBtnStatus(!0))),
+                s.range || (r.listYM = [[l.year, l.month + 1]],
+                    r.list(s.type, 0))),
+                s.range && !e) {
                 var p = r.getAsYM(l.year, l.month);
                 r.calendar(w.extend({}, l, {
                     year: p[0],
@@ -1362,7 +1362,7 @@ layui.define(function (e) {
                 , C = ["hours", "minutes", "seconds"]
                 , x = ["startTime", "endTime"][t];
             if (T[0] < 1 && (T[0] = 1),
-            "year" === e) {
+                "year" === e) {
                 var M, b = M = T[0] - 7;
                 b < 1 && (b = M = 1),
                     w.each(new Array(15), function (e) {
@@ -1433,8 +1433,8 @@ layui.define(function (e) {
                     E()
             }
             if (y && h.removeChild(y),
-                h.appendChild(d),
-            "year" === e || "month" === e)
+                    h.appendChild(d),
+                "year" === e || "month" === e)
                 w(n.elemMain[t]).addClass("laydate-ym-show"),
                     w(d).find("li").on("click", function () {
                         var r = 0 | w(this).attr("lay-ym");
@@ -1552,7 +1552,7 @@ layui.define(function (e) {
         T.prototype.stampRange = function () {
             var e, t, n = this, a = n.config, i = w(n.elem).find("td");
             if (a.range && !n.endDate && w(n.footer).find(g).addClass(s),
-                n.endDate)
+                    n.endDate)
                 return e = n.newDate({
                     year: n.startDate.year,
                     month: n.startDate.month,
@@ -1604,20 +1604,20 @@ layui.define(function (e) {
                     t.startYMD = r)
             };
             if (r = {
-                year: 0 | r[0],
-                month: (0 | r[1]) - 1,
-                date: 0 | r[2]
-            },
-                !e.hasClass(s))
+                    year: 0 | r[0],
+                    month: (0 | r[1]) - 1,
+                    date: 0 | r[2]
+                },
+                    !e.hasClass(s))
                 if (n.range) {
                     if (w.each(["startTime", "endTime"], function (e, n) {
-                        t[n] = t[n] || {
-                            hours: 0,
-                            minutes: 0,
-                            seconds: 0
-                        }
-                    }),
-                        t.endState)
+                            t[n] = t[n] || {
+                                hours: 0,
+                                minutes: 0,
+                                seconds: 0
+                            }
+                        }),
+                            t.endState)
                         l(),
                             delete t.endState,
                             delete t.endDate,
@@ -1626,8 +1626,8 @@ layui.define(function (e) {
                             e.addClass(o);
                     else if (t.startState) {
                         if (e.addClass(o),
-                            t.endDate ? w.extend(t.endDate, r) : t.endDate = w.extend({}, r, t.endTime),
-                        t.newDate(r).getTime() < t.newDate(t.startYMD).getTime()) {
+                                t.endDate ? w.extend(t.endDate, r) : t.endDate = w.extend({}, r, t.endTime),
+                            t.newDate(r).getTime() < t.newDate(t.startYMD).getTime()) {
                             var d = w.extend({}, t.endDate, {
                                 hours: t.startDate.hours,
                                 minutes: t.startDate.minutes,
@@ -1920,7 +1920,7 @@ layui.define(function (e) {
         if (void 0 === n && 1 === e.nodeType) {
             var r = "data-" + t.replace(_e, "-$1").toLowerCase();
             if (n = e.getAttribute(r),
-            "string" == typeof n) {
+                "string" == typeof n) {
                 try {
                     n = "true" === n || "false" !== n && ("null" === n ? null : +n + "" === n ? +n : qe.test(n) ? pe.parseJSON(n) : n)
                 } catch (i) {
@@ -2036,7 +2036,7 @@ layui.define(function (e) {
     function y(e, t, n, r, i) {
         for (var o, a, s, u, l, c, f, d = e.length, y = p(t), v = [], x = 0; x < d; x++)
             if (a = e[x],
-            a || 0 === a)
+                a || 0 === a)
                 if ("object" === pe.type(a))
                     pe.merge(v, a.nodeType ? [a] : a);
                 else if (Ue.test(a)) {
@@ -2047,7 +2047,7 @@ layui.define(function (e) {
                              o = f[0]; o--;)
                         u = u.lastChild;
                     if (!fe.leadingWhitespace && $e.test(a) && v.push(t.createTextNode($e.exec(a)[0])),
-                        !fe.tbody)
+                            !fe.tbody)
                         for (a = "table" !== l || Ve.test(a) ? "<table>" !== f[1] || Ve.test(a) ? 0 : u : u.firstChild,
                                  o = a && a.childNodes.length; o--;)
                             pe.nodeName(c = a.childNodes[o], "tbody") && !c.childNodes.length && a.removeChild(c);
@@ -2063,9 +2063,9 @@ layui.define(function (e) {
             if (r && pe.inArray(a, r) > -1)
                 i && i.push(a);
             else if (s = pe.contains(a.ownerDocument, a),
-                u = h(y.appendChild(a), "script"),
-            s && g(u),
-                n)
+                    u = h(y.appendChild(a), "script"),
+                s && g(u),
+                    n)
                 for (o = 0; a = u[o++];)
                     Ie.test(a.type || "") && n.push(a);
         return u = null,
@@ -2097,11 +2097,11 @@ layui.define(function (e) {
             return e
         }
         if (null == r && null == i ? (i = n,
-            r = n = void 0) : null == i && ("string" == typeof n ? (i = r,
-            r = void 0) : (i = r,
-            r = n,
-            n = void 0)),
-        i === !1)
+                r = n = void 0) : null == i && ("string" == typeof n ? (i = r,
+                r = void 0) : (i = r,
+                r = n,
+                n = void 0)),
+            i === !1)
             i = x;
         else if (!i)
             return e;
@@ -2151,7 +2151,7 @@ layui.define(function (e) {
         var n, r, i;
         if (1 === t.nodeType) {
             if (n = t.nodeName.toLowerCase(),
-            !fe.noCloneEvent && t[pe.expando]) {
+                !fe.noCloneEvent && t[pe.expando]) {
                 i = pe._data(t);
                 for (r in i.events)
                     pe.removeEvent(t, r, i.handle);
@@ -2174,9 +2174,9 @@ layui.define(function (e) {
                     S(o, t, n, r)
             });
         if (f && (l = y(t, e[0].ownerDocument, !1, e, r),
-            i = l.firstChild,
-        1 === l.childNodes.length && (l = i),
-        i || r)) {
+                i = l.firstChild,
+            1 === l.childNodes.length && (l = i),
+            i || r)) {
             for (s = pe.map(h(l, "script"), C),
                      a = s.length; c < f; c++)
                 o = l,
@@ -2236,7 +2236,7 @@ layui.define(function (e) {
             return e;
         for (var t = e.charAt(0).toUpperCase() + e.slice(1), n = Ct.length; n--;)
             if (e = Ct[n] + t,
-            e in Et)
+                e in Et)
                 return e
     }
 
@@ -2274,10 +2274,10 @@ layui.define(function (e) {
             , a = ht(t)
             , s = fe.boxSizing && "border-box" === pe.css(t, "boxSizing", !1, a);
         if (re.msFullscreenElement && e.top !== e && t.getClientRects().length && (o = Math.round(100 * t.getBoundingClientRect()[n])),
-        o <= 0 || null == o) {
+            o <= 0 || null == o) {
             if (o = gt(t, n, a),
-            (o < 0 || null == o) && (o = t.style[n]),
-                ft.test(o))
+                (o < 0 || null == o) && (o = t.style[n]),
+                    ft.test(o))
                 return o;
             i = s && (fe.boxSizingReliable() || o === t.style[n]),
                 o = parseFloat(o) || 0
@@ -2341,10 +2341,10 @@ layui.define(function (e) {
         }));
         for (r in t)
             if (i = t[r],
-                St.exec(i)) {
+                    St.exec(i)) {
                 if (delete t[r],
-                    o = o || "toggle" === i,
-                i === (h ? "hide" : "show")) {
+                        o = o || "toggle" === i,
+                    i === (h ? "hide" : "show")) {
                     if ("show" !== i || !g || void 0 === g[r])
                         continue;
                     h = !0
@@ -2378,14 +2378,14 @@ layui.define(function (e) {
         var n, r, i, o, a;
         for (n in e)
             if (r = pe.camelCase(n),
-                i = t[r],
-                o = e[n],
-            pe.isArray(o) && (i = o[1],
-                o = e[n] = o[0]),
-            n !== r && (e[r] = o,
-                delete e[n]),
-                a = pe.cssHooks[r],
-            a && "expand" in a) {
+                    i = t[r],
+                    o = e[n],
+                pe.isArray(o) && (i = o[1],
+                    o = e[n] = o[0]),
+                n !== r && (e[r] = o,
+                    delete e[n]),
+                    a = pe.cssHooks[r],
+                a && "expand" in a) {
                 o = a.expand(o),
                     delete e[r];
                 for (n in o)
@@ -2525,17 +2525,17 @@ layui.define(function (e) {
                 l[a.toLowerCase()] = e.converters[a];
         for (o = c.shift(); o;)
             if (e.responseFields[o] && (n[e.responseFields[o]] = t),
-            !u && r && e.dataFilter && (t = e.dataFilter(t, e.dataType)),
-                u = o,
-                o = c.shift())
+                !u && r && e.dataFilter && (t = e.dataFilter(t, e.dataType)),
+                    u = o,
+                    o = c.shift())
                 if ("*" === o)
                     o = u;
                 else if ("*" !== u && u !== o) {
                     if (a = l[u + " " + o] || l["* " + o],
-                        !a)
+                            !a)
                         for (i in l)
                             if (s = i.split(" "),
-                            s[1] === o && (a = l[u + " " + s[0]] || l["* " + s[0]])) {
+                                s[1] === o && (a = l[u + " " + s[0]] || l["* " + s[0]])) {
                                 a === !0 ? a = l[i] : l[i] !== !0 && (o = s[0],
                                     c.unshift(s[1]));
                                 break
@@ -2809,9 +2809,9 @@ layui.define(function (e) {
             proxy: function (e, t) {
                 var n, r, i;
                 if ("string" == typeof t && (i = e[t],
-                    t = e,
-                    e = i),
-                    pe.isFunction(e))
+                        t = e,
+                        e = i),
+                        pe.isFunction(e))
                     return n = ie.call(arguments, 2),
                         r = function () {
                             return e.apply(t || this, n.concat(ie.call(arguments)))
@@ -2833,11 +2833,11 @@ layui.define(function (e) {
         function t(e, t, n, r) {
             var i, o, a, s, u, l, f, p, h = t && t.ownerDocument, g = t ? t.nodeType : 9;
             if (n = n || [],
-            "string" != typeof e || !e || 1 !== g && 9 !== g && 11 !== g)
+                "string" != typeof e || !e || 1 !== g && 9 !== g && 11 !== g)
                 return n;
             if (!r && ((t ? t.ownerDocument || t : B) !== H && L(t),
-                t = t || H,
-                _)) {
+                    t = t || H,
+                    _)) {
                 if (11 !== g && (l = ye.exec(e)))
                     if (i = l[1]) {
                         if (9 === g) {
@@ -2983,11 +2983,11 @@ layui.define(function (e) {
                         for (; t = t[r];)
                             if (1 === t.nodeType || i) {
                                 if (l = t[P] || (t[P] = {}),
-                                    u = l[t.uniqueID] || (l[t.uniqueID] = {}),
-                                (s = u[r]) && s[0] === W && s[1] === o)
+                                        u = l[t.uniqueID] || (l[t.uniqueID] = {}),
+                                    (s = u[r]) && s[0] === W && s[1] === o)
                                     return c[2] = s[2];
                                 if (u[r] = c,
-                                    c[2] = e(t, n, a))
+                                        c[2] = e(t, n, a))
                                     return !0
                             }
                 }
@@ -3023,7 +3023,7 @@ layui.define(function (e) {
                     var l, c, f, d = [], p = [], h = a.length, y = r || g(t || "*", s.nodeType ? [s] : s, []),
                         v = !e || !r && t ? y : m(y, d, e, s, u), x = n ? o || (r ? e : h || i) ? [] : a : v;
                     if (n && n(v, x, s, u),
-                        i)
+                            i)
                         for (l = m(x, p),
                                  i(l, [], s, u),
                                  c = l.length; c--;)
@@ -3060,7 +3060,7 @@ layui.define(function (e) {
                     c = [p(h(c), n)];
                 else {
                     if (n = T.filter[e[s].type].apply(null, e[s].matches),
-                        n[P]) {
+                            n[P]) {
                         for (r = ++s; r < i && !T.relative[e[r].type]; r++)
                             ;
                         return y(s > 1 && h(c), s > 1 && d(e.slice(0, s - 1).concat({
@@ -3093,7 +3093,7 @@ layui.define(function (e) {
                     r && g.push(c))
                 }
                 if (p += h,
-                i && h !== p) {
+                    i && h !== p) {
                     for (f = 0; d = n[f++];)
                         d(g, y, a, s);
                     if (r) {
@@ -3302,8 +3302,8 @@ layui.define(function (e) {
             ,
             t.matchesSelector = function (e, n) {
                 if ((e.ownerDocument || e) !== H && L(e),
-                    n = n.replace(ce, "='$1']"),
-                w.matchesSelector && _ && !X[n + " "] && (!M || !M.test(n)) && (!F || !F.test(n)))
+                        n = n.replace(ce, "='$1']"),
+                    w.matchesSelector && _ && !X[n + " "] && (!M || !M.test(n)) && (!F || !F.test(n)))
                     try {
                         var r = O.call(e, n);
                         if (r || w.disconnectedMatch || e.document && 11 !== e.document.nodeType)
@@ -3332,9 +3332,9 @@ layui.define(function (e) {
             t.uniqueSort = function (e) {
                 var t, n = [], r = 0, i = 0;
                 if (j = !w.detectDuplicates,
-                    D = !w.sortStable && e.slice(0),
-                    e.sort(U),
-                    j) {
+                        D = !w.sortStable && e.slice(0),
+                        e.sort(U),
+                        j) {
                     for (; t = e[i++];)
                         t === e[i] && (r = n.push(i));
                     for (; r--;)
@@ -3447,7 +3447,7 @@ layui.define(function (e) {
                                         return !0
                                     }
                                     if (h = [a ? m.firstChild : m.lastChild],
-                                    a && v) {
+                                        a && v) {
                                         for (d = m,
                                                  f = d[P] || (d[P] = {}),
                                                  c = f[d.uniqueID] || (f[d.uniqueID] = {}),
@@ -3460,12 +3460,12 @@ layui.define(function (e) {
                                                 break
                                             }
                                     } else if (v && (d = t,
-                                        f = d[P] || (d[P] = {}),
-                                        c = f[d.uniqueID] || (f[d.uniqueID] = {}),
-                                        l = c[e] || [],
-                                        p = l[0] === W && l[1],
-                                        x = p),
-                                    x === !1)
+                                            f = d[P] || (d[P] = {}),
+                                            c = f[d.uniqueID] || (f[d.uniqueID] = {}),
+                                            l = c[e] || [],
+                                            p = l[0] === W && l[1],
+                                            x = p),
+                                        x === !1)
                                         for (; (d = ++p && d && d[g] || (x = p = 0) || h.pop()) && ((s ? d.nodeName.toLowerCase() !== y : 1 !== d.nodeType) || !++x || (v && (f = d[P] || (d[P] = {}),
                                             c = f[d.uniqueID] || (f[d.uniqueID] = {}),
                                             c[e] = [W, x]),
@@ -3668,11 +3668,11 @@ layui.define(function (e) {
             S = t.select = function (e, t, n, r) {
                 var i, o, a, s, u, l = "function" == typeof e && e, f = !r && N(e = l.selector || e);
                 if (n = n || [],
-                1 === f.length) {
+                    1 === f.length) {
                     if (o = f[0] = f[0].slice(0),
-                    o.length > 2 && "ID" === (a = o[0]).type && w.getById && 9 === t.nodeType && _ && T.relative[o[1].type]) {
+                        o.length > 2 && "ID" === (a = o[0]).type && w.getById && 9 === t.nodeType && _ && T.relative[o[1].type]) {
                         if (t = (T.find.ID(a.matches[0].replace(be, we), t) || [])[0],
-                            !t)
+                                !t)
                             return n;
                         l && (t = t.parentNode),
                             e = e.slice(o.shift().value.length)
@@ -3681,8 +3681,8 @@ layui.define(function (e) {
                         !T.relative[s = a.type]);)
                         if ((u = T.find[s]) && (r = u(a.matches[0].replace(be, we), ve.test(o[0].type) && c(t.parentNode) || t))) {
                             if (o.splice(i, 1),
-                                e = r.length && d(o),
-                                !e)
+                                    e = r.length && d(o),
+                                    !e)
                                 return Q.apply(n, r),
                                     n;
                             break
@@ -3784,20 +3784,20 @@ layui.define(function (e) {
             if (!e)
                 return this;
             if (n = n || Ee,
-            "string" == typeof e) {
+                "string" == typeof e) {
                 if (r = "<" === e.charAt(0) && ">" === e.charAt(e.length - 1) && e.length >= 3 ? [null, e, null] : Ne.exec(e),
-                !r || !r[1] && t)
+                    !r || !r[1] && t)
                     return !t || t.jquery ? (t || n).find(e) : this.constructor(t).find(e);
                 if (r[1]) {
                     if (t = t instanceof pe ? t[0] : t,
-                        pe.merge(this, pe.parseHTML(r[1], t && t.nodeType ? t.ownerDocument || t : re, !0)),
-                    Te.test(r[1]) && pe.isPlainObject(t))
+                            pe.merge(this, pe.parseHTML(r[1], t && t.nodeType ? t.ownerDocument || t : re, !0)),
+                        Te.test(r[1]) && pe.isPlainObject(t))
                         for (r in t)
                             pe.isFunction(this[r]) ? this[r](t[r]) : this.attr(r, t[r]);
                     return this
                 }
                 if (i = re.getElementById(r[2]),
-                i && i.parentNode) {
+                    i && i.parentNode) {
                     if (i.id !== r[2])
                         return Ee.find(e);
                     this.length = 1,
@@ -4062,7 +4062,7 @@ layui.define(function (e) {
         pe.ready.promise = function (t) {
             if (!je)
                 if (je = pe.Deferred(),
-                "complete" === re.readyState || "loading" !== re.readyState && !re.documentElement.doScroll)
+                    "complete" === re.readyState || "loading" !== re.readyState && !re.documentElement.doScroll)
                     e.setTimeout(pe.ready);
                 else if (re.addEventListener)
                     re.addEventListener("DOMContentLoaded", s),
@@ -4154,7 +4154,7 @@ layui.define(function (e) {
                 var n, r, i, o = this[0], a = o && o.attributes;
                 if (void 0 === e) {
                     if (this.length && (i = pe.data(o),
-                    1 === o.nodeType && !pe._data(o, "parsedAttrs"))) {
+                        1 === o.nodeType && !pe._data(o, "parsedAttrs"))) {
                         for (n = a.length; n--;)
                             a[n] && (r = a[n].name,
                             0 === r.indexOf("data-") && (r = pe.camelCase(r.slice(5)),
@@ -4279,14 +4279,14 @@ layui.define(function (e) {
                 for (s in n)
                     Pe(e, t, s, n[s], !0, o, a)
             } else if (void 0 !== r && (i = !0,
-            pe.isFunction(r) || (a = !0),
-            l && (a ? (t.call(e, r),
-                t = null) : (l = t,
-                    t = function (e, t, n) {
-                        return l.call(pe(e), n)
-                    }
-            )),
-                t))
+                pe.isFunction(r) || (a = !0),
+                l && (a ? (t.call(e, r),
+                    t = null) : (l = t,
+                        t = function (e, t, n) {
+                            return l.call(pe(e), n)
+                        }
+                )),
+                    t))
                 for (; s < u; s++)
                     t(e[s], n, a ? r : r.call(e[s], s, t(e[s], n)));
             return i ? e : l ? t.call(e) : u ? t(e[0], n) : o
@@ -4405,9 +4405,9 @@ layui.define(function (e) {
                 for (t = (t || "").match(De) || [""],
                          l = t.length; l--;)
                     if (s = Qe.exec(t[l]) || [],
-                        p = g = s[1],
-                        h = (s[2] || "").split(".").sort(),
-                        p) {
+                            p = g = s[1],
+                            h = (s[2] || "").split(".").sort(),
+                            p) {
                         for (f = pe.event.special[p] || {},
                                  p = (r ? f.delegateType : f.bindType) || p,
                                  d = c[p] || [],
@@ -4430,19 +4430,19 @@ layui.define(function (e) {
             var o, a, s, u, l, c, f, d = [r || re], p = ce.call(t, "type") ? t.type : t,
                 h = ce.call(t, "namespace") ? t.namespace.split(".") : [];
             if (s = c = r = r || re,
-            3 !== r.nodeType && 8 !== r.nodeType && !Ke.test(p + pe.event.triggered) && (p.indexOf(".") > -1 && (h = p.split("."),
-                p = h.shift(),
-                h.sort()),
-                a = p.indexOf(":") < 0 && "on" + p,
-                t = t[pe.expando] ? t : new pe.Event(p, "object" == typeof t && t),
-                t.isTrigger = i ? 2 : 3,
-                t.namespace = h.join("."),
-                t.rnamespace = t.namespace ? new RegExp("(^|\\.)" + h.join("\\.(?:.*\\.|)") + "(\\.|$)") : null,
-                t.result = void 0,
-            t.target || (t.target = r),
-                n = null == n ? [t] : pe.makeArray(n, [t]),
-                l = pe.event.special[p] || {},
-            i || !l.trigger || l.trigger.apply(r, n) !== !1)) {
+                3 !== r.nodeType && 8 !== r.nodeType && !Ke.test(p + pe.event.triggered) && (p.indexOf(".") > -1 && (h = p.split("."),
+                    p = h.shift(),
+                    h.sort()),
+                    a = p.indexOf(":") < 0 && "on" + p,
+                    t = t[pe.expando] ? t : new pe.Event(p, "object" == typeof t && t),
+                    t.isTrigger = i ? 2 : 3,
+                    t.namespace = h.join("."),
+                    t.rnamespace = t.namespace ? new RegExp("(^|\\.)" + h.join("\\.(?:.*\\.|)") + "(\\.|$)") : null,
+                    t.result = void 0,
+                t.target || (t.target = r),
+                    n = null == n ? [t] : pe.makeArray(n, [t]),
+                    l = pe.event.special[p] || {},
+                i || !l.trigger || l.trigger.apply(r, n) !== !1)) {
                 if (!i && !l.noBubble && !pe.isWindow(r)) {
                     for (u = l.delegateType || p,
                          Ke.test(u + p) || (s = s.parentNode); s; s = s.parentNode)
@@ -4458,7 +4458,7 @@ layui.define(function (e) {
                     o && o.apply && He(s) && (t.result = o.apply(s, n),
                     t.result === !1 && t.preventDefault());
                 if (t.type = p,
-                !i && !t.isDefaultPrevented() && (!l._default || l._default.apply(d.pop(), n) === !1) && He(r) && a && r[p] && !pe.isWindow(r)) {
+                    !i && !t.isDefaultPrevented() && (!l._default || l._default.apply(d.pop(), n) === !1) && He(r) && a && r[p] && !pe.isWindow(r)) {
                     c = r[a],
                     c && (r[a] = null),
                         pe.event.triggered = p;
@@ -4477,8 +4477,8 @@ layui.define(function (e) {
             var t, n, r, i, o, a = [], s = ie.call(arguments), u = (pe._data(this, "events") || {})[e.type] || [],
                 l = pe.event.special[e.type] || {};
             if (s[0] = e,
-                e.delegateTarget = this,
-            !l.preDispatch || l.preDispatch.call(this, e) !== !1) {
+                    e.delegateTarget = this,
+                !l.preDispatch || l.preDispatch.call(this, e) !== !1) {
                 for (a = pe.event.handlers.call(this, e, u),
                          t = 0; (i = a[t++]) && !e.isPropagationStopped();)
                     for (e.currentTarget = i.elem,
@@ -4779,8 +4779,8 @@ layui.define(function (e) {
         clone: function (e, t, n) {
             var r, i, o, a, s, u = pe.contains(e.ownerDocument, e);
             if (fe.html5Clone || pe.isXMLDoc(e) || !et.test("<" + e.nodeName + ">") ? o = e.cloneNode(!0) : (st.innerHTML = e.outerHTML,
-                st.removeChild(o = st.firstChild)),
-                !(fe.noCloneEvent && fe.noCloneChecked || 1 !== e.nodeType && 11 !== e.nodeType || pe.isXMLDoc(e)))
+                    st.removeChild(o = st.firstChild)),
+                    !(fe.noCloneEvent && fe.noCloneChecked || 1 !== e.nodeType && 11 !== e.nodeType || pe.isXMLDoc(e)))
                 for (r = h(o),
                          s = h(e),
                          a = 0; null != (i = s[a]); ++a)
@@ -4801,7 +4801,7 @@ layui.define(function (e) {
         cleanData: function (e, t) {
             for (var n, r, i, o, a = 0, s = pe.expando, u = pe.cache, l = fe.attributes, c = pe.event.special; null != (n = e[a]); a++)
                 if ((t || He(n)) && (i = n[s],
-                    o = i && u[i])) {
+                        o = i && u[i])) {
                     if (o.events)
                         for (r in o.events)
                             c[r] ? pe.event.remove(n, r) : pe.removeEvent(n, r, o.handle);
@@ -5088,15 +5088,15 @@ layui.define(function (e) {
             if (e && 3 !== e.nodeType && 8 !== e.nodeType && e.style) {
                 var i, o, a, s = pe.camelCase(t), u = e.style;
                 if (t = pe.cssProps[s] || (pe.cssProps[s] = H(s) || s),
-                    a = pe.cssHooks[t] || pe.cssHooks[s],
-                void 0 === n)
+                        a = pe.cssHooks[t] || pe.cssHooks[s],
+                    void 0 === n)
                     return a && "get" in a && void 0 !== (i = a.get(e, !1, r)) ? i : u[t];
                 if (o = typeof n,
-                "string" === o && (i = Me.exec(n)) && i[1] && (n = d(e, t, i),
-                    o = "number"),
-                null != n && n === n && ("number" === o && (n += i && i[3] || (pe.cssNumber[s] ? "" : "px")),
-                fe.clearCloneStyle || "" !== n || 0 !== t.indexOf("background") || (u[t] = "inherit"),
-                    !(a && "set" in a && void 0 === (n = a.set(e, n, r)))))
+                    "string" === o && (i = Me.exec(n)) && i[1] && (n = d(e, t, i),
+                        o = "number"),
+                    null != n && n === n && ("number" === o && (n += i && i[3] || (pe.cssNumber[s] ? "" : "px")),
+                    fe.clearCloneStyle || "" !== n || 0 !== t.indexOf("background") || (u[t] = "inherit"),
+                        !(a && "set" in a && void 0 === (n = a.set(e, n, r)))))
                     try {
                         u[t] = n
                     } catch (l) {
@@ -5476,9 +5476,9 @@ layui.define(function (e) {
                     get: function (e) {
                         for (var t, n, r = e.options, i = e.selectedIndex, o = "select-one" === e.type || i < 0, a = o ? null : [], s = o ? i + 1 : r.length, u = i < 0 ? s : o ? i : 0; u < s; u++)
                             if (n = r[u],
-                            (n.selected || u === i) && (fe.optDisabled ? !n.disabled : null === n.getAttribute("disabled")) && (!n.parentNode.disabled || !pe.nodeName(n.parentNode, "optgroup"))) {
+                                (n.selected || u === i) && (fe.optDisabled ? !n.disabled : null === n.getAttribute("disabled")) && (!n.parentNode.disabled || !pe.nodeName(n.parentNode, "optgroup"))) {
                                 if (t = pe(n).val(),
-                                    o)
+                                        o)
                                     return t;
                                 a.push(t)
                             }
@@ -5487,7 +5487,7 @@ layui.define(function (e) {
                     set: function (e, t) {
                         for (var n, r, i = e.options, o = pe.makeArray(t), a = i.length; a--;)
                             if (r = i[a],
-                            pe.inArray(pe.valHooks.option.get(r), o) > -1)
+                                pe.inArray(pe.valHooks.option.get(r), o) > -1)
                                 try {
                                     r.selected = n = !0
                                 } catch (s) {
@@ -5585,8 +5585,8 @@ layui.define(function (e) {
         set: function (e, t, n) {
             var r = e.getAttributeNode(n);
             if (r || e.setAttributeNode(r = e.ownerDocument.createAttribute(n)),
-                r.value = t += "",
-            "value" === n || t === e.getAttribute(n))
+                    r.value = t += "",
+                "value" === n || t === e.getAttribute(n))
                 return t
         }
     },
@@ -5699,7 +5699,7 @@ layui.define(function (e) {
             if ("string" == typeof e && e)
                 for (t = e.match(De) || []; n = this[u++];)
                     if (i = z(n),
-                        r = 1 === n.nodeType && (" " + i + " ").replace(Pt, " ")) {
+                            r = 1 === n.nodeType && (" " + i + " ").replace(Pt, " ")) {
                         for (a = 0; o = t[a++];)
                             r.indexOf(" " + o + " ") < 0 && (r += o + " ");
                         s = pe.trim(r),
@@ -5718,7 +5718,7 @@ layui.define(function (e) {
             if ("string" == typeof e && e)
                 for (t = e.match(De) || []; n = this[u++];)
                     if (i = z(n),
-                        r = 1 === n.nodeType && (" " + i + " ").replace(Pt, " ")) {
+                            r = 1 === n.nodeType && (" " + i + " ").replace(Pt, " ")) {
                         for (a = 0; o = t[a++];)
                             for (; r.indexOf(" " + o + " ") > -1;)
                                 r = r.replace(" " + o + " ", " ");
@@ -5932,16 +5932,16 @@ layui.define(function (e) {
                     }
                 };
             if (g.promise(T).complete = m.add,
-                T.success = T.done,
-                T.error = T.fail,
-                d.url = ((t || d.url || en) + "").replace(zt, "").replace(Jt, tn[1] + "//"),
-                d.type = n.method || n.type || d.method || d.type,
-                d.dataTypes = pe.trim(d.dataType || "*").toLowerCase().match(De) || [""],
-            null == d.crossDomain && (i = Gt.exec(d.url.toLowerCase()),
-                d.crossDomain = !(!i || i[1] === tn[1] && i[2] === tn[2] && (i[3] || ("http:" === i[1] ? "80" : "443")) === (tn[3] || ("http:" === tn[1] ? "80" : "443")))),
-            d.data && d.processData && "string" != typeof d.data && (d.data = pe.param(d.data, d.traditional)),
-                U(Kt, d, n, T),
-            2 === b)
+                    T.success = T.done,
+                    T.error = T.fail,
+                    d.url = ((t || d.url || en) + "").replace(zt, "").replace(Jt, tn[1] + "//"),
+                    d.type = n.method || n.type || d.method || d.type,
+                    d.dataTypes = pe.trim(d.dataType || "*").toLowerCase().match(De) || [""],
+                null == d.crossDomain && (i = Gt.exec(d.url.toLowerCase()),
+                    d.crossDomain = !(!i || i[1] === tn[1] && i[2] === tn[2] && (i[3] || ("http:" === i[1] ? "80" : "443")) === (tn[3] || ("http:" === tn[1] ? "80" : "443")))),
+                d.data && d.processData && "string" != typeof d.data && (d.data = pe.param(d.data, d.traditional)),
+                    U(Kt, d, n, T),
+                2 === b)
                 return T;
             l = pe.event && d.global,
             l && 0 === pe.active++ && pe.event.trigger("ajaxStart"),
@@ -5968,8 +5968,8 @@ layui.define(function (e) {
                 T[o](d[o]);
             if (c = U(Qt, d, n, T)) {
                 if (T.readyState = 1,
-                l && h.trigger("ajaxSend", [T, d]),
-                2 === b)
+                    l && h.trigger("ajaxSend", [T, d]),
+                    2 === b)
                     return T;
                 d.async && d.timeout > 0 && (u = e.setTimeout(function () {
                     T.abort("timeout")
@@ -6076,7 +6076,7 @@ layui.define(function (e) {
                 r[r.length] = encodeURIComponent(e) + "=" + encodeURIComponent(t)
         };
         if (void 0 === t && (t = pe.ajaxSettings && pe.ajaxSettings.traditional),
-        pe.isArray(e) || e.jquery && !pe.isPlainObject(e))
+            pe.isArray(e) || e.jquery && !pe.isPlainObject(e))
             pe.each(e, function () {
                 i(this.name, this.value)
             });
@@ -6131,7 +6131,7 @@ layui.define(function (e) {
                 send: function (r, i) {
                     var o, a = t.xhr(), s = ++un;
                     if (a.open(t.type, t.url, t.async, t.username, t.password),
-                        t.xhrFields)
+                            t.xhrFields)
                         for (o in t.xhrFields)
                             a[o] = t.xhrFields[o];
                     t.mimeType && a.overrideMimeType && a.overrideMimeType(t.mimeType),
@@ -6143,9 +6143,9 @@ layui.define(function (e) {
                             var o, u, l;
                             if (n && (r || 4 === a.readyState))
                                 if (delete ln[s],
-                                    n = void 0,
-                                    a.onreadystatechange = pe.noop,
-                                    r)
+                                        n = void 0,
+                                        a.onreadystatechange = pe.noop,
+                                        r)
                                     4 !== a.readyState && a.abort();
                                 else {
                                     l = {},
@@ -6643,35 +6643,35 @@ layui.define(function (e) {
                         t.tipsMore || r.closeAll("tips")
                 }
                 if (e.vessel(f, function (n, r, u) {
-                    c.append(n[0]),
-                        f ? function () {
-                            2 == t.type || 4 == t.type ? function () {
-                                i("body").append(n[1])
-                            }() : function () {
-                                s.parents("." + l[0])[0] || (s.data("display", s.css("display")).show().addClass("layui-layer-wrap").wrap(n[1]),
-                                    i("#" + l[0] + a).find("." + l[5]).before(r))
-                            }()
-                        }() : c.append(n[1]),
-                    i(".layui-layer-move")[0] || c.append(o.moveElem = u),
-                        e.layero = i("#" + l[0] + a),
-                    t.scrollbar || l.html.css("overflow", "hidden").attr("layer-full", a)
-                }).auto(a),
-                    i("#layui-layer-shade" + e.index).css({
-                        "background-color": t.shade[1] || "#000",
-                        opacity: t.shade[0] || t.shade
+                        c.append(n[0]),
+                            f ? function () {
+                                2 == t.type || 4 == t.type ? function () {
+                                    i("body").append(n[1])
+                                }() : function () {
+                                    s.parents("." + l[0])[0] || (s.data("display", s.css("display")).show().addClass("layui-layer-wrap").wrap(n[1]),
+                                        i("#" + l[0] + a).find("." + l[5]).before(r))
+                                }()
+                            }() : c.append(n[1]),
+                        i(".layui-layer-move")[0] || c.append(o.moveElem = u),
+                            e.layero = i("#" + l[0] + a),
+                        t.scrollbar || l.html.css("overflow", "hidden").attr("layer-full", a)
+                    }).auto(a),
+                        i("#layui-layer-shade" + e.index).css({
+                            "background-color": t.shade[1] || "#000",
+                            opacity: t.shade[0] || t.shade
+                        }),
+                    2 == t.type && 6 == r.ie && e.layero.find("iframe").attr("src", s[0]),
+                        4 == t.type ? e.tips() : e.offset(),
+                    t.fixed && n.on("resize", function () {
+                        e.offset(),
+                        (/^\d+%$/.test(t.area[0]) || /^\d+%$/.test(t.area[1])) && e.auto(a),
+                        4 == t.type && e.tips()
                     }),
-                2 == t.type && 6 == r.ie && e.layero.find("iframe").attr("src", s[0]),
-                    4 == t.type ? e.tips() : e.offset(),
-                t.fixed && n.on("resize", function () {
-                    e.offset(),
-                    (/^\d+%$/.test(t.area[0]) || /^\d+%$/.test(t.area[1])) && e.auto(a),
-                    4 == t.type && e.tips()
-                }),
-                t.time <= 0 || setTimeout(function () {
-                    r.close(e.index)
-                }, t.time),
-                    e.move().callback(),
-                    l.anim[t.anim]) {
+                    t.time <= 0 || setTimeout(function () {
+                        r.close(e.index)
+                    }, t.time),
+                        e.move().callback(),
+                        l.anim[t.anim]) {
                     var u = "layer-anim " + l.anim[t.anim];
                     e.layero.addClass(u).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function () {
                         i(this).removeClass(u)
@@ -6817,9 +6817,9 @@ layui.define(function (e) {
                             , o = i.clientY - c.offset[1]
                             , l = "fixed" === s.css("position");
                         if (i.preventDefault(),
-                            c.stX = l ? 0 : n.scrollLeft(),
-                            c.stY = l ? 0 : n.scrollTop(),
-                            !t.moveOut) {
+                                c.stX = l ? 0 : n.scrollLeft(),
+                                c.stY = l ? 0 : n.scrollTop(),
+                                !t.moveOut) {
                             var f = n.width() - s.outerWidth() + c.stX
                                 , u = n.height() - s.outerHeight() + c.stY;
                             a < c.stX && (a = c.stX),
@@ -7105,8 +7105,8 @@ layui.define(function (e) {
     r.prompt = function (e, t) {
         var a = "";
         if (e = e || {},
-        "function" == typeof e && (t = e),
-            e.area) {
+            "function" == typeof e && (t = e),
+                e.area) {
             var o = e.area;
             a = 'style="width: ' + o[0] + "; height: " + o[1] + ';"',
                 delete e.area
@@ -7198,7 +7198,7 @@ layui.define(function (e) {
 
             var s = {};
             if (t = t || {},
-                t.photos) {
+                    t.photos) {
                 var l = t.photos.constructor === Object
                     , f = l ? t.photos : {}
                     , u = f.data || []
@@ -7207,7 +7207,7 @@ layui.define(function (e) {
                     t.img = t.img || "img";
                 var y = t.success;
                 if (delete t.success,
-                    l) {
+                        l) {
                     if (0 === u.length)
                         return r.msg("&#x6CA1;&#x6709;&#x56FE;&#x7247;")
                 } else {
@@ -7226,22 +7226,22 @@ layui.define(function (e) {
                             })
                     };
                     if (h(),
-                    0 === u.length)
+                        0 === u.length)
                         return;
                     if (n || p.on("click", t.img, function () {
-                        var e = i(this)
-                            , n = e.attr("layer-index");
-                        r.photos(i.extend(t, {
-                            photos: {
-                                start: n,
-                                data: u,
-                                tab: t.tab
-                            },
-                            full: t.full
-                        }), !0),
-                            h()
-                    }),
-                        !n)
+                            var e = i(this)
+                                , n = e.attr("layer-index");
+                            r.photos(i.extend(t, {
+                                photos: {
+                                    start: n,
+                                    data: u,
+                                    tab: t.tab
+                                },
+                                full: t.full
+                            }), !0),
+                                h()
+                        }),
+                            !n)
                         return
                 }
                 s.imgprev = function (e) {
@@ -7493,15 +7493,15 @@ layui.define("jquery", function (t) {
                     ,
                     c = a('<span class="layui-unselect layui-tab-bar" ' + r + "><i " + r + ' class="layui-icon">&#xe61a;</i></span>');
                 if (n === window && 8 != i.ie && f.hideTabMore(!0),
-                s.attr("lay-allowClose") && o.find("li").each(function () {
-                    var t = a(this);
-                    if (!t.find("." + l)[0]) {
-                        var i = a('<i class="layui-icon layui-unselect ' + l + '">&#x1006;</i>');
-                        i.on("click", f.tabDelete),
-                            t.append(i)
-                    }
-                }),
-                "string" != typeof s.attr("lay-unauto"))
+                    s.attr("lay-allowClose") && o.find("li").each(function () {
+                        var t = a(this);
+                        if (!t.find("." + l)[0]) {
+                            var i = a('<i class="layui-icon layui-unselect ' + l + '">&#x1006;</i>');
+                            i.on("click", f.tabDelete),
+                                t.append(i)
+                        }
+                    }),
+                    "string" != typeof s.attr("lay-unauto"))
                     if (o.prop("scrollWidth") > o.outerWidth() + 1) {
                         if (o.find("." + e)[0])
                             return;
@@ -7862,8 +7862,8 @@ layui.define("layer", function (e) {
                     }, 30)
             }, d = function (e, t) {
                 if (o.elemFile.next("." + s).remove(),
-                    r.value = "",
-                "object" != typeof t)
+                        r.value = "",
+                    "object" != typeof t)
                     try {
                         t = JSON.parse(t)
                     } catch (i) {
@@ -7905,7 +7905,7 @@ layui.define("layer", function (e) {
                     a.ie ? a.ie > 9 ? u() : c() : void u())
             };
             if (v = 0 === v.length ? r.value.match(/[^\/\\]+\..+/g) || [] || "" : v,
-            0 !== v.length) {
+                0 !== v.length) {
                 switch (l.accept) {
                     case "file":
                         if (h && !RegExp("\\w\\.(" + h + ")$", "i").test(escape(v)))
@@ -7924,33 +7924,33 @@ layui.define("layer", function (e) {
                         break;
                     default:
                         if (layui.each(v, function (e, t) {
-                            RegExp("\\w\\.(" + (h || "jpg|png|gif|bmp|jpeg$") + ")", "i").test(escape(t)) || (n = !0)
-                        }),
-                            n)
+                                RegExp("\\w\\.(" + (h || "jpg|png|gif|bmp|jpeg$") + ")", "i").test(escape(t)) || (n = !0)
+                            }),
+                                n)
                             return o.msg("选择的图片中包含不支持的格式"),
                                 r.value = ""
                 }
                 if (o.fileLength = function () {
-                    var t = 0
-                        , i = e || o.files || o.chooseFiles || r.files;
-                    return layui.each(i, function () {
-                        t++
-                    }),
-                        t
-                }(),
-                l.number && o.fileLength > l.number)
+                        var t = 0
+                            , i = e || o.files || o.chooseFiles || r.files;
+                        return layui.each(i, function () {
+                            t++
+                        }),
+                            t
+                    }(),
+                    l.number && o.fileLength > l.number)
                     return o.msg("同时最多只能上传的数量为：" + l.number);
                 if (l.size > 0 && !(a.ie && a.ie < 10)) {
                     var F;
                     if (layui.each(o.chooseFiles, function (e, t) {
-                        if (t.size > 1024 * l.size) {
-                            var i = l.size / 1024;
-                            i = i >= 1 ? Math.floor(i) + (i % 1 > 0 ? i.toFixed(1) : 0) + "MB" : l.size + "KB",
-                                r.value = "",
-                                F = i
-                        }
-                    }),
-                        F)
+                            if (t.size > 1024 * l.size) {
+                                var i = l.size / 1024;
+                                i = i >= 1 ? Math.floor(i) + (i % 1 > 0 ? i.toFixed(1) : 0) + "MB" : l.size + "KB",
+                                    r.value = "",
+                                    F = i
+                            }
+                        }),
+                            F)
                         return o.msg("文件不能超过" + F)
                 }
                 y()
@@ -8310,42 +8310,42 @@ layui.define("layer", function (e) {
             , v = c.find("input,select,textarea")
             , h = e.attr("lay-filter");
         if (layui.each(d, function (e, l) {
-            var r = t(this)
-                , u = r.attr("lay-verify").split("|")
-                , c = r.attr("lay-verType")
-                , d = r.val();
-            if (r.removeClass(o),
-                layui.each(u, function (e, t) {
-                    var u, f = "", y = "function" == typeof a[t];
-                    if (a[t]) {
-                        var u = y ? f = a[t](d, l) : !a[t][0].test(d);
-                        if (f = f || a[t][1],
-                            u)
-                            return "tips" === c ? i.tips(f, function () {
-                                return "string" == typeof r.attr("lay-ignore") || "select" !== l.tagName.toLowerCase() && !/^checkbox|radio$/.test(l.type) ? r : r.next()
-                            }(), {
-                                tips: 1
-                            }) : "alert" === c ? i.alert(f, {
-                                title: "提示",
-                                shadeClose: !0
-                            }) : i.msg(f, {
-                                icon: 5,
-                                shift: 6
-                            }),
-                            n.android || n.ios || l.focus(),
-                                r.addClass(o),
-                                s = !0
-                    }
-                }),
+                var r = t(this)
+                    , u = r.attr("lay-verify").split("|")
+                    , c = r.attr("lay-verType")
+                    , d = r.val();
+                if (r.removeClass(o),
+                        layui.each(u, function (e, t) {
+                            var u, f = "", y = "function" == typeof a[t];
+                            if (a[t]) {
+                                var u = y ? f = a[t](d, l) : !a[t][0].test(d);
+                                if (f = f || a[t][1],
+                                        u)
+                                    return "tips" === c ? i.tips(f, function () {
+                                        return "string" == typeof r.attr("lay-ignore") || "select" !== l.tagName.toLowerCase() && !/^checkbox|radio$/.test(l.type) ? r : r.next()
+                                    }(), {
+                                        tips: 1
+                                    }) : "alert" === c ? i.alert(f, {
+                                        title: "提示",
+                                        shadeClose: !0
+                                    }) : i.msg(f, {
+                                        icon: 5,
+                                        shift: 6
+                                    }),
+                                    n.android || n.ios || l.focus(),
+                                        r.addClass(o),
+                                        s = !0
+                            }
+                        }),
+                        s)
+                    return s
+            }),
                 s)
-                return s
-        }),
-            s)
             return !1;
         var p = {};
         return layui.each(v, function (e, t) {
             if (t.name = (t.name || "").replace(/^\s*|\s*&/, ""),
-                t.name) {
+                    t.name) {
                 if (/^.*\[\]$/.test(t.name)) {
                     var i = t.name.match(/^(.*)\[\]$/g)[0];
                     p[i] = 0 | p[i],
@@ -8600,25 +8600,25 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
             var e = this
                 , a = e.config;
             if (a.elem = t(a.elem),
-                a.where = a.where || {},
-                a.id = a.id || a.elem.attr("id"),
-                a.request = t.extend({
-                    pageName: "page",
-                    limitName: "limit"
-                }, a.request),
-                a.response = t.extend({
-                    statusName: "code",
-                    statusCode: 0,
-                    msgName: "msg",
-                    dataName: "data",
-                    countName: "count"
-                }, a.response),
-            "object" == typeof a.page && (a.limit = a.page.limit || a.limit,
-                a.limits = a.page.limits || a.limits,
-                e.page = a.page.curr = a.page.curr || 1,
-                delete a.page.elem,
-                delete a.page.jump),
-                !a.elem[0])
+                    a.where = a.where || {},
+                    a.id = a.id || a.elem.attr("id"),
+                    a.request = t.extend({
+                        pageName: "page",
+                        limitName: "limit"
+                    }, a.request),
+                    a.response = t.extend({
+                        statusName: "code",
+                        statusCode: 0,
+                        msgName: "msg",
+                        dataName: "data",
+                        countName: "count"
+                    }, a.response),
+                "object" == typeof a.page && (a.limit = a.page.limit || a.limit,
+                    a.limits = a.page.limits || a.limits,
+                    e.page = a.page.curr = a.page.curr || 1,
+                    delete a.page.elem,
+                    delete a.page.jump),
+                    !a.elem[0])
                 return e;
             e.setArea();
             var l = a.elem
@@ -8629,19 +8629,19 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
                 index: e.index
             }));
             if (a.index = e.index,
-            n[0] && n.remove(),
-                l.after(o),
-                e.layHeader = o.find(p),
-                e.layMain = o.find(v),
-                e.layBody = o.find(m),
-                e.layFixed = o.find(g),
-                e.layFixLeft = o.find(x),
-                e.layFixRight = o.find(b),
-                e.layTool = o.find(k),
-                e.layPage = o.find(C),
-                e.layTool.html(i(t(a.toolbar).html() || "").render(a)),
-            a.height && e.fullSize(),
-            a.cols.length > 1) {
+                n[0] && n.remove(),
+                    l.after(o),
+                    e.layHeader = o.find(p),
+                    e.layMain = o.find(v),
+                    e.layBody = o.find(m),
+                    e.layFixed = o.find(g),
+                    e.layFixLeft = o.find(x),
+                    e.layFixRight = o.find(b),
+                    e.layTool = o.find(k),
+                    e.layPage = o.find(C),
+                    e.layTool.html(i(t(a.toolbar).html() || "").render(a)),
+                a.height && e.fullSize(),
+                a.cols.length > 1) {
                 var r = e.layFixed.find(p).find("th");
                 r.height(e.layHeader.height() - 1 - parseFloat(r.css("padding-top")) - parseFloat(r.css("padding-bottom")))
             }
@@ -8729,7 +8729,7 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
                 "object" == typeof n.initSort && a.sort(n.initSort.field, n.initSort.type)
             };
             if (a.startTime = (new Date).getTime(),
-                n.url) {
+                    n.url) {
                 var c = {};
                 c[o.pageName] = e,
                     c[o.limitName] = n.limit;
@@ -8813,7 +8813,7 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
                                 , f = a[r];
                             c.getColElem(c.layHeader, r);
                             if (void 0 !== f && null !== f || (f = ""),
-                                !(n.colspan > 1)) {
+                                    !(n.colspan > 1)) {
                                 var y = ['<td data-field="' + r + '" ' + function () {
                                     var e = [];
                                     return n.edit && e.push('data-edit="' + n.edit + '"'),
@@ -9069,7 +9069,7 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
                 S.on("mousemove", function (t) {
                     if (c.resizeStart) {
                         if (t.preventDefault(),
-                            c.rule) {
+                                c.rule) {
                             var i = c.ruleWidth + t.clientX - c.offset[0];
                             i < c.minWidth && (i = c.minWidth),
                                 c.rule.style.width = i + "px",
@@ -9150,7 +9150,7 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
                         e.data("edit"))
                         , o = e.children(h);
                     if (l.close(a.tipsIndex),
-                        !e.data("off"))
+                            !e.data("off"))
                         if (i)
                             if ("select" === i)
                                 ;
@@ -9644,11 +9644,11 @@ layui.define("jquery", function (e) {
                 "function" == typeof e.done && e.done(++c, p)
             };
             if (g(),
-                h.find("a").on("click", function () {
-                    l(this);
-                    i || o || g()
-                }),
-                e.isLazyimg)
+                    h.find("a").on("click", function () {
+                        l(this);
+                        i || o || g()
+                    }),
+                    e.isLazyimg)
                 var n = a.lazyimg({
                     elem: e.elem + " img",
                     scrollElem: e.scrollElem
@@ -9694,7 +9694,7 @@ layui.define("jquery", function (e) {
                     , m = n.scrollTop()
                     , u = m + f;
                 if (t.lazyimg.elem = l(r),
-                    e)
+                        e)
                     c(e, f);
                 else
                     for (var s = 0; s < t.lazyimg.elem.length; s++) {
@@ -9703,13 +9703,13 @@ layui.define("jquery", function (e) {
                             return v.offset().top - n.offset().top + m
                         }() : v.offset().top;
                         if (c(v, f),
-                            i = s,
-                        y > u)
+                                i = s,
+                            y > u)
                             break
                     }
             };
             if (f(),
-                !o) {
+                    !o) {
                 var m;
                 n.on("scroll", function () {
                     var e = l(this);
@@ -9905,7 +9905,7 @@ layui.define(["layer", "form"], function (t) {
         for (var o in i)
             n.setAttribute(o, i[o]);
         if (n.removeAttribute("text"),
-            l.selection) {
+                l.selection) {
             var r = a.text || i.text;
             if ("a" === t && !r)
                 return;

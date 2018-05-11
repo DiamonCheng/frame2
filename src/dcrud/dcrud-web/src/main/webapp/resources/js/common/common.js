@@ -50,9 +50,24 @@ $(function () {
         form.on('select', function (data) {
             $(data.elem).change();
         });
-        // layer.render();
-        //layedit.render();
-        //laydate.render();
+
+        /* data picker */
+
+        $("input.date-picker").each(function () {
+            var $this = $(this);
+
+            var option = $this.data("picker-option");
+            if (!option) {
+                option = {};
+            }
+            if ((typeof option) === 'string') {
+                option = eval("(" + option + ")");
+            }
+            option.elem = this;
+            option.lang = window.lang.lang;
+            laydate.render(option);
+        })
+
     });
 
     //***  validator  ***//

@@ -1,4 +1,5 @@
 window.lang = {
+    lang: 'en',
     validator: {
         rule: {
             required: "This field cannot be null.",

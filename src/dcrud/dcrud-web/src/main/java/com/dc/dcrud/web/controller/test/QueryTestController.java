@@ -1,6 +1,9 @@
 package com.dc.dcrud.web.controller.test;
 
+import com.dc.dcrud.web.view.DefaultDataTableView;
+import com.dc.dcrud.web.view.DefaultOptionButtonView;
 import com.dc.dcrud.web.view.DefaultQueryPanelView;
+import com.dc.frame2.view.view.freemarker.form.FormView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,6 +19,6 @@ public class QueryTestController {
     
     @RequestMapping("/")
     public Object page() {
-        return new DefaultQueryPanelView();
+        return new FormView().addContent(new DefaultQueryPanelView()).addContent(new DefaultOptionButtonView()).addContent(new DefaultDataTableView());
     }
 }

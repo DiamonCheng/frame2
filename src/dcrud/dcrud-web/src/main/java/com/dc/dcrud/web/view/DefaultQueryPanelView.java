@@ -12,7 +12,7 @@ import java.util.Map;
  * @date 2018/5/6.
  */
 public class DefaultQueryPanelView implements FreemarkerView {
-    private static final String TEMPLATE_NAME = "/common/crud/query/panel.html.ftl";
+    private static final String TEMPLATE_NAME = "/common/crud/query/conditions.html.ftl";
     
     @Override
     public String getTemplateName() {

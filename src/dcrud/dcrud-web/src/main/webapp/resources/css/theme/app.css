@@ -99,8 +99,8 @@ html{
 }
 
 #frame2_app > .layout > .side-menu > .menu-container > .menu > .menu-item > a {
-    line-height: 32px;
-    height: 32px;
+    line-height: 40px;
+    height: 40px;
 }
 
 .side-menu > div > dl.menu {
@@ -137,9 +137,9 @@ html{
     -webkit-transition: all .3s;
 }
 .side-menu .menu .menu-item a{
-    line-height:28px;
+    line-height: 32px;
     position: relative;
-    height: 28px;
+    /* height: 28px; */
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -189,7 +189,7 @@ html{
 #frame2_app .menu-container > dl dd.open > dl > dd > a {
     /*     display: block; */
     /* height: 28px; */
-    height: 28px;
+    height: 32px;
 }
 /*.layui-nav-tree {
     width: 200px;

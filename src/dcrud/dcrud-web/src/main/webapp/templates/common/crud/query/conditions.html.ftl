@@ -1,14 +1,24 @@
-<form>
-    <section class="layui-collapse layui-card query-panel">
-        <div class="layui-colla-item">
-            <div class="layui-colla-title query-panel-head">查询页 demo</div>
-            <div class="layui-colla-content query-panel-conditions layui-anim-fadein layui-anim layui-row layui-col-space10 layui-show">
+<section class="layui-collapse layui-card query-panel">
+    <div class="layui-colla-item">
+        <div class="layui-colla-title query-panel-head">查询页 demo</div>
+        <div class="layui-colla-content query-panel-conditions layui-anim-fadein layui-anim layui-show">
+            <div class=" layui-row layui-col-space10">
                 <div class="layui-col-md6 layui-col-xs12 layui-col-lg6">
                     <div class="layui-form-item">
                         <label class="layui-form-label">输入框</label>
                         <div class="layui-input-block">
                             <input validator="required" type="text" name="title" placeholder="请输入标题" autocomplete="off"
                                    class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12 layui-col-lg6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">日期选择</label>
+                        <div class="layui-input-block">
+                            <input validator="required" type="text" name="title2" placeholder="请输入标题" autocomplete="off"
+                                   class="layui-input date-picker"
+                                   data-picker-option="{min:'2018-01-01',max:'2018-12-12'}">
                         </div>
                     </div>
                 </div>
@@ -126,7 +136,9 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">文本域</label>
                         <div class="layui-input-block">
-                            <textarea name="" placeholder="请输入" class="layui-textarea"></textarea>
+                            <textarea name="" placeholder="请输入" class="layui-textarea">233
+3
+3</textarea>
                         </div>
                     </div>
                 </div>
@@ -138,68 +150,7 @@
                 </div>
             </div>
         </div>
-    <#--http://www.layui.com/demo/form.html-->
-    </section>
+    </div>
+<#--http://www.layui.com/demo/form.html-->
+</section>
 
-    <section class="layui-collapse layui-card ">
-        <div class="layui-card-body option-buttons">
-            <a href="javascript:" class="layui-btn">按钮一</a>
-            <a href="javascript:" class="layui-btn layui-btn-primary">按钮三</a>
-            <a href="javascript:" class="layui-btn layui-btn-danger">按钮二</a>
-        </div>
-    </section>
-
-    <section class="layui-collapse layui-card ">
-        <div class="layui-card-body data-table" lay-size="sm">
-
-            <table class="layui-table">
-                <thead>
-                <tr>
-                    <th>昵称
-                        <span class="layui-table-sort layui-inline" lay-sort="desc">
-                            <i class="layui-edge layui-table-sort-asc"></i>
-                            <i class="layui-edge layui-table-sort-desc"></i>
-                        </span>
-                    </th>
-                    <th>积分</th>
-                    <th>签名</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>贤心1</td>
-                    <td>66</td>
-                    <td>人生就像是一场修行a</td>
-                    <td>
-                        <a href="javascript:" class="layui-btn layui-btn-xs">修改</a>
-                        <a href="javascript:" class="layui-btn layui-btn-primary layui-btn-xs">详情</a>
-                        <a href="javascript:" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>贤心2</td>
-                    <td>88</td>
-                    <td>人生就像是一场修行b</td>
-                    <td>
-                        <a href="javascript:" class="layui-btn layui-btn-xs">修改</a>
-                        <a href="javascript:" class="layui-btn layui-btn-primary layui-btn-xs">详情</a>
-                        <a href="javascript:" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>贤心3</td>
-                    <td>33</td>
-                    <td>人生就像是一场修行c</td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <section class="layui-collapse layui-card ">
-        <div class="layui-card-body page-bar" id="page-bar" totalCount="101" pageNo="2" pageSize="20">
-        </div>
-    </section>
-
-</form>
