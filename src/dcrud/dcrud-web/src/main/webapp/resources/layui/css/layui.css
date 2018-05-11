@@ -1592,7 +1592,7 @@ a cite {
 .layui-collapse {
     border-width: 1px;
     border-style: solid;
-    border-radius: 2px
+    border-radius: 2px;
 }
 
 .layui-colla-content, .layui-colla-item {
@@ -1638,7 +1638,7 @@ a cite {
     margin-bottom: 15px;
     border-radius: 2px;
     background-color: #fff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05)
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
 }
 
 .layui-card:last-child {
@@ -2001,7 +2001,7 @@ a cite {
     float: left;
     display: block;
     padding: 9px 15px;
-    width: 80px;
+    width: 150px;
     font-weight: 400;
     line-height: 20px;
     text-align: right
@@ -2021,7 +2021,7 @@ a cite {
 }
 
 .layui-input-block {
-    margin-left: 110px;
+    margin-left: 180px;
     min-height: 36px
 }
 

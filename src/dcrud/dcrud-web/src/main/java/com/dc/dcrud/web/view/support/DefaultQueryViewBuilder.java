@@ -1,4 +1,4 @@
-package com.dc.dcrud.web.view;
+package com.dc.dcrud.web.view.support;
 
 /**
  * <p>Descriptions...
@@ -6,5 +6,5 @@ package com.dc.dcrud.web.view;
  * @author DC
  * @date 2018/5/6.
  */
-public class DefaultCrudViewBuilder {
+public class DefaultQueryViewBuilder {
 }

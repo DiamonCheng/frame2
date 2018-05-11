@@ -1,8 +1,14 @@
 @charset "UTF-8";
-
+/******
+  首页，
+  菜单，
+  顶部，
+  底部,
+  布局
+*******/
 html{
     color: #666;
-    background-color: #d2d2d2;
+    background-color: #0000001d;
 }
 
 /*
@@ -23,6 +29,12 @@ html{
     top: 39px;
     bottom: 0;
     right: 0;
+}
+
+@media (min-width: 768px) {
+    #frame2_app > .layout > .content {
+        padding: 20px;
+    }
 }
 
 /* header */
@@ -211,7 +223,7 @@ html{
     left: -200px;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     #frame2_app > .layout {
         right: -200px;
     }

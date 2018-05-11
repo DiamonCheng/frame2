@@ -1,4 +1,4 @@
-package com.dc.frame2.view.view.freemarker;
+package com.dc.frame2.view.view.freemarker.page;
 
 /**
  * <p>Descriptions...
