@@ -1,3 +1,13 @@
+/*
+* DC 表单校验工具
+*
+* 使用方法： input，select，textarea 添加 validator="required" 之类的属性，
+* 统一校验器定义在 validator.list.js 中,
+* 可以在单独页面中只用 window.validator.rules.自定义规则={test:function(value){验证代码}}添加自定义的校验工具
+*
+* 对于特殊的操作可以参考源代码手动调用包中的方法。
+*/
+
 (function ($) {
     window.validator = {
         valid: function ($input) {

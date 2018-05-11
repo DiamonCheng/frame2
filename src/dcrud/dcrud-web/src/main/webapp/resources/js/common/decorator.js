@@ -56,6 +56,15 @@ $(function menu_option() {
             }
         } else if (!$app.hasClass("shrink")) {
             $app.addClass("shrink");
+
+            //hide conditions
+            $(".query-panel-conditions").removeClass("layui-show");
+            $(".query-panel-head>i").html("&#xe602");
         }
+
+
     }).trigger("resize");
+    $("#frame2_app #shade").click(function () {
+        $("#frame2_app").addClass("shrink");
+    });
 });

@@ -39,18 +39,60 @@
 })($);
 
 $(function () {
+    $('form').addClass("layui-form");
+    $('form select>option:gt(9)').parent().attr("lay-search", "");
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
         form.render();
+        form.on('select', function (data) {
+            $(data.elem).change();
+        });
         // layer.render();
         //layedit.render();
         //laydate.render();
-
     });
 
     //***  validator  ***//
     validator.register();
+
+    //*** page bar ***//
+    layui.use('laypage', function () {
+        var laypage = layui.laypage;
+        $(".page-bar").each(function () {
+            var $this = $(this);
+            var totalCount = $this.attr("totalCount");
+            if (totalCount == null) totalCount = 0;
+            var pageNo = $this.attr("pageNo");
+            if (pageNo == null) pageNo = 0;
+            var pageSize = $this.attr("pageSize");
+            if (pageSize == null) pageSize = 0;
+            //执行一个laypage实例
+            laypage.render({
+                elem: this,//注意，这里的 test1 是 ID，不用加 # 号
+                count: totalCount, //数据总数，从服务端得到
+                limit: pageSize,
+                limits: [5, 10, 20, 100],
+                curr: parseInt(pageNo) + 1,
+                next: window.lang.pageBar.next,
+                prev: window.lang.pageBar.prev,
+                total1: window.lang.pageBar.total1,
+                total2: window.lang.pageBar.total2,
+                itemPage: window.lang.pageBar.itemPage,
+                to: window.lang.pageBar.to,
+                pageString: window.lang.pageBar.pageString,
+                submit: window.lang.pageBar.submit,
+                layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'],
+                jump: function (page, first) {
+                    if (!first) {
+                        console.log(page.curr - 1,
+                            page.limit)
+                    }
+                }
+            });
+        });
+
+    });
 });

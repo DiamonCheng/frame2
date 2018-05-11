@@ -7,9 +7,15 @@ form .danger textarea {
 
 form .danger-text {
     color: #FF5722 !important;
+    padding-left: 10px;
 }
 
 form .danger-tip {
     margin-top: 1px;
-    line-height: 18px;
+    line-height: 19px;
+    /* padding-left: 10px; */
+}
+
+form .danger-tip > .layui-badge {
+    line-height: 19px;
 }
