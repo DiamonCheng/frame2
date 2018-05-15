@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>500</title>
+    <style>
+        .container {
+            margin: 100px auto;
+            width: 750px;
+        }
+
+        span {
+            font-size: 24px;
+        }
+
+        .desc {
+            text-align: right;
+        }
+
+        .e-context {
+            transition: all .3s;
+            -webkit-transition: all .3s;
+            white-space: nowrap;
+            line-height: 0;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <code>
+        _____ ___ ___ ______<br/>
+        | ____|/ _ \ / _ \ | ____|<br/>
+        | |__ | | | | | | | | |__ _ __ _ __ ___ _ __<br/>
+        |___ \| | | | | | | | __| | '__| '__/ _ \| '__|<br/>
+        ___) | |_| | |_| | | |____| | | | | (_) | |<br/>
+        |____/ \___/ \___/ |______|_| |_| \___/|_|<br/>
+    </code>
+    <br/>
+    <div class="desc">
+        <span>(╯‵□′)╯︵┻━┻ 页面爆炸了</span>
+    </div>
+    <div class="desc">
+        <span>Error with server..</span>
+    </div>
+    <div id="ex" class="e-context" th:utext="${ex}">ex</div>
+</div>
+</body>
+</html>

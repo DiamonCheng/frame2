@@ -53,10 +53,16 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
      * 如果记住用户了 但是session里面的用户超时了，就重新查询用户信息
      */
     private void checkSessionUser() {
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        PrincipalCollection principalCollection = subject.getPrincipals();
-        if (principalCollection == null) {
+        Session session = null;
+        PrincipalCollection principalCollection = null;
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            session = subject.getSession();
+            principalCollection = subject.getPrincipals();
+            if (principalCollection == null) {
+                return;
+            }
+        } catch (Exception e) {
             return;
         }
         Collection realm = principalCollection.fromRealm(SecurityRealm.REALM_NAME);

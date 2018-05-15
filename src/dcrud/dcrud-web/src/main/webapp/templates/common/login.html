@@ -20,8 +20,8 @@
     <form method="post" action="">
         <div class="layadmin-user-login-main">
             <div class="layadmin-user-login-box layadmin-user-login-header">
-                <h2 th:utext="#{login.page.title}">layuiAdmin</h2>
-                <p th:utext="#{login.page.subtitle}">layui 官方出品的单页面后台管理模板系统</p>
+                <h2 th:text="#{login.page.title}">layuiAdmin</h2>
+                <p th:text="#{login.page.subtitle}">layui 官方出品的单页面后台管理模板系统</p>
             </div>
             <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
                 <div class="layui-form-item">
@@ -39,7 +39,7 @@
                     </div>-->
                 </div>
                 <div class="layui-form-item failedMessage" th:if="${failedMessage != null}">
-                    <span class="layui-badge">!</span> <span class="danger-text" th:utext="${failedMessage}"></span>
+                    <span class="layui-badge">!</span> <span class="danger-text" th:text="${failedMessage}"></span>
                     <script>$(function () {
                         validator.onValidate = function () {
                             $(".failedMessage").remove()
@@ -61,7 +61,7 @@
                     <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>-->
 
                     <a href="javascript:" class="layadmin-user-jump-change layadmin-link lang"
-                       th:attr="lang = ${lang eq 'zh'?'en':'zh'}" th:utext="#{common.page.language}">English</a>
+                       th:attr="lang = ${lang eq 'zh'?'en':'zh'}" th:text="#{common.page.language}">English</a>
                 </div>
             </div>
         </div>
@@ -70,9 +70,9 @@
 
         <p>© 2018 <a href="/help" target="_blank">DC.com</a></p>
         <p>
-            <span><a href="javascript:" target="_blank" th:utext="#{login.page.bottomBtn1}">获取授权</a></span>
-            <span><a href="javascript:" target="_blank" th:utext="#{login.page.bottomBtn2}">在线演示</a></span>
-            <span><a href="javascript:" target="_blank" th:utext="#{login.page.bottomBtn3}">前往官网</a></span>
+            <span><a href="javascript:" target="_blank" th:text="#{login.page.bottomBtn1}">获取授权</a></span>
+            <span><a href="javascript:" target="_blank" th:text="#{login.page.bottomBtn2}">在线演示</a></span>
+            <span><a href="javascript:" target="_blank" th:text="#{login.page.bottomBtn3}">前往官网</a></span>
         </p>
     </div>
 

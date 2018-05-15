@@ -35,7 +35,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/resources/error/403.html");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/templates/error/403.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

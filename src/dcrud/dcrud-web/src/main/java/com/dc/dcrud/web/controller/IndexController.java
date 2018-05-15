@@ -15,7 +15,8 @@ public class IndexController {
     
     @RequestMapping({"/", "/index"})
     public Object index() {
-        return "index";
+        throw new NullPointerException();
+//        return "index";
     }
     
     @RequestMapping("/decorator")

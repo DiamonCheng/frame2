@@ -24,6 +24,19 @@
                 </div>
                 <div class="layui-col-md6 layui-col-xs12 layui-col-lg6">
                     <div class="layui-form-item">
+                        <label class="layui-form-label">日期范围选择</label>
+                        <div class="layui-input-block">
+                            <input validator="required" type="text" name="date" placeholder="请输入标题" autocomplete="off"
+                                   class="layui-input date-range-picker"
+                                   data-range-option="{start:'dateStart',end:'dateEnd'}"
+                                   data-picker-option="{min:'2018-01-01',max:'2018-12-12'}">
+                            <input name="dateStart" value="2018-3-11">
+                            <input name="dateEnd" value="2018-3-13">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12 layui-col-lg6">
+                    <div class="layui-form-item">
                         <label class="layui-form-label">普通下拉</label>
                         <div class="layui-input-block" validator="required">
                             <select name="city">

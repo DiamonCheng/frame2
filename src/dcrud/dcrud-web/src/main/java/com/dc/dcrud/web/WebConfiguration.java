@@ -5,11 +5,14 @@ import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -88,5 +91,15 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         });
         registrationBean.addUrlPatterns("/*");
         return registrationBean;
+    }
+    
+    @Bean
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
+        return container -> {
+            container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
+            container.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, "/error/403"));
+            container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500"));
+            container.addErrorPages(new ErrorPage(Throwable.class, "/error/500"));
+        };
     }
 }
