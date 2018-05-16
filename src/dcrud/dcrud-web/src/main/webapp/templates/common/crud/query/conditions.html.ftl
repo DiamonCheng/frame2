@@ -30,8 +30,8 @@
                                    class="layui-input date-range-picker"
                                    data-range-option="{start:'dateStart',end:'dateEnd'}"
                                    data-picker-option="{min:'2018-01-01',max:'2018-12-12'}">
-                            <input name="dateStart" value="2018-3-11">
-                            <input name="dateEnd" value="2018-3-13">
+                            <input type="hidden" class="date-range-picker-value" name="dateStart" value="2018-3-11">
+                            <input type="hidden" class="date-range-picker-value" name="dateEnd" value="2018-3-13">
                         </div>
                     </div>
                 </div>
