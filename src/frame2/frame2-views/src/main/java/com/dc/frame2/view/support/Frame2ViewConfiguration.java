@@ -19,6 +19,7 @@ public class Frame2ViewConfiguration {
     private String dateTimeFormat=DATE_TIME_FORMAT;
     private String contentType = DEFAULT_CONTENT_TYPE;
     
+    private boolean debug;
     
     public Configuration buildConfiguration() {
         Configuration configuration=new Configuration(Configuration.VERSION_2_3_0);
@@ -27,6 +28,9 @@ public class Frame2ViewConfiguration {
         configuration.setDateFormat(dateFormat);
         configuration.setDateTimeFormat(dateTimeFormat);
         configuration.setClassicCompatible(true);
+        if (debug) {
+            configuration.setTemplateUpdateDelayMilliseconds(0);
+        }
         configuration.addAutoImport("spring","/spring.ftl");
         return configuration;
     }
@@ -58,6 +62,11 @@ public class Frame2ViewConfiguration {
     
     public Frame2ViewConfiguration setContentType(String contentType) {
         this.contentType = contentType;
+        return this;
+    }
+    
+    public Frame2ViewConfiguration setDebug(boolean debug) {
+        this.debug = debug;
         return this;
     }
 }

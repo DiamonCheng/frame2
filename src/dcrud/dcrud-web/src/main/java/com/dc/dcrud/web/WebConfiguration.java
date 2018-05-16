@@ -3,14 +3,18 @@ package com.dc.dcrud.web;
 import com.dc.dcrud.web.interceptor.DcrudInterceptor;
 import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
+import com.dc.frame2.view.support.Frame2ViewConfiguration;
+import com.dc.frame2.view.support.Frame2ViewSpringConfiguration;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.LocaleResolver;
@@ -28,8 +32,10 @@ import java.util.Locale;
  * @date 2018/4/18.
  */
 @Configuration
+@Import({Frame2ViewSpringConfiguration.class})
 public class WebConfiguration extends WebMvcConfigurerAdapter {
     private static final String[] MESSAGE_SOURCE_LOCATIONS = {"classpath:/i18n/messages_page", "classpath:/i18n/messages"};
+    
     @Bean
     public MessageSource messageSource(){
         ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource=new ReloadableResourceBundleMessageSource();
@@ -101,5 +107,10 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
             container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500"));
             container.addErrorPages(new ErrorPage(Throwable.class, "/error/500"));
         };
+    }
+    
+    @Bean
+    public Frame2ViewConfiguration frame2ViewConfiguration(@Value("${debug:false}") boolean debug) {
+        return new Frame2ViewConfiguration().setDebug(debug);
     }
 }

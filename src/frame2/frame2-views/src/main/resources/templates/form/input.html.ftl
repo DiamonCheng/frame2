@@ -19,7 +19,7 @@ ${(input.value??)?string('value="'+input.value+'"',"")}
         placeholder="<@spring.message input.placeholder/>"
         class="<#list input.classes as cls>${cls} </#list>"
         autocomplete="off"
-<#list input.attrs as attr>
-    ${attr.key}="${attr.value}"
+<#list input.attrs?keys as key>
+    ${key}="${input.attrs[key]}"
 </#list>
        />

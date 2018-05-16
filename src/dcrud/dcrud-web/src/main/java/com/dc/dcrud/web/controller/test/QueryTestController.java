@@ -2,6 +2,7 @@ package com.dc.dcrud.web.controller.test;
 
 import com.dc.dcrud.web.view.DefaultDataTableView;
 import com.dc.dcrud.web.view.DefaultOptionButtonView;
+import com.dc.dcrud.web.view.query.InputCondition;
 import com.dc.dcrud.web.view.query.QueryPanelView;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,20 @@ public class QueryTestController {
     
     @RequestMapping("/")
     public Object page() {
-        return new FormView().addContent(new QueryPanelView()).addContent(new DefaultOptionButtonView()).addContent(new DefaultDataTableView());
+        return new FormView()
+                       .addContent(
+                               new QueryPanelView().addCondition(
+                                       new InputCondition()
+                                               .setId("inputView")
+                                               .setLabel("crud.query.test.inputView.label")
+                                               .setName("inputView")
+                                               .setPlaceHolder("crud.query.test.inputView.label")
+                                               .addValidator("required")
+                               )
+                       ).addContent(
+                        new DefaultOptionButtonView()
+                ).addContent(
+                        new DefaultDataTableView()
+                );
     }
 }
