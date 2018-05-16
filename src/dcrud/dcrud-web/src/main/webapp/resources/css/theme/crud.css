@@ -13,4 +13,10 @@
     text-align: right;
 }
 
+.page-bar > .layui-laypage {
+    margin: 0;
+}
 
+.page-bar > .layui-laypage a, .page-bar > .layui-laypage span {
+    margin-bottom: 0px;
+}
