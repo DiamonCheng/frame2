@@ -21,7 +21,9 @@ select
 
 <select  ${(select.id??)?string('id="'+select.id+'"',"")}
 ${(select.name??)?string('name="'+select.name+'"',"")}
+    <#if select.title??>
         title="<@spring.message select.title/>"
+    </#if>
         class="<#list select.classes as cls>${cls} </#list>"
 <#list select.attrs as attr>
     ${attr.key}="${attr.value}"

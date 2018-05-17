@@ -18,5 +18,9 @@
 }
 
 .page-bar > .layui-laypage a, .page-bar > .layui-laypage span {
-    margin-bottom: 0px;
+    margin-bottom: 0;
+}
+
+.layui-card-body.option-buttons {
+    position: static;
 }
