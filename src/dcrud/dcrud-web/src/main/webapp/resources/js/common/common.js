@@ -1,3 +1,4 @@
+
 (function ($) {
     var getParam = function (url) {
         var reg_url = /^[^\?]+\?([\w\W]+)$/,
@@ -128,7 +129,7 @@ $(function () {
     //*** page bar ***//
     layui.use('laypage', function () {
         var laypage = layui.laypage;
-        $(".page-bar").each(function () {
+        $("#page-bar").each(function () {
             var $this = $(this);
             var totalCount = $this.attr("totalCount");
             if (totalCount == null) totalCount = 0;
@@ -154,12 +155,14 @@ $(function () {
                 layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'],
                 jump: function (page, first) {
                     if (!first) {
-                        console.log(page.curr - 1, page.limit);
-                        jumpPage
+                        // console.log(page.curr - 1, page.limit);
+                        $('#pageForm')
+                            .append($("<input type='hidden' name='pageSize'>").val(page.limit))
+                            .append($("<input type='hidden' name='pageNo'>").val(page.curr))
+                            .submit();
                     }
                 }
             });
         });
-
     });
 });

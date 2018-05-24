@@ -24,6 +24,7 @@ public class QueryTestController {
     @RequestMapping("/")
     public Object page() {
         return new FormView()
+                       .setId("pageForm")
                        .addContent(
                                new QueryPanelView().addCondition(
                                        new InputCondition()
