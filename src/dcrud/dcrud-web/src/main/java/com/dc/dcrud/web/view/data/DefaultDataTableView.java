@@ -1,4 +1,4 @@
-package com.dc.dcrud.web.view;
+package com.dc.dcrud.web.view.data;
 
 import com.dc.frame2.util.MapBuilder;
 import com.dc.frame2.view.view.freemarker.FreemarkerView;

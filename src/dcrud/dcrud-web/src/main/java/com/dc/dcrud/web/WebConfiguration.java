@@ -34,7 +34,13 @@ import java.util.Locale;
 @Configuration
 @Import({Frame2ViewSpringConfiguration.class})
 public class WebConfiguration extends WebMvcConfigurerAdapter {
-    private static final String[] MESSAGE_SOURCE_LOCATIONS = {"classpath:/i18n/messages_page", "classpath:/i18n/messages"};
+    private static final String[] MESSAGE_SOURCE_LOCATIONS = {
+            "classpath:/i18n/messages",
+            "classpath:/i18n/messages_page"
+    };
+    
+    @Value("${debug:false}")
+    private boolean debug;
     
     @Bean
     public MessageSource messageSource(){
@@ -42,6 +48,9 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
         reloadableResourceBundleMessageSource.setUseCodeAsDefaultMessage(true);
         reloadableResourceBundleMessageSource.setBasenames(MESSAGE_SOURCE_LOCATIONS);
+        if (debug) {
+            reloadableResourceBundleMessageSource.setCacheMillis(0);
+        }
         return reloadableResourceBundleMessageSource;
     }
     

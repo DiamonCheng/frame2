@@ -154,8 +154,8 @@ $(function () {
                 layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'],
                 jump: function (page, first) {
                     if (!first) {
-                        console.log(page.curr - 1,
-                            page.limit)
+                        console.log(page.curr - 1, page.limit);
+                        jumpPage
                     }
                 }
             });

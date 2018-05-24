@@ -1,5 +1,6 @@
 <section class="layui-collapse layui-card ">
     <div class="layui-card-body data-table" lay-size="sm">
+
         <table class="layui-table">
             <thead>
             <tr>

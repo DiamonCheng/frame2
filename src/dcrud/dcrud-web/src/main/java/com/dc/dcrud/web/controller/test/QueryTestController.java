@@ -1,7 +1,8 @@
 package com.dc.dcrud.web.controller.test;
 
-import com.dc.dcrud.web.view.DefaultDataTableView;
-import com.dc.dcrud.web.view.DefaultOptionButtonView;
+import com.dc.dcrud.web.view.data.DefaultDataTableView;
+import com.dc.dcrud.web.view.option.DefaultOptionButtonView;
+import com.dc.dcrud.web.view.option.OptionButton;
 import com.dc.dcrud.web.view.query.*;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import com.dc.frame2.view.view.freemarker.form.Option;
@@ -75,6 +76,25 @@ public class QueryTestController {
                                ).setTitle("crud.query.test.title")
                        ).addContent(
                         new DefaultOptionButtonView()
+                                .addButton(
+                                        new OptionButton()
+                                                .setName("crud.query.test.button1.text")
+                                                .setTitle("crud.query.test.button1.text")
+                                                .setType(OptionButton.Type.DEFAULT)
+                                )
+                                .addButton(
+                                        new OptionButton()
+                                                .setName("crud.query.test.button2.text")
+                                                .setTitle("crud.query.test.button2.text")
+                                                .setType(OptionButton.Type.PRIMARY)
+                                )
+                                .addButton(
+                                        new OptionButton()
+                                                .setName("crud.query.test.button3.text")
+                                                .setTitle("crud.query.test.button3.text")
+                                                .setType(OptionButton.Type.DANGER)
+                                )
+                        
                 ).addContent(
                         new DefaultDataTableView()
                 );
