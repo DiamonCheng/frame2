@@ -48,7 +48,7 @@ html{
     transition: all 0.3s;
 }
 #frame2_app>.layout>.header>*>*,#frame2_app>.layout>.header>*{
-    line-height: 39px;
+    line-height: 40px;
     color:#333;
 }
 #frame2_app>.layout>.header>*>*>*{

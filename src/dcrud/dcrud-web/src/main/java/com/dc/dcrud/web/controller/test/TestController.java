@@ -43,7 +43,8 @@ public class TestController {
     @RequestMapping("/user/search")
     @ResponseBody
     public Object searchUser(UserSearcher searcher) {
-        return userDao.searchPage(searcher);
+        userDao.searchPage(searcher);
+        return searcher;
     }
     
     @RequestMapping({"/index2"})

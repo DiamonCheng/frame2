@@ -97,7 +97,7 @@ public class QueryTestController {
                                 )
                         
                 ).addContent(
-                        new DefaultDataTableView()
+                        new DefaultDataTableView().setPageParameters(3, 10, 233)
                 );
     }
 }

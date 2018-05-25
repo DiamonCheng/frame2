@@ -22,18 +22,21 @@ public class SearcherJpaRepositoryImpl<T,PK extends Serializable> extends Simple
         super(entityInformation,entityManager);
     }
     @Override
-    public Page<T> searchPage(PageSearcher<T> pageSearcher) {
-        return findAll(
+    public void searchPage(PageSearcher<T> pageSearcher) {
+        Page<T> page = findAll(
                 (root, query, builder) -> ConditionResolver.getInstance().resolve(pageSearcher,root,query,builder),
                 pageSearcher
         );
+        pageSearcher.setResultList(page.getContent());
+        pageSearcher.setTotalCount(page.getTotalElements());
     }
     
     @Override
-    public List<T> search(Searcher<T> searcher) {
-        return findAll(
+    public void search(Searcher<T> searcher) {
+        List<T> resultList = findAll(
                 (root, query, builder) ->
                         ConditionResolver.getInstance().resolve(searcher,root,query,builder)
         );
+        searcher.setResultList(resultList);
     }
 }

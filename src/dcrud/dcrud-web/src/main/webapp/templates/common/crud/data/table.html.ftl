@@ -1,6 +1,6 @@
 <section class="layui-collapse layui-card ">
     <div class="layui-card-body data-table" lay-size="sm">
-        <table class="layui-table">
+        <table class="layui-table" ${(dataTable.id??)?string('id="'+dataTable.id+'"',"")}>
             <thead>
             <tr>
                 <th>昵称
@@ -45,7 +45,10 @@
         </table>
     </div>
 </section>
+<#if dataTable.pageable>
 <section class="layui-collapse layui-card ">
-    <div class="layui-card-body page-bar" id="page-bar" totalCount="101" pageNo="2" pageSize="20">
+    <div class="layui-card-body page-bar" id="page-bar" totalCount="${dataTable.totalCount}"
+         pageNo="${dataTable.pageNo}" pageSize="${dataTable.pageSize}">
     </div>
 </section>
+</#if>
