@@ -64,7 +64,7 @@ public class Pager implements Pageable, Serializable, Cloneable {
                 orders.add(new Sort.Order(Sort.Direction.DESC, propertyName));
             }
         }
-        return new Sort(orders);
+        return orders.isEmpty() ? null : new Sort(orders);
     }
     
     @Override

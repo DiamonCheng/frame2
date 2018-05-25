@@ -61,6 +61,7 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
         Throwable ex = getError(request);
         if (ex != null) {
             result.setData(printExString(ex));
+            result.setMessage(ex.getMessage());
         }
         return result;
     }
