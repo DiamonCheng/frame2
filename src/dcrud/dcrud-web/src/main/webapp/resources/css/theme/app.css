@@ -90,12 +90,13 @@ html{
     z-index: 1001;
 }
 #frame2_app>.layout>.side-menu>.menu-container{
-    width: 216px;
+    width: 220px;
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    overflow:  auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #frame2_app > .layout > .side-menu > .menu-container > .menu > .menu-item > a {
