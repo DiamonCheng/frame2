@@ -5,9 +5,9 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  * Configure it in spring and inject it the use；
- * Only usable in a web context;
+ * Only usable in a web context; means a request should bind to this thread.
  * Must define and configure the WebContextBinder.
- * Must
+ *
  *
  * @author DC
  * @date 2018/4/21.

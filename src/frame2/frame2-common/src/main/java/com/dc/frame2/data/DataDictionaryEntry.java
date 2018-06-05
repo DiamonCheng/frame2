@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Diamon.Cheng
  * @date 2018/5/17.
  */
-public class DataDictionaryEnty {
+public class DataDictionaryEntry {
     private String text;
     private String value;
     
@@ -16,7 +16,7 @@ public class DataDictionaryEnty {
         return text;
     }
     
-    public DataDictionaryEnty setText(String text) {
+    public DataDictionaryEntry setText(String text) {
         this.text = text;
         return this;
     }
@@ -25,7 +25,7 @@ public class DataDictionaryEnty {
         return value;
     }
     
-    public DataDictionaryEnty setValue(String value) {
+    public DataDictionaryEntry setValue(String value) {
         this.value = value;
         return this;
     }
@@ -38,7 +38,7 @@ public class DataDictionaryEnty {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DataDictionaryEnty that = (DataDictionaryEnty) o;
+        DataDictionaryEntry that = (DataDictionaryEntry) o;
         return Objects.equals(text, that.text);
     }
     

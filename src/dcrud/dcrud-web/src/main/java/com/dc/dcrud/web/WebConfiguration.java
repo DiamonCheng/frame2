@@ -1,6 +1,7 @@
 package com.dc.dcrud.web;
 
 import com.dc.dcrud.web.interceptor.DcrudInterceptor;
+import com.dc.frame2.util.SpringContextUtils;
 import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
 import com.dc.frame2.view.support.Frame2ViewConfiguration;
@@ -65,6 +66,11 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public WebContextBinder webContextBinder() {
         return new WebContextBinder();
+    }
+    
+    @Bean
+    public SpringContextUtils springContextUtil() {
+        return new SpringContextUtils();
     }
     
     @Bean

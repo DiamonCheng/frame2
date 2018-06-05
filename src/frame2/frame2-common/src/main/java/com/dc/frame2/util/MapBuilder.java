@@ -18,6 +18,12 @@ public class MapBuilder<K,V> {
         builder.map = new HashMap<>(3);
         return builder;
     }
+    
+    public static <K, V> MapBuilder<K, V> hashMap(Class<K> kClass, Class<V> vClass) {
+        MapBuilder<K, V> builder = new MapBuilder<>();
+        builder.map = new HashMap<>(3);
+        return builder;
+    }
     public static <K,V> MapBuilder<K,V> hashMap(){
         MapBuilder<K,V> builder=new MapBuilder<>();
         builder.map=new HashMap<>(3);

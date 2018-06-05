@@ -2,6 +2,8 @@ package com.dc.dcrud.web.view.data;
 
 import com.dc.frame2.view.view.freemarker.FreemarkerView;
 
+import java.util.List;
+
 /**
  * <p>Descriptions...
  *
@@ -9,8 +11,5 @@ import com.dc.frame2.view.view.freemarker.FreemarkerView;
  * @date 2018/5/25.
  */
 public interface TableHeadView extends FreemarkerView {
-    DataCellView resolveDataCellView(Object data, TableHeadView tableHeadView);
-//    resolveData
-//    resolveDataStyle
-    
+    DataCellView resolveDataCellView(List<?> dataList, Object data, int index);
 }
