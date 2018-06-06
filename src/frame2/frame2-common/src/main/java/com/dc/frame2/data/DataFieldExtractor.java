@@ -13,13 +13,22 @@ import java.util.Date;
  * @author Diamon.Cheng
  * @date 2018/6/5.
  */
-public interface DataFieldExtractor {
+public interface DataFieldExtractor<T, TT> {
     
+    /**
+     * given entity data and field name, to transfer field value to a string value
+     */
+    @SuppressWarnings("unchecked")
     static String extractString(Object data, String field) {
         if (data == null) {
             return null;
         }
-        Object value = ReflectionUtils.getValueByField(data, field);
+        Object value = null;
+        try {
+            value = ReflectionUtils.getValueByField(data, field);
+        } catch (Exception e) {
+            throw new IllegalStateException("Try extract data field failed. Maybe this field not exists in entity. data:" + data + ", field:" + field, e);
+        }
         if (value == null) {
             return null;
         }
@@ -28,7 +37,6 @@ public interface DataFieldExtractor {
             Class<? extends DataFieldExtractor> dataFiledExtractorClass = extractor.value();
             DataFieldExtractor dataFiledExtractor;
             IllegalStateException exception = new IllegalStateException("Try extract data field failed. data:" + data + ", field:" + field);
-            ;
             try {
                 try {
                     dataFiledExtractor = SpringContextUtils.getBean(dataFiledExtractorClass);
@@ -48,5 +56,5 @@ public interface DataFieldExtractor {
         return value.toString();
     }
     
-    String extract(Object data, String field, Object fieldValue);
+    String extract(T data, String field, TT fieldValue);
 }

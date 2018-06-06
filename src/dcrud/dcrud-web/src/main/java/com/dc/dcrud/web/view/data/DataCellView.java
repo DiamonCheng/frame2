@@ -9,4 +9,5 @@ import com.dc.frame2.view.view.freemarker.FreemarkerView;
  * @date 2018/5/25.
  */
 public interface DataCellView extends FreemarkerView {
+    Object getCellData();
 }

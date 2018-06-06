@@ -1,6 +1,9 @@
 package com.dc.dcrud.web.controller.test;
 
+import com.dc.dcrud.domain.RoleEntity;
+import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.web.view.data.DefaultDataTableView;
+import com.dc.dcrud.web.view.data.DefaultTableHeadView;
 import com.dc.dcrud.web.view.option.DefaultOptionButtonView;
 import com.dc.dcrud.web.view.option.OptionButton;
 import com.dc.dcrud.web.view.query.*;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 
 /**
  * <p>Descriptions...
@@ -95,9 +100,70 @@ public class QueryTestController {
                                                 .setTitle("crud.query.test.button3.text")
                                                 .setType(OptionButton.Type.DANGER)
                                 )
-                        
+        
                 ).addContent(
-                        new DefaultDataTableView().setPageParameters(3, 10, 233)
+                        new DefaultDataTableView()
+                                .setPageParameters(3, 10, 233)
+                                .setData(Arrays.asList(
+                                        new UserEntity()
+                                                .setNickName("nickName1")
+                                                .setUsername("username1")
+                                                .setCreateDateTime(new Date())
+                                                .setUpdateDateTime(new Date())
+                                                .setId(123465L),
+                                        new UserEntity()
+                                                .setNickName("nickName2")
+                                                .setUsername("username2")
+                                                .setCreateDateTime(new Date())
+                                                .setUpdateDateTime(new Date())
+                                                .setId(223465L),
+                                        new UserEntity()
+                                                .setNickName("nickName3")
+                                                .setUsername("username3")
+                                                .setCreateDateTime(new Date())
+                                                .setUpdateDateTime(new Date())
+                                                .setId(323465L),
+                                        new UserEntity()
+                                                .setNickName("nickName4")
+                                                .setUsername("username4")
+                                                .setRoles(Collections.singleton(new RoleEntity().setName("admin")))
+                                                .setCreateDateTime(new Date())
+                                                .setUpdateDateTime(new Date())
+                                                .setId(423465L)
+                                )).addTableHeadView(
+                                new DefaultTableHeadView()
+                                        .setFieldName("username")
+                                        .setName("crud.query.test.dataTable.head.username")
+                                        .setSortable(true)
+                                        .setTextAlign(DefaultTableHeadView.TEXT_ALIGN_RIGHT)
+                                        .setSortFieldName("username")
+                                        .setSort("DESC")
+                                        .setSortOrder(1)
+                        ).addTableHeadView(
+                                new DefaultTableHeadView()
+                                        .setFieldName("nickName")
+                                        .setName("crud.query.test.dataTable.head.nickName")
+                                        .setSortable(true)
+                                        .setSortFieldName("nickName")
+                                        .setSort("DESC")
+                                        .setSortOrder(2)
+                        ).addTableHeadView(
+                                new DefaultTableHeadView()
+                                        .setFieldName("createDateTime")
+                                        .setName("crud.query.test.dataTable.head.createTime")
+                        ).addTableHeadView(
+                                new DefaultTableHeadView()
+                                        .setFieldName("roles")
+                                        .setName("crud.query.test.dataTable.head.roles")
+                        ).addTableHeadView(
+                                new DefaultTableHeadView()
+                                        .setFieldName("updateDateTime")
+                                        .setName("crud.query.test.dataTable.head.updateTime")
+                                        .setSortable(true)
+                                        .setWidth("126px")
+                                        .setSort("DESC")
+                                        .setSortOrder(4)
+                        )
                 );
     }
 }

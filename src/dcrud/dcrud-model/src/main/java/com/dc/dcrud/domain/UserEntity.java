@@ -1,6 +1,8 @@
 package com.dc.dcrud.domain;
 
+import com.dc.dcrud.extractor.UserEntityRoleDataExtractor;
 import com.dc.frame2.core.domain.BaseConfigEntity;
+import com.dc.frame2.data.Extractor;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -20,6 +22,7 @@ public class UserEntity extends BaseConfigEntity {
     private String nickName;
     @ManyToMany(targetEntity = RoleEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
+    @Extractor(UserEntityRoleDataExtractor.class)
     private Set<RoleEntity> roles;
     
     public String getUsername() {

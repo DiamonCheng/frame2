@@ -3,6 +3,7 @@ package com.dc.dcrud.web.view.data;
 import com.dc.frame2.util.MapBuilder;
 import com.dc.frame2.view.view.freemarker.FreemarkerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +22,8 @@ public class DefaultDataTableView implements FreemarkerView {
     
     private String id;
     
-    //TODO
-    private List<TableHeadView> head;
+    private List<TableHeadView> tableHeadViews = new ArrayList<>(3);
     private List<?> data;
-    private List<List<DataCellView>> dataViews;
     
     public DefaultDataTableView setPageParameters(int pageNo, int pageSize, long totalCount) {
         this.pageable = true;
@@ -48,8 +47,35 @@ public class DefaultDataTableView implements FreemarkerView {
         return TEMPLATE_NAME;
     }
     
+    public DefaultDataTableView setData(List<?> data) {
+        this.data = data;
+        return this;
+    }
+    
+    public List<?> getData() {
+        return data;
+    }
+    
+    public List<TableHeadView> getTableHeadViews() {
+        return tableHeadViews;
+    }
+    
+    public DefaultDataTableView addTableHeadView(TableHeadView tableHeadView) {
+        tableHeadViews.add(tableHeadView);
+        return this;
+    }
+    
     @Override
     public Map<String, Object> getParam() {
+        List<List<DataCellView>> tableRows = new ArrayList<>(data.size());
+        for (Object d : data) {
+            List<DataCellView> tableColumn = new ArrayList<>(tableHeadViews.size());
+            tableRows.add(tableColumn);
+            int index = 0;
+            for (TableHeadView tableHeadView : tableHeadViews) {
+                tableColumn.add(tableHeadView.resolveDataCellView(data, d, index++));
+            }
+        }
         return MapBuilder.dataMap()
                        .put(
                                "dataTable",
@@ -59,6 +85,8 @@ public class DefaultDataTableView implements FreemarkerView {
                                        .put("pageNo", pageNo)
                                        .put("pageSize", pageSize)
                                        .put("totalCount", totalCount)
+                                       .put("tableRows", tableRows)
+                                       .put("tableHeadViews", tableHeadViews)
                                        .build()
                        )
                        .build();

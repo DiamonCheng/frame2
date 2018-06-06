@@ -17,8 +17,10 @@ public class DefaultTableHeadView implements TableHeadView {
     public static final String TEXT_ALIGN_RIGHT = "right";
     private String name;
     private String fieldName;
+    private String sortFieldName;
+    private Boolean sortable = false;
     private String sort;
-    private String sortOrder;
+    private Integer sortOrder;
     private String width;
     private String textAlign;
     
@@ -34,9 +36,10 @@ public class DefaultTableHeadView implements TableHeadView {
                 MapBuilder.dataMap()
                         .put("name", name)
                         .put("width", width)
-                        .put("textAlign", textAlign)
                         .put("sort", sort)
                         .put("sortOrder", sortOrder)
+                        .put("sortFieldName", sortFieldName)
+                        .put("sortable", sortable)
                         .build()
         ).build();
     }
@@ -48,15 +51,16 @@ public class DefaultTableHeadView implements TableHeadView {
     
     public DefaultTableHeadView setFieldName(String fieldName) {
         this.fieldName = fieldName;
+        setSortFieldName(fieldName);
         return this;
     }
     
     public DefaultTableHeadView setSort(String sort) {
-        this.sort = sort;
+        this.sort = sort == null ? null : sort.toLowerCase();
         return this;
     }
     
-    public DefaultTableHeadView setSortOrder(String sortOrder) {
+    public DefaultTableHeadView setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
         return this;
     }
@@ -71,10 +75,25 @@ public class DefaultTableHeadView implements TableHeadView {
         return this;
     }
     
+    public DefaultTableHeadView setSortFieldName(String sortFieldName) {
+        this.sortFieldName = sortFieldName;
+        return this;
+    }
+    
+    public DefaultTableHeadView setSortable(Boolean sortable) {
+        this.sortable = sortable;
+        return this;
+    }
+    
     @Override
     public DataCellView resolveDataCellView(List<?> dataList, Object data, int index) {
         String content = DataFieldExtractor.extractString(data, fieldName);
         return new DataCellView() {
+            @Override
+            public Object getCellData() {
+                return data;
+            }
+            
             @Override
             public String getTemplateName() {
                 return "/common/crud/data/table.cell.html.ftl";
@@ -85,6 +104,7 @@ public class DefaultTableHeadView implements TableHeadView {
                 return MapBuilder.dataMap().put(
                         "cell",
                         MapBuilder.dataMap()
+                                .put("align", textAlign)
                                 .put("content", content)
                                 .build()
                 ).build();
