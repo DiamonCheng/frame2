@@ -505,14 +505,18 @@
         } else {
             NProgress.done();
         }
+    }).on('beforeunload', function () {
+        if (0 === loadingContext++) {
+            NProgress.start();
+            NProgress.set(0.25);
+        }
     });
     $(document).on('ajaxSend', function () {
         if (0 === loadingContext++) {
             NProgress.start();
             NProgress.set(0.25);
         }
-    });
-    $(document).on('ajaxComplete', function () {
+    }).on('ajaxComplete', function () {
         if (--loadingContext > 0) {
             NProgress.inc(0.25);
         } else {

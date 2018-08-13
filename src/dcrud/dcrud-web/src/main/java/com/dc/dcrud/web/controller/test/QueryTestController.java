@@ -2,6 +2,7 @@ package com.dc.dcrud.web.controller.test;
 
 import com.dc.dcrud.domain.RoleEntity;
 import com.dc.dcrud.domain.UserEntity;
+import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.dcrud.web.view.data.DefaultDataTableView;
 import com.dc.dcrud.web.view.data.DefaultTableHeadView;
 import com.dc.dcrud.web.view.option.DefaultOptionButtonView;
@@ -27,7 +28,7 @@ import java.util.Date;
 public class QueryTestController {
     
     @RequestMapping("/")
-    public Object page() {
+    public Object page(UserSearcher searcher) {
         return new FormView()
                        .setId("pageForm")
                        .addContent(
@@ -137,7 +138,6 @@ public class QueryTestController {
                                         .setSortable(true)
                                         .setTextAlign(DefaultTableHeadView.TEXT_ALIGN_RIGHT)
                                         .setSortFieldName("username")
-                                        .setSort("DESC")
                                         .setSortOrder(1)
                         ).addTableHeadView(
                                 new DefaultTableHeadView()
@@ -146,7 +146,7 @@ public class QueryTestController {
                                         .setSortable(true)
                                         .setSortFieldName("nickName")
                                         .setSort("DESC")
-                                        .setSortOrder(2)
+                                        .setSortOrder(5)
                         ).addTableHeadView(
                                 new DefaultTableHeadView()
                                         .setFieldName("createDateTime")
