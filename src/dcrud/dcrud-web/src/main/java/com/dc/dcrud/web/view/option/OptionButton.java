@@ -3,7 +3,10 @@ package com.dc.dcrud.web.view.option;
 import com.dc.frame2.util.MapBuilder;
 import com.dc.frame2.view.view.freemarker.FreemarkerView;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * <p>Descriptions...
@@ -35,8 +38,9 @@ public class OptionButton implements FreemarkerView {
     private String title = "";
     private String id;
     private Type type = Type.DEFAULT;
-    
-    //TODO permission
+    private Map<String, String> attrs = MapBuilder.<String, String>hashMap().build();
+    private Set<String> classes = new HashSet<>(3);
+    private OperationPermissionCheck permissionCheck = () -> true;
     
     public String getName() {
         return name;
@@ -74,6 +78,35 @@ public class OptionButton implements FreemarkerView {
         return this;
     }
     
+    public OptionButton addAttr(String key, String value) {
+        this.attrs.put(key, value);
+        return this;
+    }
+    
+    public OptionButton removeAttr(String key) {
+        this.attrs.remove(key);
+        return this;
+    }
+    
+    public OptionButton addCls(String cls) {
+        this.classes.add(cls);
+        return this;
+    }
+    
+    public OptionButton removeCls(String cls) {
+        this.classes.remove(cls);
+        return this;
+    }
+    
+    public OptionButton setPermissionCheck(OperationPermissionCheck permissionCheck) {
+        this.permissionCheck = Objects.requireNonNull(permissionCheck);
+        return this;
+    }
+    
+    public OperationPermissionCheck getPermissionCheck() {
+        return permissionCheck;
+    }
+    
     @Override
     public String getTemplateName() {
         return TEMPLATE_NAME;
@@ -88,6 +121,9 @@ public class OptionButton implements FreemarkerView {
                                               .put("title", title)
                                               .put("name", name)
                                               .put("cls", type.getCls())
+                                              .put("classes", classes)
+                                              .put("attrs", attrs)
+                                              .put("permissionCheck", permissionCheck.test())
                                               .build())
                        .build();
     }

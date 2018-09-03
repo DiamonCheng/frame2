@@ -6,7 +6,6 @@
                 <#list dataTable.tableHeadViews as tableHeadView>
                     ${RENDER(tableHeadView)}
                 </#list>
-                <th>option</th>
             </tr>
             </thead>
             <tbody>
@@ -15,16 +14,8 @@
                     <#list tableRow as dataCell>
                         ${RENDER(dataCell)}
                     </#list>
-                <td>
-                    <a href="javascript:" class="layui-btn layui-btn-xs">修改</a>
-                    <a href="javascript:" class="layui-btn layui-btn-primary layui-btn-xs">详情</a>
-                    <a href="javascript:" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
-                </td>
             </tr>
             </#list>
-
-
-
             </tbody>
         </table>
     </div>

@@ -5,6 +5,8 @@ import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.dcrud.web.view.data.DefaultDataTableView;
 import com.dc.dcrud.web.view.data.DefaultTableHeadView;
+import com.dc.dcrud.web.view.data.OptionTableHeadView;
+import com.dc.dcrud.web.view.data.TableOptionButton;
 import com.dc.dcrud.web.view.option.DefaultOptionButtonView;
 import com.dc.dcrud.web.view.option.OptionButton;
 import com.dc.dcrud.web.view.query.*;
@@ -26,7 +28,6 @@ import java.util.Date;
 @Controller
 @RequestMapping("/query")
 public class QueryTestController {
-    
     @RequestMapping("/")
     public Object page(UserSearcher searcher) {
         return new FormView()
@@ -127,7 +128,7 @@ public class QueryTestController {
                                         new UserEntity()
                                                 .setNickName("nickName4")
                                                 .setUsername("username4")
-                                                .setRoles(Collections.singleton(new RoleEntity().setName("admin")))
+                                                .setRoles(Collections.singleton(new RoleEntity().setName("admin").setCode("admin")))
                                                 .setCreateDateTime(new Date())
                                                 .setUpdateDateTime(new Date())
                                                 .setId(423465L)
@@ -160,9 +161,21 @@ public class QueryTestController {
                                         .setFieldName("updateDateTime")
                                         .setName("crud.query.test.dataTable.head.updateTime")
                                         .setSortable(true)
-                                        .setWidth("126px")
                                         .setSort("DESC")
                                         .setSortOrder(4)
+                        ).addTableHeadView(
+                                new OptionTableHeadView().setName("crud.query.table.option.head")
+                                        .addButton((TableOptionButton)
+                                                           new TableOptionButton()
+                                                                   .setTableOptionButtonFilter((dataList, data, index) -> {
+                                                                       UserEntity userEntity = (UserEntity) data;
+                                                                       return userEntity.getRoles() != null && userEntity.getRoles().stream().anyMatch(role -> "admin".equals(role.getCode()));
+                                                                   }).setName("crud.query.table.option.update")
+                                        )
+                                        .addButton((TableOptionButton)
+                                                           new TableOptionButton()
+                                                                   .setName("crud.query.table.option.delete")
+                                        )
                         )
                 );
     }
