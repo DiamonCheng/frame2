@@ -1,9 +1,11 @@
 package com.dc.dcrud.web.view.data;
 
+import com.dc.frame2.data.DataIdExtractor;
 import com.dc.frame2.util.MapBuilder;
 import com.dc.frame2.view.view.freemarker.FreemarkerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,14 +69,18 @@ public class DefaultDataTableView implements FreemarkerView {
     
     @Override
     public Map<String, Object> getParam() {
-        List<List<DataCellView>> tableRows = new ArrayList<>(data.size());
+        List<Map<String, Object>> tableRows = new ArrayList<>(data.size());
         for (Object d : data) {
+            Map<String, Object> rowData = new HashMap<>(3);
+            tableRows.add(rowData);
             List<DataCellView> tableColumn = new ArrayList<>(tableHeadViews.size());
-            tableRows.add(tableColumn);
+            rowData.put("dataCells", tableColumn);
             int index = 0;
             for (TableHeadView tableHeadView : tableHeadViews) {
                 tableColumn.add(tableHeadView.resolveDataCellView(data, d, index++));
             }
+            Map<String, String> dataIds = DataIdExtractor.extractId(d);
+            rowData.put("dataIds", dataIds);
         }
         return MapBuilder.dataMap()
                        .put(

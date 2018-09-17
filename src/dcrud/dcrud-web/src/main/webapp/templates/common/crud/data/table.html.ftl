@@ -10,8 +10,12 @@
             </thead>
             <tbody>
             <#list dataTable.tableRows as tableRow>
-            <tr>
-                    <#list tableRow as dataCell>
+            <tr
+                <#list tableRow.dataIds?keys as idKey>
+                    data-${idKey}="${tableRow.dataIds[idKey]}"
+                </#list>
+            >
+                    <#list tableRow.dataCells as dataCell>
                         ${RENDER(dataCell)}
                     </#list>
             </tr>
