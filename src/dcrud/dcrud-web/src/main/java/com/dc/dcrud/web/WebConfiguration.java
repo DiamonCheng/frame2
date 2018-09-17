@@ -37,7 +37,9 @@ import java.util.Locale;
 public class WebConfiguration extends WebMvcConfigurerAdapter {
     private static final String[] MESSAGE_SOURCE_LOCATIONS = {
             "classpath:/i18n/messages",
-            "classpath:/i18n/messages_page"
+            "classpath:/i18n/messages_page",
+            "classpath:/i18n/messages_base",
+            "classpath:/i18n/messages_page_base"
     };
     
     @Value("${debug:false}")

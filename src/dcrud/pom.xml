@@ -9,6 +9,7 @@
         <module>dcrud-dao</module>
         <module>dcrud-service</module>
         <module>dcrud-web</module>
+        <module>dcrud-web-support</module>
     </modules>
     <groupId>com.dc</groupId>
     <artifactId>dcrud</artifactId>
