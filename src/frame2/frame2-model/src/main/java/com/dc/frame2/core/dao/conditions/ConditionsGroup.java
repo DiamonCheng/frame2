@@ -6,7 +6,7 @@ package com.dc.frame2.core.dao.conditions;
  *
  *     define a filed implements this interface, then define the conditions as in a searcher
  * </p>
- *
+ * @see Condition
  * @author DC
  * @date 2018/4/14.
  */

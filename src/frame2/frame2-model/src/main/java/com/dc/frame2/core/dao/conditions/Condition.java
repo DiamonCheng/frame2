@@ -58,4 +58,11 @@ public @interface Condition{
      * @return default false
      */
     boolean nullResolve() default false;
+    
+    /**
+     * Define a custom path condition resolver to replace [operator, value, joinType, nullResolve] field process.
+     *
+     * @return CustomSearcherFieldResolver must can be instanced with no parameter.
+     */
+    Class<CustomSearcherFieldResolver> customResolver() default CustomSearcherFieldResolver.class;
 }

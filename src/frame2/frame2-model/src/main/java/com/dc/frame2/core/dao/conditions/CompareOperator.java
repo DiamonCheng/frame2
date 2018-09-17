@@ -46,5 +46,13 @@ public enum CompareOperator {
     /**
      * use "!=" compare this condition.
      */
-    NOT_EQ
+    NOT_EQ,
+    /**
+     * use "in" compare this condition, a array type or collection type value can be resolved, else a single(string) value will be resolve as xxx in ('string value')
+     */
+    IN,
+    /**
+     * use "not in" compare this condition, a array type or collection type value can be resolved, else a single(string) value will be resolve as xxx not in ('string value')
+     */
+    NOT_IN
 }

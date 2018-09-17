@@ -2,6 +2,7 @@ package com.dc.frame2.core.dao;
 
 import com.dc.frame2.core.dao.conditions.*;
 import com.dc.frame2.core.exception.TranslatableException;
+import com.dc.frame2.util.SpringContextUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -9,9 +10,7 @@ import javax.persistence.criteria.*;
 import javax.persistence.criteria.JoinType;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -30,6 +29,7 @@ public class ConditionResolver {
     
     private static ConditionResolver instance = new ConditionResolver();
     
+    @SuppressWarnings("unchecked")
     public Predicate resolve(ConditionsGroup searcher, Root<?> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         if (searcher == null) {
             return null;
@@ -41,26 +41,44 @@ public class ConditionResolver {
             Field field = conditionPojo.getField();
             ReflectionUtils.makeAccessible(field);
             Object value = ReflectionUtils.getField(field, searcher);
-            if (value == null && !condition.nullResolve()) {
-                continue;
-            }
-            if (ConditionsGroup.class.isAssignableFrom(field.getType())) {
-                Predicate subPredicate = resolve(ConditionsGroup.class.cast(value), root, query, builder);
-                predicate = mergePredicate(predicate, subPredicate, condition, builder);
+            Class<CustomSearcherFieldResolver> customSearcherFieldResolverClass = condition.customResolver();
+            if (CustomSearcherFieldResolver.class.equals(customSearcherFieldResolverClass)) {
+                //standard resolve condition
+                if (value == null && !condition.nullResolve()) {
+                    continue;
+                }
+                if (ConditionsGroup.class.isAssignableFrom(field.getType())) {
+                    Predicate subPredicate = resolve(ConditionsGroup.class.cast(value), root, query, builder);
+                    predicate = mergePredicate(predicate, subPredicate, condition, builder);
+                } else {
+                    Path<?> path = getPath(root, condition, field);
+                    predicate = mergePredicate(
+                            predicate,
+                            resolveOperator(path, value, condition, builder),
+                            condition,
+                            builder
+                    );
+                }
             } else {
-                Path<?> path = getPath(root, condition, field);
-                predicate = mergePredicate(
-                        predicate,
-                        resolveOperator(path,value,condition,builder),
-                        condition,
-                        builder
-                );
+                //custom resolve condition
+                CustomSearcherFieldResolver customSearcherFieldResolver;
+                try {
+                    customSearcherFieldResolver = SpringContextUtils.getBean(customSearcherFieldResolverClass);
+                    if (customSearcherFieldResolver == null) {
+                        customSearcherFieldResolver = customSearcherFieldResolverClass.newInstance();
+                    }
+                    Path<?> path = getPath(root, condition, field);
+                    return customSearcherFieldResolver.resolve(root, path, query, builder, searcher, value);
+                } catch (Exception e) {
+                    throw new IllegalStateException("Custom condition field failed. extractor: " + customSearcherFieldResolverClass, e);
+                }
             }
         }
         return predicate;
     }
     
-    private Predicate resolveOperator(Path path,Object value, Condition condition,CriteriaBuilder builder){
+    @SuppressWarnings("unchecked")
+    private Predicate resolveOperator(Path path, Object value, Condition condition, CriteriaBuilder builder){
         try {
             switch (condition.operator()){
                 case EQ:
@@ -78,11 +96,23 @@ public class ConditionResolver {
                 case LIKE:
                     return builder.like(path, (String) value);
                 case DUP_LIKE:
-                    return builder.like(path,"%"+escapeParamString((String) value)+"%",ESCAPE_CHAR);
+                    return builder.like(path, "%"+escapeParamString((String) value)+"%", ESCAPE_CHAR);
                 case PRE_LIKE:
-                    return builder.like(path,escapeParamString((String) value)+"%",ESCAPE_CHAR);
+                    return builder.like(path, escapeParamString((String) value)+"%", ESCAPE_CHAR);
                 case POST_LIKE:
-                    return builder.like(path,"%"+escapeParamString((String) value),ESCAPE_CHAR);
+                    return builder.like(path, "%"+escapeParamString((String) value), ESCAPE_CHAR);
+                case IN:
+                case NOT_IN: {
+                    CriteriaBuilder.In expression = builder.in(path);
+                    if (value instanceof Object[]) {
+                        Arrays.stream((Object[]) value).forEach(expression::value);
+                    } else if (value instanceof Collection) {
+                        ((Collection) value).forEach(expression::value);
+                    } else {
+                        expression.value(value);
+                    }
+                    return condition.operator() == CompareOperator.IN ? expression : builder.not(expression);
+                }
                 default:
                     return null;
             }
@@ -92,8 +122,8 @@ public class ConditionResolver {
                           .message("Parameter transfer failed, check searcher condition type with domain entity!")
                           .functionName("SEARCH_DAO")
                           .sceneName("FILL_CONDITION_s")
-                          .context("path",path)
-                          .context("value",value)
+                          .context("path", path)
+                          .context("value", value)
                           .context("condition",condition)
                           .build();
         }
@@ -225,6 +255,12 @@ public class ConditionResolver {
             public boolean nullResolve() {
                 return false;
             }
+    
+            @Override
+            public Class<CustomSearcherFieldResolver> customResolver() {
+                return null;
+            }
         };
     }
+    
 }
