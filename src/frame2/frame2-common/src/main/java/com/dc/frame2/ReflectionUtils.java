@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author Diamon.Cheng
  * @date 2018/6/5.
  */
-public class ReflectionUtils {
+public class ReflectionUtils extends org.springframework.util.ReflectionUtils {
     public static class ReflectException extends RuntimeException {
         private static final long serialVersionUID = -233333333333333L;
         

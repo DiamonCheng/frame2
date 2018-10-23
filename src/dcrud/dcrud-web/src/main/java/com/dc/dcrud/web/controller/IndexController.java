@@ -20,7 +20,7 @@ public class IndexController {
     
     @RequestMapping("/decorator")
     public Object decorator(){
-        return new ModelAndView("/common/decorator");
+        return new ModelAndView("common/decorator");
     }
     
 }

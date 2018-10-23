@@ -16,7 +16,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.dc.frame2.Application</mainClass>
+                    <mainClass>com.dc.dcrud.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -103,11 +103,11 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!-- <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-devtools</artifactId>
+             <optional>true</optional>
+         </dependency>-->
 
 
     </dependencies>

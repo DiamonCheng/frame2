@@ -35,12 +35,12 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
     
     @RequestMapping("/404")
     public Object error404(HttpServletRequest request) {
-        return "/error/404";
+        return "error/404";
     }
     
     @RequestMapping("/403")
     public Object error403(HttpServletRequest request) {
-        return "/error/403";
+        return "error/403";
     }
     
     @RequestMapping(value = "/500", produces = "text/html")

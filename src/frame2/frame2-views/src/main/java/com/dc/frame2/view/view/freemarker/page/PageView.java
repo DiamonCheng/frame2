@@ -69,6 +69,15 @@ public class PageView implements FreemarkerView {
         return this;
     }
     
+    /**
+     * get Components to modify
+     *
+     * @return frame2view components
+     */
+    public List<Frame2View> getComponents() {
+        return components;
+    }
+    
     @Override
     public String getTemplateName() {
         return TEMPLATE_NAME;

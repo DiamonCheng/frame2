@@ -35,14 +35,21 @@ public class OptionTableHeadView implements TableHeadView {
             
             @Override
             public Map<String, Object> getParam() {
-                return MapBuilder.dataMap()
-                               .put(
-                                       "buttons",
-                                       buttons.stream()
-                                               .filter(button -> button.getPermissionCheck().test()
-                                                                         && button.getTableOptionButtonFilter().test(dataList, data, index))
-                                               .collect(Collectors.toList())
-                               ).build();
+                List<TableOptionButton> buttons1 = buttons.stream()
+                                                           .filter(button -> button.getPermissionCheck().test()
+                                                                                     && button.getTableOptionButtonFilter().test(dataList, data, index))
+                                                           .map(button -> {
+                                                               try {
+                                                                   return button.clone();
+                                                               } catch (CloneNotSupportedException e) {
+                                                                   throw new IllegalStateException(e);
+                                                               }
+                                                           }).collect(Collectors.toList());
+                buttons1.forEach(
+                        button -> button.getTableOptionButtonRowDataConfigurator()
+                                          .configure(button, dataList, data, index)
+                );
+                return MapBuilder.dataMap().put("buttons", buttons1).build();
             }
         };
     }

@@ -12,7 +12,7 @@ import java.util.List;
  * @author DC
  * @date 2018/4/14.
  */
-public class PageSearcher<T> extends Pager implements ConditionsGroup {
+public abstract class PageSearcher<T> extends Pager implements ConditionsGroup {
     private List<T> resultList;
     private Long totalCount;
     
@@ -33,4 +33,6 @@ public class PageSearcher<T> extends Pager implements ConditionsGroup {
         this.totalCount = totalCount;
         return this;
     }
+    
+    public abstract Class<T> getViewObjectClass();
 }

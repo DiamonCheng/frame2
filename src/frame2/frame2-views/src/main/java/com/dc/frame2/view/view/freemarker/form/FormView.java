@@ -58,6 +58,10 @@ public class FormView implements FreemarkerView {
         return this;
     }
     
+    public List<Frame2View> getContents() {
+        return contents;
+    }
+    
     @Override
     public Map<String, Object> getParam() {
         return MapBuilder.<String, Object>hashMap()

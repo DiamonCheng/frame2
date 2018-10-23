@@ -1,6 +1,7 @@
 package com.dc.dcrud.searcher;
 
 import com.dc.dcrud.domain.UserEntity;
+import com.dc.dcrud.web.view.support.viewpojo.TextView;
 import com.dc.frame2.core.dao.conditions.CompareOperator;
 import com.dc.frame2.core.dao.conditions.Condition;
 import com.dc.frame2.core.dao.conditions.ConditionsGroup;
@@ -15,9 +16,11 @@ import com.dc.frame2.core.dto.PageSearcher;
  */
 public class UserSearcher extends PageSearcher<UserEntity>{
     private Condition2 condition2;
+    @TextView
     @Condition(order = 1,operator = CompareOperator.DUP_LIKE)
     private String nickName;
     @Condition(order = 2,preContact = PreContact.OR,operator = CompareOperator.DUP_LIKE)
+    @TextView
     private String userName;
     
     
@@ -48,6 +51,11 @@ public class UserSearcher extends PageSearcher<UserEntity>{
         return this;
     }
     
+    @Override
+    public Class<UserEntity> getViewObjectClass() {
+        return UserEntity.class;
+    }
+    
     public static class Condition2 implements ConditionsGroup{
         @Condition(operator = CompareOperator.DUP_LIKE)
         private String userName;
@@ -71,4 +79,5 @@ public class UserSearcher extends PageSearcher<UserEntity>{
             return this;
         }
     }
+    
 }

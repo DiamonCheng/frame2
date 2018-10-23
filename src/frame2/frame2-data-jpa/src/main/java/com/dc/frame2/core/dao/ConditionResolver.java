@@ -258,7 +258,7 @@ public class ConditionResolver {
     
             @Override
             public Class<CustomSearcherFieldResolver> customResolver() {
-                return null;
+                return CustomSearcherFieldResolver.class;
             }
         };
     }
