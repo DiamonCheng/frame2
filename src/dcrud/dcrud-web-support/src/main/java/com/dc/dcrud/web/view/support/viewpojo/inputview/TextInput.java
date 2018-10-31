@@ -1,4 +1,4 @@
-package com.dc.dcrud.web.view.support.viewpojo;
+package com.dc.dcrud.web.view.support.viewpojo.inputview;
 
 import java.lang.annotation.*;
 
@@ -12,8 +12,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-@ViewConfigurator(TextViewGenerator.class)
-public @interface TextView {
+@InputViewConfigurator(TextInputGenerator.class)
+public @interface TextInput {
     /**
      * Not required. define the name attribute of this HTML element.
      * In Spring MVC the input name will auto reflect to the parameter.

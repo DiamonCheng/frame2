@@ -1,4 +1,6 @@
-package com.dc.dcrud.web.view.support.viewpojo;
+package com.dc.dcrud.web.view.support.viewpojo.inputview;
+
+import com.dc.dcrud.web.view.support.viewpojo.ViewGenerator;
 
 import java.lang.annotation.*;
 
@@ -12,6 +14,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface ViewConfigurator {
+public @interface InputViewConfigurator {
     Class<? extends ViewGenerator> value();
 }

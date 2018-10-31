@@ -13,10 +13,10 @@ import java.util.Map;
  * @author Diamon.Cheng
  * @date 2018/5/17.
  */
-public class DatePickerCondition extends InputCondition {
+public class DatePickerInput extends TextInput {
     private Map<String, String> options = new HashMap<>();
     
-    public DatePickerCondition() {
+    public DatePickerInput() {
         super();
         inputView.addCls("date-picker");
     }
@@ -25,7 +25,7 @@ public class DatePickerCondition extends InputCondition {
         return options;
     }
     
-    public DatePickerCondition addOption(String key, String val) {
+    public DatePickerInput addOption(String key, String val) {
         options.put(key, val);
         return this;
     }

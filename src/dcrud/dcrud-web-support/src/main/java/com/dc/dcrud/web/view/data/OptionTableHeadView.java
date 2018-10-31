@@ -36,7 +36,7 @@ public class OptionTableHeadView implements TableHeadView {
             @Override
             public Map<String, Object> getParam() {
                 List<TableOptionButton> buttons1 = buttons.stream()
-                                                           .filter(button -> button.getPermissionCheck().test()
+                                                           .filter(button -> button.getPermissionCheck().test(button)
                                                                                      && button.getTableOptionButtonFilter().test(dataList, data, index))
                                                            .map(button -> {
                                                                try {

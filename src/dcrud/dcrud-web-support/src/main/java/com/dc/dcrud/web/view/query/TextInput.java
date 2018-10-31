@@ -10,37 +10,37 @@ import java.util.Map;
  * @author Diamon.Cheng
  * @date 2018/5/16.
  */
-public class InputCondition extends ConditionView {
+public class TextInput extends ConditionView {
     protected InputView inputView;
     
-    public InputCondition() {
+    public TextInput() {
         inputView = new InputView();
         inputView.addCls("layui-input");
         addInput(inputView);
     }
     
-    public InputCondition setName(String name) {
+    public TextInput setName(String name) {
         inputView.setName(name);
         return this;
     }
     
-    public InputCondition setValue(String value) {
+    public TextInput setValue(String value) {
         inputView.setValue(value);
         return this;
     }
     
-    public InputCondition setPlaceHolder(String placeHolder) {
+    public TextInput setPlaceHolder(String placeHolder) {
         inputView.setPlaceholder(placeHolder);
         return this;
     }
     
-    public InputCondition setId(String id) {
+    public TextInput setId(String id) {
         inputView.setId(id);
         return this;
     }
     
     @Override
-    public InputCondition setLabel(String label) {
+    public TextInput setLabel(String label) {
         super.setLabel(label);
         inputView.setTitle(label);
         return this;

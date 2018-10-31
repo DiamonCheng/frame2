@@ -12,18 +12,18 @@ import java.util.Map;
  * @author Diamon.Cheng
  * @date 2018/5/17.
  */
-public class SelectCondition extends ConditionView {
+public class SelectInput extends ConditionView {
     protected SelectView selectView;
     
     private String value;
     
-    public SelectCondition() {
+    public SelectInput() {
         selectView = new SelectView();
         selectView.addOption(new Option().setValue("").setText("crud.query.condition.select.option.all"));
         addInput(selectView);
     }
     
-    public SelectCondition addOption(Option option) {
+    public SelectInput addOption(Option option) {
         selectView.addOption(option);
         return this;
     }
@@ -32,23 +32,23 @@ public class SelectCondition extends ConditionView {
         return selectView.getOptions();
     }
     
-    public SelectCondition setName(String name) {
+    public SelectInput setName(String name) {
         selectView.setName(name);
         return this;
     }
     
-    public SelectCondition setValue(String value) {
+    public SelectInput setValue(String value) {
         this.value = value;
         return this;
     }
     
-    public SelectCondition setId(String id) {
+    public SelectInput setId(String id) {
         selectView.setId(id);
         return this;
     }
     
     @Override
-    public SelectCondition setLabel(String label) {
+    public SelectInput setLabel(String label) {
         super.setLabel(label);
         selectView.setTitle(label);
         return this;

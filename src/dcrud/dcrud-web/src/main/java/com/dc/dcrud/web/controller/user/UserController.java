@@ -8,8 +8,6 @@ import com.dc.dcrud.web.view.data.DefaultDataTableView;
 import com.dc.dcrud.web.view.data.DefaultTableHeadView;
 import com.dc.dcrud.web.view.data.OptionTableHeadView;
 import com.dc.dcrud.web.view.data.TableOptionButton;
-import com.dc.dcrud.web.view.option.DefaultOptionButtonView;
-import com.dc.dcrud.web.view.option.OptionButton;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import com.dc.frame2.view.view.freemarker.page.PageView;
@@ -42,27 +40,6 @@ public class UserController {
         PageView pageView = (PageView) queryPageViewFactory.createPageQueryView(searcher);
         FormView formView = (FormView) pageView.getComponents().get(0);
         formView.addContent(
-                new DefaultOptionButtonView()
-                        .addButton(
-                                new OptionButton()
-                                        .setName("crud.query.test.button1.text")
-                                        .setTitle("crud.query.test.button1.text")
-                                        .setType(OptionButton.Type.DEFAULT)
-                        )
-                        .addButton(
-                                new OptionButton()
-                                        .setName("crud.query.test.button2.text")
-                                        .setTitle("crud.query.test.button2.text")
-                                        .setType(OptionButton.Type.PRIMARY)
-                        )
-                        .addButton(
-                                new OptionButton()
-                                        .setName("crud.query.test.button3.text")
-                                        .setTitle("crud.query.test.button3.text")
-                                        .setType(OptionButton.Type.DANGER)
-                        )
-        
-        ).addContent(
                 new DefaultDataTableView()
                         .setPageParameters(3, 10, 233)
                         .setData(Arrays.asList(

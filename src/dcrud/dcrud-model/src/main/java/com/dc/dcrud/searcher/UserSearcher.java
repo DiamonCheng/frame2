@@ -1,7 +1,9 @@
 package com.dc.dcrud.searcher;
 
 import com.dc.dcrud.domain.UserEntity;
-import com.dc.dcrud.web.view.support.viewpojo.TextView;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
+import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButton;
+import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButtons;
 import com.dc.frame2.core.dao.conditions.CompareOperator;
 import com.dc.frame2.core.dao.conditions.Condition;
 import com.dc.frame2.core.dao.conditions.ConditionsGroup;
@@ -14,13 +16,19 @@ import com.dc.frame2.core.dto.PageSearcher;
  * @author DC
  * @date 2018/4/14.
  */
+
+@OptionButtons({
+        @OptionButton(name = "crud.query.test.button1.text"),
+        @OptionButton(name = "crud.query.test.button2.text"),
+        @OptionButton(name = "crud.query.test.button3.text")
+})
 public class UserSearcher extends PageSearcher<UserEntity>{
     private Condition2 condition2;
-    @TextView
+    @TextInput
     @Condition(order = 1,operator = CompareOperator.DUP_LIKE)
     private String nickName;
     @Condition(order = 2,preContact = PreContact.OR,operator = CompareOperator.DUP_LIKE)
-    @TextView
+    @TextInput
     private String userName;
     
     

@@ -34,20 +34,20 @@ public class QueryTestController {
                        .setId("pageForm")
                        .addContent(
                                new QueryPanelView().addCondition(
-                                       new InputCondition()
+                                       new TextInput()
                                                .setId("inputView")
                                                .setLabel("crud.query.test.inputView.label")
                                                .setName("inputView")
                                                .setPlaceHolder("crud.query.test.inputView.label")
                                ).addCondition(
-                                       new DatePickerCondition()
+                                       new DatePickerInput()
                                                .addOption("max", "2018-12-12")
                                                .addOption("min", "2018-01-01")
                                                .setId("dataPickerView")
                                                .setLabel("crud.query.test.dataPickerView.label")
                                                .setName("dataPickerView")
                                ).addCondition(
-                                       new DateRangePickerCondition()
+                                       new DateRangePickerInput()
                                                .addOption("max", "2018-12-12")
                                                .addOption("min", "2018-01-01")
                                                .setStartName("xxxxStart")
@@ -56,7 +56,7 @@ public class QueryTestController {
                                                .setEndValue("2018-03-16")
                                                .setLabel("crud.query.test.dataRangeView.label")
                                ).addCondition(
-                                       new SelectCondition()
+                                       new SelectInput()
                                                .setLabel("crud.query.test.selectView.label")
                                                .setName("selectView")
                                                .addOption(new Option().setText("crud.query.test.selectView.option.text.1").setValue("1"))

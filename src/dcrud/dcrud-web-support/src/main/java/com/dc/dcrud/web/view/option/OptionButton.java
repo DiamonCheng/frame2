@@ -38,9 +38,9 @@ public class OptionButton implements FreemarkerView {
     private String title = "";
     private String id;
     private Type type = Type.DEFAULT;
-    private Map<String, String> attrs = MapBuilder.<String, String>hashMap().build();
+    private Map<String, String> attrs = MapBuilder.<String, String>hashMap().put("href", "javascript:").build();
     private Set<String> classes = new HashSet<>(3);
-    private OperationPermissionCheck permissionCheck = () -> true;
+    private OperationPermissionCheck permissionCheck = (b) -> true;
     
     public String getName() {
         return name;
@@ -123,7 +123,7 @@ public class OptionButton implements FreemarkerView {
                                               .put("cls", type.getCls())
                                               .put("classes", classes)
                                               .put("attrs", attrs)
-                                              .put("permissionCheck", permissionCheck.test())
+                                              .put("permissionCheck", permissionCheck.test(this))
                                               .build())
                        .build();
     }

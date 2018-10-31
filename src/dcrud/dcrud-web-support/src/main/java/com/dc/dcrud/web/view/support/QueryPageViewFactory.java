@@ -13,7 +13,9 @@ import com.dc.frame2.view.view.freemarker.page.PageView;
  */
 public class QueryPageViewFactory implements QueryViewFactory {
     
-    private QueryConditionViewFactory queryConditionViewFactory = new QueryConditionViewFactory();
+    private QueryPageViewConditionFactory queryPageViewConditionFactory = new QueryPageViewConditionFactory();
+    
+    private QueryPageViewOptionButtonFactory queryPageViewOptionButtonFactory = new QueryPageViewOptionButtonFactory();
     
     @Override
     public Frame2View createPageQueryView(PageSearcher searcher) {
@@ -21,13 +23,38 @@ public class QueryPageViewFactory implements QueryViewFactory {
         FormView formView = new FormView();
         pageView.addComponent(formView);
         formView.setId("pageFrom");
-        Frame2View conditionView = queryConditionViewFactory.createPageQueryView(searcher);
+        Frame2View conditionView = queryPageViewConditionFactory.createPageQueryView(searcher);
         formView.addContent(conditionView);
+        Frame2View optionButtonsView = queryPageViewOptionButtonFactory.createPageQueryView(searcher);
+        formView.addContent(optionButtonsView);
         return pageView;
     }
     
-    public QueryPageViewFactory setQueryConditionViewFactory(QueryConditionViewFactory queryConditionViewFactory) {
-        this.queryConditionViewFactory = queryConditionViewFactory;
+    /**
+     * TODO
+     *
+     * @param configurePojo a PageSearcher instance with Page configure annotations
+     */
+    public void configure(PageSearcher configurePojo) {
+        queryPageViewConditionFactory.configure(configurePojo);
+        queryPageViewOptionButtonFactory.configure(configurePojo);
+    }
+    
+    public QueryPageViewFactory setQueryPageViewConditionFactory(QueryPageViewConditionFactory queryPageViewConditionFactory) {
+        this.queryPageViewConditionFactory = queryPageViewConditionFactory;
+        return this;
+    }
+    
+    public QueryPageViewConditionFactory getQueryPageViewConditionFactory() {
+        return queryPageViewConditionFactory;
+    }
+    
+    public QueryPageViewOptionButtonFactory getQueryPageViewOptionButtonFactory() {
+        return queryPageViewOptionButtonFactory;
+    }
+    
+    public QueryPageViewFactory setQueryPageViewOptionButtonFactory(QueryPageViewOptionButtonFactory queryPageViewOptionButtonFactory) {
+        this.queryPageViewOptionButtonFactory = queryPageViewOptionButtonFactory;
         return this;
     }
 }

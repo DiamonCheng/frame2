@@ -15,12 +15,12 @@ import java.util.Map;
  * @author Diamon.Cheng
  * @date 2018/5/17.
  */
-public class DateRangePickerCondition extends InputCondition {
+public class DateRangePickerInput extends TextInput {
     private Map<String, String> options = new HashMap<>();
     protected InputView startInput;
     protected InputView endInput;
     
-    public DateRangePickerCondition() {
+    public DateRangePickerInput() {
         super();
         inputView.addCls("date-range-picker");
         startInput = new InputView().setName("start").addCls("date-range-picker-value").setType("hidden");
@@ -33,7 +33,7 @@ public class DateRangePickerCondition extends InputCondition {
         return startInput.getName();
     }
     
-    public DateRangePickerCondition setStartName(String startName) {
+    public DateRangePickerInput setStartName(String startName) {
         startInput.setName(startName);
         return this;
     }
@@ -42,7 +42,7 @@ public class DateRangePickerCondition extends InputCondition {
         return endInput.getName();
     }
     
-    public DateRangePickerCondition setEndName(String endName) {
+    public DateRangePickerInput setEndName(String endName) {
         endInput.setName(endName);
         return this;
     }
@@ -51,7 +51,7 @@ public class DateRangePickerCondition extends InputCondition {
         return startInput.getValue();
     }
     
-    public DateRangePickerCondition setStartValue(String startValue) {
+    public DateRangePickerInput setStartValue(String startValue) {
         this.startInput.setValue(startValue);
         return this;
     }
@@ -60,7 +60,7 @@ public class DateRangePickerCondition extends InputCondition {
         return endInput.getValue();
     }
     
-    public DateRangePickerCondition setEndValue(String endValue) {
+    public DateRangePickerInput setEndValue(String endValue) {
         this.endInput.setValue(endValue);
         return this;
     }
@@ -69,7 +69,7 @@ public class DateRangePickerCondition extends InputCondition {
         return options;
     }
     
-    public DateRangePickerCondition addOption(String key, String val) {
+    public DateRangePickerInput addOption(String key, String val) {
         options.put(key, val);
         return this;
     }

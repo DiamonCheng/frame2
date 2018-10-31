@@ -1,6 +1,5 @@
 <#if button.permissionCheck>
 <a ${(button.id??)?string('id="'+button.id+'"',"")}
-        href="javascript:"
         class="${button.cls} <#list button.classes as cls>${cls} </#list>"
     <#list button.attrs?keys as key>
         ${key}="${button.attrs[key]}"

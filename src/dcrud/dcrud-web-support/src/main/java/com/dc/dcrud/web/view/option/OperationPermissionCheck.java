@@ -13,7 +13,7 @@ public interface OperationPermissionCheck {
      *
      * @return true if show this button
      */
-    boolean test();
+    boolean test(OptionButton optionButton);
     
     /**
      * use to add a external permission check condition
@@ -22,6 +22,6 @@ public interface OperationPermissionCheck {
      * @return OperationPermissionCheck
      */
     default OperationPermissionCheck and(OperationPermissionCheck check) {
-        return () -> test() && check.test();
+        return (b) -> test(b) && check.test(b);
     }
 }
