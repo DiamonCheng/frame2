@@ -4,6 +4,7 @@ import com.dc.dcrud.web.view.query.ConditionView;
 import com.dc.dcrud.web.view.query.QueryPanelView;
 import com.dc.dcrud.web.view.support.viewpojo.ViewGenerator;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.InputViewConfigurator;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.InputViewPanelHead;
 import com.dc.frame2.ReflectionUtils;
 import com.dc.frame2.core.dao.conditions.ConditionsGroup;
 import com.dc.frame2.core.dto.PageSearcher;
@@ -27,6 +28,7 @@ public class QueryPageViewConditionFactory implements QueryViewFactory {
     
     protected List<FieldViewGeneratorTracer> generators = null;
     
+    protected String configuredTitle = null;
     /**
      * configure this factory by a PageSearcher with TextView annotations on fields.
      * such as TextInput annotation
@@ -36,6 +38,11 @@ public class QueryPageViewConditionFactory implements QueryViewFactory {
      */
     public QueryPageViewConditionFactory configure(PageSearcher searcher) {
         Assert.notNull(searcher, "Searcher cannot be null.");
+    
+        InputViewPanelHead inputViewPanelHead = searcher.getClass().getAnnotation(InputViewPanelHead.class);
+        if (inputViewPanelHead != null) {
+            this.configuredTitle = inputViewPanelHead.value();
+        }
         generators = new ArrayList<>(10);
         resolveConditionGroups(searcher.getClass(), Collections.emptyList(), searcher.getClass());
         return this;
@@ -91,6 +98,9 @@ public class QueryPageViewConditionFactory implements QueryViewFactory {
     @Override
     public Frame2View createPageQueryView(PageSearcher searcher) {
         QueryPanelView queryPanelView = new QueryPanelView();
+        if (configuredTitle != null) {
+            queryPanelView.setTitle(configuredTitle);
+        }
         //1. 如果没有configure configure 生成 generators
         //generators.get(0).getViewGenerator().generate()
         //2. 使用ganerators变量解析searcher字段进行视图生成conditionViews 并添加进queryPanelView中。

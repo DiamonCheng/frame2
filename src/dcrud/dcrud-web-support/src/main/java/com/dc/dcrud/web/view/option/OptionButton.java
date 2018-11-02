@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class OptionButton implements FreemarkerView {
     private static final String TEMPLATE_NAME = "/common/crud/option/button.html.ftl";
-    
+    public static final String DEFAULT_HREF = "javascript:";
     public enum Type {
         /***/
         DEFAULT("layui-btn"), PRIMARY("layui-btn layui-btn-primary"), DANGER("layui-btn layui-btn-danger");
@@ -38,7 +38,7 @@ public class OptionButton implements FreemarkerView {
     private String title = "";
     private String id;
     private Type type = Type.DEFAULT;
-    private Map<String, String> attrs = MapBuilder.<String, String>hashMap().put("href", "javascript:").build();
+    private Map<String, String> attrs = MapBuilder.<String, String>hashMap().put("href", DEFAULT_HREF).build();
     private Set<String> classes = new HashSet<>(3);
     private OperationPermissionCheck permissionCheck = (b) -> true;
     
@@ -98,6 +98,15 @@ public class OptionButton implements FreemarkerView {
         return this;
     }
     
+    public OptionButton setHref(String href) {
+        this.addAttr("href", href);
+        return this;
+    }
+    
+    public String getHref() {
+        return this.attrs.get("href");
+    }
+    
     public OptionButton setPermissionCheck(OperationPermissionCheck permissionCheck) {
         this.permissionCheck = Objects.requireNonNull(permissionCheck);
         return this;
@@ -105,6 +114,24 @@ public class OptionButton implements FreemarkerView {
     
     public OperationPermissionCheck getPermissionCheck() {
         return permissionCheck;
+    }
+    
+    public Map<String, String> getAttrs() {
+        return attrs;
+    }
+    
+    public OptionButton setAttrs(Map<String, String> attrs) {
+        this.attrs = attrs;
+        return this;
+    }
+    
+    public Set<String> getClasses() {
+        return classes;
+    }
+    
+    public OptionButton setClasses(Set<String> classes) {
+        this.classes = classes;
+        return this;
     }
     
     @Override

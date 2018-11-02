@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class QueryPageViewOptionButtonFactory implements QueryViewFactory {
     
-    List<com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButton> buttonConfigs = null;
+    private List<com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButton> buttonConfigs = null;
     
     public QueryPageViewOptionButtonFactory configure(PageSearcher searcher) {
         Assert.notNull(searcher, "Searcher cannot be null.");
@@ -51,16 +51,7 @@ public class QueryPageViewOptionButtonFactory implements QueryViewFactory {
             Arrays.stream(buttonConfig.classes()).forEach(optionButton::addCls);
             optionButton.addAttr("href", buttonConfig.href());
             if (!OperationPermissionCheck.class.equals(buttonConfig.permissionCheckClass())) {
-                Class<? extends OperationPermissionCheck> permissionCheckClass = buttonConfig.permissionCheckClass();
-                OperationPermissionCheck operationPermissionCheck;
-                try {
-                    operationPermissionCheck = SpringContextUtils.getBean(permissionCheckClass);
-                    if (operationPermissionCheck == null) {
-                        operationPermissionCheck = permissionCheckClass.newInstance();
-                    }
-                } catch (Exception e) {
-                    throw new IllegalStateException("Failed to get permissionCheck instance " + permissionCheckClass, e);
-                }
+                optionButton.setPermissionCheck(SpringContextUtils.tryGetInstanceByClass(buttonConfig.permissionCheckClass()));
             }
             defaultOptionButtonView.addButton(optionButton);
         });

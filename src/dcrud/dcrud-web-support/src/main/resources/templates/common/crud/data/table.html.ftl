@@ -27,7 +27,9 @@
 <#if dataTable.pageable>
 <section class="layui-collapse layui-card ">
     <div class="layui-card-body page-bar" id="page-bar" totalCount="${dataTable.totalCount?c}"
-         pageNo="${dataTable.pageNo?c}" pageSize="${dataTable.pageSize?c}">
+         pageNo="${dataTable.pageNo?c}" pageSize="${dataTable.pageSize?c}"
+         pageSizes="<#list dataTable.pageSizes as limit>${limit}${limit_has_next?string(',','')}</#list>"
+    >
     </div>
     <script src="/resources/js/common/datatable.js"></script>
 </section>

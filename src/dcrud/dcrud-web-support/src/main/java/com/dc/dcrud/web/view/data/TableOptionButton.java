@@ -2,6 +2,9 @@ package com.dc.dcrud.web.view.data;
 
 import com.dc.dcrud.web.view.option.OptionButton;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 /**
  * <p>Descriptions...
  *
@@ -36,6 +39,9 @@ public class TableOptionButton extends OptionButton implements Cloneable {
     
     @Override
     protected TableOptionButton clone() throws CloneNotSupportedException {
-        return (TableOptionButton) super.clone();
+        TableOptionButton tableOptionButton = (TableOptionButton) super.clone();
+        tableOptionButton.setAttrs(new HashMap<>(getAttrs()));
+        tableOptionButton.setClasses(new HashSet<>(getClasses()));
+        return tableOptionButton;
     }
 }

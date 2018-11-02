@@ -45,4 +45,16 @@ public class SpringContextUtils implements ApplicationContextAware {
     public static String[] getAliases(String name) throws NoSuchBeanDefinitionException {
         return applicationContext.getAliases(name);
     }
+    
+    public static <T> T tryGetInstanceByClass(Class<T> clazz) {
+        T instance = getBean(clazz);
+        try {
+            if (instance == null) {
+                instance = clazz.newInstance();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to get instance " + clazz, e);
+        }
+        return instance;
+    }
 }

@@ -11,6 +11,7 @@
                         <input type="submit" class="layui-btn query-btn"
                                value="<@spring.message 'crud.query.condition.button.query'/>"/>
                         <input type="reset" class="layui-btn layui-btn-primary reset-btn"
+                               onclick="window.location.replace('./')"
                                value="<@spring.message 'crud.query.condition.button.reset'/>"/>
                     </div>
                 </div>

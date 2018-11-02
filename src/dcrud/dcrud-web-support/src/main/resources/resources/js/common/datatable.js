@@ -19,7 +19,7 @@ $(function () {
                 elem: this,//注意，这里的 test1 是 ID，不用加 # 号
                 count: totalCount, //数据总数，从服务端得到
                 limit: pageSize,
-                limits: [5, 10, 20, 100],
+                limits: $this.attr("pageSizes").split(","),
                 curr: parseInt(pageNo) + 1,
                 next: window.lang.pageBar.next,
                 prev: window.lang.pageBar.prev,
@@ -74,10 +74,30 @@ $(function () {
         }
     }
     $('#pageForm').append($sort);
-    $('#pageForm').find(".data-table table th[sortable] .sort-btn").click(function () {
+    $('#pageForm').find(".data-table table th[sortable] .sort-btn").click(function (e) {
         var sortField = $(this).attr("sortFieldName");
         var order = $(this).attr("order");
-        $sort.find("input[name=orderBy][fieldName='" + sortField + "']").val(sortField + " " + order).remove().prependTo($sort);
+        $sort.find("input[name=orderBy][fieldName='" + sortField + "']").remove();
+        $('<input type="hidden" name="orderBy">').attr("fieldname", sortField).val(sortField + " " + order).prependTo($sort);
+        $('#pageForm')
+            .append($("<input type='hidden' name='pageSize'>").val($("#page-bar").attr("pageSize")))
+            .submit();
+        e.stopPropagation();
+    });
+    $('#pageForm').find(".data-table table th[sortable]").click(function () {
+        var sortField = $(this).attr("sortFieldName");
+        var order = $(this).attr("sort");
+        if (order == null || order === "") {
+            order = "ASC"
+        } else if (order.toUpperCase() === "ASC") {
+            order = "DESC"
+        } else if (order.toUpperCase() === "DESC") {
+            order = "";
+        }
+        $sort.find("input[name=orderBy][fieldName='" + sortField + "']").remove();
+        if (order != "") {
+            $('<input type="hidden" name="orderBy">').attr("fieldname", sortField).val(sortField + " " + order).prependTo($sort);
+        }
         $('#pageForm')
             .append($("<input type='hidden' name='pageSize'>").val($("#page-bar").attr("pageSize")))
             .submit();

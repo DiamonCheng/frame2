@@ -17,16 +17,19 @@ public class QueryPageViewFactory implements QueryViewFactory {
     
     private QueryPageViewOptionButtonFactory queryPageViewOptionButtonFactory = new QueryPageViewOptionButtonFactory();
     
+    private QueryPageViewDataTableFactory queryPageViewDataTableFactory = new QueryPageViewDataTableFactory();
     @Override
     public Frame2View createPageQueryView(PageSearcher searcher) {
         PageView pageView = new PageView();
         FormView formView = new FormView();
         pageView.addComponent(formView);
-        formView.setId("pageFrom");
+        formView.setId("pageForm");
         Frame2View conditionView = queryPageViewConditionFactory.createPageQueryView(searcher);
         formView.addContent(conditionView);
         Frame2View optionButtonsView = queryPageViewOptionButtonFactory.createPageQueryView(searcher);
         formView.addContent(optionButtonsView);
+        Frame2View dataTableView = queryPageViewDataTableFactory.createPageQueryView(searcher);
+        formView.addContent(dataTableView);
         return pageView;
     }
     
@@ -38,6 +41,7 @@ public class QueryPageViewFactory implements QueryViewFactory {
     public void configure(PageSearcher configurePojo) {
         queryPageViewConditionFactory.configure(configurePojo);
         queryPageViewOptionButtonFactory.configure(configurePojo);
+        queryPageViewDataTableFactory.configure(configurePojo);
     }
     
     public QueryPageViewFactory setQueryPageViewConditionFactory(QueryPageViewConditionFactory queryPageViewConditionFactory) {
@@ -56,5 +60,14 @@ public class QueryPageViewFactory implements QueryViewFactory {
     public QueryPageViewFactory setQueryPageViewOptionButtonFactory(QueryPageViewOptionButtonFactory queryPageViewOptionButtonFactory) {
         this.queryPageViewOptionButtonFactory = queryPageViewOptionButtonFactory;
         return this;
+    }
+    
+    public QueryPageViewFactory setQueryPageViewDataTableFactory(QueryPageViewDataTableFactory queryPageViewDataTableFactory) {
+        this.queryPageViewDataTableFactory = queryPageViewDataTableFactory;
+        return this;
+    }
+    
+    public QueryPageViewDataTableFactory getQueryPageViewDataTableFactory() {
+        return queryPageViewDataTableFactory;
     }
 }

@@ -1,22 +1,21 @@
-package com.dc.dcrud.web.view.support.viewpojo.optionbutton;
+package com.dc.dcrud.web.view.support.viewpojo.datatable;
 
+import com.dc.dcrud.web.view.data.TableOptionButtonFilter;
 import com.dc.dcrud.web.view.option.OperationPermissionCheck;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.*;
 
 /**
  * <p>Descriptions...
  *
  * @author Diamon.Cheng
- * @date 2018/10/30.
+ * @date 2018/11/1.
  */
+@Target({ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface OptionButton {
+public @interface TableOptionButtonConfig {
     String name();
     
     String title() default "";
@@ -31,4 +30,5 @@ public @interface OptionButton {
     
     com.dc.dcrud.web.view.option.OptionButton.Type type() default com.dc.dcrud.web.view.option.OptionButton.Type.DEFAULT;
     
+    Class<? extends TableOptionButtonFilter> filter() default TableOptionButtonFilter.class;
 }

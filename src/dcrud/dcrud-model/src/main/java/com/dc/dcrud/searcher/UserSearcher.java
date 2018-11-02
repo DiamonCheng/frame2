@@ -1,13 +1,15 @@
 package com.dc.dcrud.searcher;
 
 import com.dc.dcrud.domain.UserEntity;
+import com.dc.dcrud.web.view.support.viewpojo.datatable.DataTableConfig;
+import com.dc.dcrud.web.view.support.viewpojo.datatable.TableColumnConfig;
+import com.dc.dcrud.web.view.support.viewpojo.datatable.TableOptionButtonConfig;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.InputViewPanelHead;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButton;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButtons;
 import com.dc.frame2.core.dao.conditions.CompareOperator;
 import com.dc.frame2.core.dao.conditions.Condition;
-import com.dc.frame2.core.dao.conditions.ConditionsGroup;
-import com.dc.frame2.core.dao.conditions.PreContact;
 import com.dc.frame2.core.dto.PageSearcher;
 
 /**
@@ -22,22 +24,43 @@ import com.dc.frame2.core.dto.PageSearcher;
         @OptionButton(name = "crud.query.test.button2.text"),
         @OptionButton(name = "crud.query.test.button3.text")
 })
-public class UserSearcher extends PageSearcher<UserEntity>{
-    private Condition2 condition2;
+@DataTableConfig(
+        columns = {
+                @TableColumnConfig(
+                        path = "username", headName = "com.dc.dcrud.domain.UserEntity.username"
+                ),
+                @TableColumnConfig(
+                        path = "nickName", headName = "com.dc.dcrud.domain.UserEntity.nickName"
+                ),
+                @TableColumnConfig(
+                        path = "roles", headName = "com.dc.dcrud.domain.UserEntity.roles"
+                ),
+                @TableColumnConfig(
+                        path = "createDateTime", headName = "com.dc.dcrud.domain.createDateTime"
+                ),
+                @TableColumnConfig(
+                        path = "updateDateTime", headName = "com.dc.dcrud.domain.updateDateTime"
+                ),
+        }, buttons = {
+        @TableOptionButtonConfig(name = "crud.query.table.option.update", href = "edit"),
+        @TableOptionButtonConfig(name = "crud.query.table.option.delete", href = "delete")
+})
+@InputViewPanelHead("crud.userEntity.query.condition.title")
+public class UserSearcher extends PageSearcher<UserEntity> {
     @TextInput
-    @Condition(order = 1,operator = CompareOperator.DUP_LIKE)
+    @Condition(operator = CompareOperator.DUP_LIKE)
     private String nickName;
-    @Condition(order = 2,preContact = PreContact.OR,operator = CompareOperator.DUP_LIKE)
+    @Condition(operator = CompareOperator.DUP_LIKE)
     @TextInput
-    private String userName;
+    private String username;
     
     
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
     
-    public UserSearcher setUserName(String userName) {
-        this.userName = userName;
+    public UserSearcher setUsername(String username) {
+        this.username = username;
         return this;
     }
     
@@ -50,42 +73,5 @@ public class UserSearcher extends PageSearcher<UserEntity>{
         return this;
     }
     
-    public Condition2 getCondition2() {
-        return condition2;
-    }
-    
-    public UserSearcher setCondition2(Condition2 condition2) {
-        this.condition2 = condition2;
-        return this;
-    }
-    
-    @Override
-    public Class<UserEntity> getViewObjectClass() {
-        return UserEntity.class;
-    }
-    
-    public static class Condition2 implements ConditionsGroup{
-        @Condition(operator = CompareOperator.DUP_LIKE)
-        private String userName;
-        @Condition(preContact = PreContact.OR,operator = CompareOperator.DUP_LIKE)
-        private String userPassword;
-        public String getUserPassword() {
-            return userPassword;
-        }
-    
-        public Condition2 setUserPassword(String userPassword) {
-            this.userPassword = userPassword;
-            return this;
-        }
-    
-        public String getUserName() {
-            return userName;
-        }
-    
-        public Condition2 setUserName(String userName) {
-            this.userName = userName;
-            return this;
-        }
-    }
     
 }

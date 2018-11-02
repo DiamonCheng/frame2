@@ -33,6 +33,4 @@ public abstract class PageSearcher<T> extends Pager implements ConditionsGroup {
         this.totalCount = totalCount;
         return this;
     }
-    
-    public abstract Class<T> getViewObjectClass();
 }

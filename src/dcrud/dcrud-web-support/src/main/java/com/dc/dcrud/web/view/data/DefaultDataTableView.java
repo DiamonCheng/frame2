@@ -3,6 +3,7 @@ package com.dc.dcrud.web.view.data;
 import com.dc.frame2.data.DataIdExtractor;
 import com.dc.frame2.util.MapBuilder;
 import com.dc.frame2.view.view.freemarker.FreemarkerView;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class DefaultDataTableView implements FreemarkerView {
     private Integer pageNo;
     private Integer pageSize;
     private Long totalCount;
-    
+    private int[] pageSizes = {10, 50, 100};
     private String id;
     
     private List<TableHeadView> tableHeadViews = new ArrayList<>(3);
@@ -32,6 +33,16 @@ public class DefaultDataTableView implements FreemarkerView {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
         this.totalCount = totalCount;
+        return this;
+    }
+    
+    public int[] getPageSizes() {
+        return pageSizes;
+    }
+    
+    public DefaultDataTableView setPageSizes(int[] pageSizes) {
+        Assert.notNull(pageSizes, "pageSizes must not be set to null");
+        this.pageSizes = pageSizes;
         return this;
     }
     
@@ -82,6 +93,7 @@ public class DefaultDataTableView implements FreemarkerView {
             Map<String, String> dataIds = DataIdExtractor.extractId(d);
             rowData.put("dataIds", dataIds);
         }
+    
         return MapBuilder.dataMap()
                        .put(
                                "dataTable",
@@ -90,6 +102,7 @@ public class DefaultDataTableView implements FreemarkerView {
                                        .put("pageable", pageable)
                                        .put("pageNo", pageNo)
                                        .put("pageSize", pageSize)
+                                       .put("pageSizes", pageSizes)
                                        .put("totalCount", totalCount)
                                        .put("tableRows", tableRows)
                                        .put("tableHeadViews", tableHeadViews)
