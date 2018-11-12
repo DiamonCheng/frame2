@@ -56,7 +56,7 @@ $(function () {
             fieldName: $(this).attr("sortfieldname")
         });
     });
-    console.log(sortList);
+    //console.log(sortList);
     var $sort = $('<div style="display:none;">');
     sortList.sort(function (a, b) {
         if (a.order == null) {

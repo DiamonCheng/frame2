@@ -116,17 +116,12 @@ html{
 }
 
 .side-menu dd.menu-item > a:not(:only-child):after {
-    /*     background-color:#fff; */
     content: "<";
     position: absolute;
     right: 15px;
 }
 
 .side-menu dd.menu-item.open > a:not(:only-child):after {
-    /*     background-color:#fff; */
-    /*     content:"+";
-        position:absolute;
-        right:15px; */
     transform: rotate(-90deg);
 }
 .side-menu .menu-item {
@@ -140,14 +135,12 @@ html{
 .side-menu .menu .menu-item a{
     line-height: 32px;
     position: relative;
-    /* height: 28px; */
+
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     display: block;
-    /*margin-top:1px;*/
-    /*box-shadow:0px -1px 0px 0 rgba(0,0,0,.1);*/
-    /* margin-right:15px */
+
 }
 
 .side-menu .menu .menu-item.active a {
@@ -181,30 +174,19 @@ html{
 }
 
 #frame2_app .menu-container > dl > dd dl > dd > a {
-    /*     display: none; */
-    /* height: 0; */
-    /*     overflow: hidden; */
+
     height: 0;
 }
 
 #frame2_app .menu-container > dl dd.open > dl > dd > a {
-    /*     display: block; */
-    /* height: 28px; */
+
     height: 32px;
 }
-/*.layui-nav-tree {
-    width: 200px;
-    padding: 0;
+
+#frame2_app .menu-container > dl dd.close dl > dd > a {
+
+    height: 0px;
 }
-.layui-nav {
-    position: relative;
-    padding: 0 20px;
-    background-color: #393D49;
-    color: #fff;
-    border-radius: 2px;
-    font-size: 0;
-    box-sizing: border-box;
-}*/
 
 
 .layui-side-menu{
@@ -241,9 +223,26 @@ html{
         right: 0;
         z-index: 100003;
         background-color: #00000059;
+        animation: a-shade .3s;
+    }
+
+    @keyframes a-shade {
+        0% {
+            opacity: 0;
+            left: 0;
+        }
+        100% {
+            left: 200px;
+            opacity: 1;
+        }
     }
 
     #frame2_app.shrink #shade {
         display: none;
+        left: 0;
     }
+}
+
+.edit-panel .edit-panel-head {
+    padding-left: 35px;
 }

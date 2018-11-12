@@ -1,13 +1,16 @@
 package com.dc.dcrud.web.controller.user;
 
+import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.dcrud.service.rbac.UserService;
+import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import com.dc.frame2.view.view.freemarker.page.PageView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * <p>Descriptions...
@@ -21,6 +24,8 @@ public class UserController {
     
     private QueryPageViewFactory queryPageViewFactory = new QueryPageViewFactory();
     
+    private EditViewFactory editViewFactory = new EditViewFactory();
+    
     @Autowired
     private UserService userService;
     
@@ -31,6 +36,27 @@ public class UserController {
         FormView formView = (FormView) pageView.getComponents().get(0);
         return pageView;
     }
-
+    
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public Object add() {
+        return editViewFactory.generateAddView(new UserEntity());
+    }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public Object edit(Long id) {
+        UserEntity userEntity = userService.get(id);
+        
+        return editViewFactory.generateEditView(userEntity);
+    }
+    
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public Object save(UserEntity userEntity) {
+        return "redirect:./";
+    }
+    
+    @RequestMapping(value = "/delete")
+    public Object delete(long id) {
+        return "redirect:./";
+    }
 
 }

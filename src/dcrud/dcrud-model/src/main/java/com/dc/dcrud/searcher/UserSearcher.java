@@ -20,9 +20,7 @@ import com.dc.frame2.core.dto.PageSearcher;
  */
 
 @OptionButtons({
-        @OptionButton(name = "crud.query.test.button1.text"),
-        @OptionButton(name = "crud.query.test.button2.text"),
-        @OptionButton(name = "crud.query.test.button3.text")
+        @OptionButton(name = "crud.query.option.add", href = "add"),
 })
 @DataTableConfig(
         columns = {

@@ -3,6 +3,8 @@ package com.dc.dcrud.web.view.support.viewpojo.inputview;
 import com.dc.dcrud.web.view.query.TextInput;
 import com.dc.dcrud.web.view.support.viewpojo.ViewGenerator;
 import com.dc.frame2.view.Frame2View;
+import org.hibernate.proxy.HibernateProxy;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
@@ -20,7 +22,12 @@ public class TextInputGenerator implements ViewGenerator {
     
     @Override
     public void configure(Class<?> root) {
-        this.root = root;
+        if (HibernateProxy.class.isAssignableFrom(root) || ClassUtils.isCglibProxyClass(root)) {
+            this.root = root.getSuperclass();
+        } else {
+            this.root = root;
+        }
+        
     }
     
     @Override

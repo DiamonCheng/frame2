@@ -25,4 +25,8 @@ public class UserService {
     public void searchPage(UserSearcher searcher) {
         userDao.searchPage(searcher);
     }
+    
+    public UserEntity get(Long id) {
+        return userDao.getOne(id);
+    }
 }
