@@ -1,4 +1,4 @@
-window.lang = {
+window.lang = $.extend(window.lang, {
     lang: 'en',
     validator: {
         rule: {
@@ -16,5 +16,13 @@ window.lang = {
         to: "To page",
         pageString: " ",
         submit: "GO"
+    },
+    option: {
+        success: "Option Success.",
+        failed: "Option Failed！",
+        sessionTimeout: "Session Timeout. Please Login again",
+        unknownError: "Error Occurred. Press F12 to see.",
+        confirmTitle: 'Confirm',
+        confirmOption: 'Are you sure to execute option {0} ?',
     }
-};
+});

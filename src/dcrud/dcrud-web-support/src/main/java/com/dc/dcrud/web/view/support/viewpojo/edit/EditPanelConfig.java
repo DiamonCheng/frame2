@@ -20,4 +20,5 @@ public @interface EditPanelConfig {
     String editSubmitPath() default "save";
     
     String addSubmitPath() default "save";
+    //TODO other fields config support
 }

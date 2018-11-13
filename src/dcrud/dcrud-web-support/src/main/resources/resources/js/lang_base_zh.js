@@ -1,4 +1,4 @@
-window.lang = {
+window.lang = $.extend(window.lang, {
     lang: 'zh',
     validator: {
         rule: {
@@ -17,5 +17,13 @@ window.lang = {
         pageString: "页",
         submit: "确定"
 
+    },
+    option: {
+        success: "操作成功。",
+        failed: "操作失败！",
+        sessionTimeout: "会话超时，请重新登录。",
+        unknownError: "出现异常，按F12查看",
+        confirmTitle: '确认',
+        confirmOption: '确定要执行{0}操作吗？',
     }
-};
+});

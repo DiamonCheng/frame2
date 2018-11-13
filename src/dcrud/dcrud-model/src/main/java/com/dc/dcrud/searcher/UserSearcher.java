@@ -41,7 +41,9 @@ import com.dc.frame2.core.dto.PageSearcher;
                 ),
         }, buttons = {
         @TableOptionButtonConfig(name = "crud.query.table.option.update", href = "edit"),
-        @TableOptionButtonConfig(name = "crud.query.table.option.delete", href = "delete")
+        @TableOptionButtonConfig(name = "crud.query.table.option.delete", href = "delete",
+                ajax = true,
+                ajaxConfirm = true)
 })
 @InputViewPanelHead("crud.userEntity.query.condition.title")
 public class UserSearcher extends PageSearcher<UserEntity> {

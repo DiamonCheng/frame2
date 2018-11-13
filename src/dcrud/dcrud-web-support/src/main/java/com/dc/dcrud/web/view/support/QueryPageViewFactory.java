@@ -7,6 +7,7 @@ import com.dc.frame2.view.view.freemarker.page.JsResource;
 import com.dc.frame2.view.view.freemarker.page.PageView;
 import com.dc.frame2.view.view.freemarker.page.Resource;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class QueryPageViewFactory implements QueryViewFactory {
     
     private List<Resource> headResources = new LinkedList<>();
     
-    private List<JsResource> buttonJsResources = new LinkedList<>();
+    private List<JsResource> buttonJsResources = new LinkedList<>(Collections.singleton(new JsResource().setPath("/resources/js/common/query.table.support.js")));
     
     @Override
     public Frame2View createPageQueryView(PageSearcher searcher) {

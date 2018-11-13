@@ -16,6 +16,20 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 public @interface TableOptionButtonConfig {
+    /**
+     * if define this as true, this button will create a ajax request using href and data-id as param, using POST method when click
+     *
+     * @return false default
+     */
+    boolean ajax() default false;
+    
+    /**
+     * if define this and ajax as true, it will pop confirm window before create ajax request.
+     *
+     * @return true or false
+     */
+    boolean ajaxConfirm() default false;
+    
     String name();
     
     String title() default "";

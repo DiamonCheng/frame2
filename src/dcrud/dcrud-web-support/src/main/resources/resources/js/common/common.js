@@ -1,7 +1,10 @@
 /**
- *
+ * utils
  */
 (function () {
+    /**
+     * String.format
+     * */
     String.prototype.format = function (args) {
         if (arguments.length > 0) {
             var result = this;
@@ -25,6 +28,10 @@
             return this;
         }
     }
+    /**
+     * variable ctx
+     * @type {string}
+     */
     window.ctx = (function () {
         var contextPath = "";//window.location.pathname.split("/")[1];
         var basePath = window.location.protocol + "//" + window.location.host/*+":"+local.port*/ + "/" + contextPath;
@@ -57,6 +64,9 @@
         $(form).appendTo($("body"));
         document.getElementById(id).submit();
     };
+    /**
+     * Session timeout and ajax error resolve
+     */
     $.ajaxSetup({
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType: 'JSON',
@@ -64,24 +74,29 @@
             var sessionstatus = XMLHttpRequest.getResponseHeader("SESSION_STATUS"); // 通过XMLHttpRequest取得响应头，sessionstatus，
             if (sessionstatus == "TIME_OUT") {
                 // 如果超时就处理 ，指定要跳转的页面
-                window.location.href = ctx + "/login";
+                messager.error(lang.option.sessionTimeout, function () {
+                    window.location.href = ctx + "/login";
+                });
+
             }
         }, error: function (xhr, status, e) {
             if (xhr.status == 500) {
                 var e = JSON.parse(xhr.responseText);
                 console.error(e);
-                frame.toastError("操作失败 " + e.message);
+                messager.error(lang.option.failed + " " + e.message);
             } else {
                 console.error("ajax请求出现异常:", xhr);
                 console.error("status:", status);
                 console.error(e);
-                frame.toastError("出现异常，F12查看错误信息。");
+                messager.error(lang.option.unknownError);
             }
         }
     });
 })();
 
-
+/**
+ * utils 2
+ */
 (function ($) {
     var getParam = function (url) {
         var reg_url = /^[^\?]+\?([\w\W]+)$/,
@@ -216,3 +231,27 @@ $(function () {
     validator.register();
 
 });
+
+(function () {
+    window.messager = {
+        message: function (message, callback) {
+            window.alert(message);
+            if (typeof callback === "function") {
+                callback();
+            }
+        },
+        error: function (message, callback) {
+            window.alert(message);
+            if (typeof callback === "function") {
+                callback();
+            }
+        },
+        confirm: function (title, message, callback) {
+            var flag = window.confirm(message);
+            if (flag && typeof callback === "function") {
+                callback(flag);
+            }
+        }
+    }
+})();
+

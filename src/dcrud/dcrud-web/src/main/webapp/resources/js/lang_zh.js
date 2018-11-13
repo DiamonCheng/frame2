@@ -1,0 +1,1 @@
+window.lang = $.extend(window.lang, {});

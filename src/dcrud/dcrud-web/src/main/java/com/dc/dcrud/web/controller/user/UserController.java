@@ -5,12 +5,14 @@ import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.dcrud.service.rbac.UserService;
 import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;
+import com.dc.frame2.core.dto.AjaxResult;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import com.dc.frame2.view.view.freemarker.page.PageView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>Descriptions...
@@ -50,13 +52,15 @@ public class UserController {
     }
     
     @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseBody
     public Object save(UserEntity userEntity) {
-        return "redirect:./";
+        return new AjaxResult();
     }
     
     @RequestMapping(value = "/delete")
+    @ResponseBody
     public Object delete(long id) {
-        return "redirect:./";
+        return new AjaxResult();
     }
 
 }

@@ -87,26 +87,33 @@ public class QueryPageViewDataTableFactory implements QueryViewFactory {
                 if (!TableOptionButtonFilter.class.equals(buttonConfig.filter())) {
                     tableOptionButton.setTableOptionButtonFilter(SpringContextUtils.tryGetInstanceByClass(buttonConfig.filter()));
                 }
-                tableOptionButton.setTableOptionButtonRowDataConfigurator((button, dataList, data, index) -> {
-                    String href = button.getHref();
-                    if (href != null && !href.startsWith(OptionButton.DEFAULT_HREF)) {
-                        boolean flag = href.contains("?");
-                        Map<String, String> ids = DataIdExtractor.extractId(data);
-                        StringBuilder paramStr = new StringBuilder();
-                        int index1 = 0;
-                        for (Map.Entry<String, String> entry : ids.entrySet()) {
-                            String key = entry.getKey();
-                            String value = entry.getValue();
-                            if (index1++ == 0 && !flag) {
-                                paramStr.append("?");
-                            } else {
-                                paramStr.append("&");
+                if (buttonConfig.ajax()) {
+                    tableOptionButton.setHref("javascript:");
+                    tableOptionButton.addAttr("ahref", buttonConfig.href());
+                    tableOptionButton.addAttr("ajax", "true");
+                    tableOptionButton.addAttr("confirm", String.valueOf(buttonConfig.ajaxConfirm()));
+                } else {
+                    tableOptionButton.setTableOptionButtonRowDataConfigurator((button, dataList, data, index) -> {
+                        String href = button.getHref();
+                        if (href != null && !href.startsWith(OptionButton.DEFAULT_HREF)) {
+                            boolean flag = href.contains("?");
+                            Map<String, String> ids = DataIdExtractor.extractId(data);
+                            StringBuilder paramStr = new StringBuilder();
+                            int index1 = 0;
+                            for (Map.Entry<String, String> entry : ids.entrySet()) {
+                                String key = entry.getKey();
+                                String value = entry.getValue();
+                                if (index1++ == 0 && !flag) {
+                                    paramStr.append("?");
+                                } else {
+                                    paramStr.append("&");
+                                }
+                                paramStr.append(key).append("=").append(value);
                             }
-                            paramStr.append(key).append("=").append(value);
+                            button.setHref(href + paramStr);
                         }
-                        button.setHref(href + paramStr);
-                    }
-                });
+                    });
+                }
                 optionTableHeadView.addButton(tableOptionButton);
             });
         }

@@ -12,7 +12,7 @@
             <#list dataTable.tableRows as tableRow>
             <tr
                 <#list tableRow.dataIds?keys as idKey>
-                    data-id-${idKey}="${tableRow.dataIds[idKey]}"
+                    data-${idKey}="${tableRow.dataIds[idKey]}"
                 </#list>
             >
                     <#list tableRow.dataCells as dataCell>

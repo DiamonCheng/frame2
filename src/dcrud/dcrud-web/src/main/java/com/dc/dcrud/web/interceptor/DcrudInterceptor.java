@@ -5,6 +5,9 @@ import com.dc.dcrud.dao.UserDao;
 import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.pojo.User;
 import com.dc.dcrud.service.shiro.SecurityRealm;
+import com.dc.frame2.core.dto.AjaxResult;
+import com.dc.frame2.core.exception.TranslatableException;
+import com.dc.frame2.util.web.MessageResolver;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -12,6 +15,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -27,27 +31,11 @@ import java.util.Collection;
  */
 public class DcrudInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(DcrudInterceptor.class);
-    
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        checkSessionUser();
-        return true;
-    }
-    
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-    }
-    
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        if (!request.getRequestURI().contains("decorator")) {
-            LOGGER.info("access url:{}, handler:{}", request.getRequestURI(), handler);
-        }
-    }
-    
     @Autowired
     private UserDao userDao;
     
+    @Autowired
+    private MessageResolver messageResolver;
     
     /**
      * 如果记住用户了 但是session里面的用户超时了，就重新查询用户信息
@@ -80,5 +68,53 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
             }
         }
         
+    }
+    
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        checkSessionUser();
+        return true;
+    }
+    
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    }
+    
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        if (!request.getRequestURI().contains("decorator")) {
+            LOGGER.info("access url:{}, handler:{}", request.getRequestURI(), handler);
+        }
+        if (ex != null) {
+            LOGGER.error("拦截器捕获到异常。", ex);
+            if (isAjaxRequest(request)) {
+                AjaxResult res = new AjaxResult();
+                res.setSuccess(false);
+                String message = null;
+                if (ex instanceof TranslatableException) {
+                    message = messageResolver.getMessage(((TranslatableException) ex).getCode());
+                } else if (ex instanceof NullPointerException) {
+                    message = "Null Point Exception!";
+                }
+                if (StringUtils.isEmpty(message)) {
+                    message = ex.getLocalizedMessage();
+                }
+                res.setMessage(message);
+                res.setData(ex);
+                response.setCharacterEncoding("UTF-8");
+                response.setStatus(500);
+                response.setHeader("AJAX_ERROR", "1");
+                response.setHeader("Content-Type", "application/json;charset=UTF-8");
+                response.getWriter().print(res);
+                response.getWriter().flush();
+                response.getWriter().close();
+            } else {
+                throw ex;
+            }
+        }
+    }
+    
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        return request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equals("XMLHttpRequest");
     }
 }
