@@ -12,6 +12,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface InputViewPanelHead {
+public @interface ConditionViewTitle {
     String value();
 }

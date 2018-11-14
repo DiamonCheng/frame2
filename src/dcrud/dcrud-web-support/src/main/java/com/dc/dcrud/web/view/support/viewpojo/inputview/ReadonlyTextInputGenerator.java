@@ -1,6 +1,5 @@
 package com.dc.dcrud.web.view.support.viewpojo.inputview;
 
-import com.dc.dcrud.web.view.query.TextInput;
 import com.dc.dcrud.web.view.support.viewpojo.ViewGenerator;
 import com.dc.frame2.view.Frame2View;
 import org.hibernate.proxy.HibernateProxy;
@@ -8,7 +7,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 
 /**
  * <p>Descriptions...
@@ -16,8 +14,8 @@ import java.util.Arrays;
  * @author Diamon.Cheng
  * @date 2018/9/18.
  */
-public class TextInputGenerator implements ViewGenerator {
-    private com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput textInputAnnotation;
+public class ReadonlyTextInputGenerator implements ViewGenerator {
+    private com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput textInputAnnotation;
     private String path;
     private Class<?> root;
     
@@ -33,7 +31,7 @@ public class TextInputGenerator implements ViewGenerator {
     
     @Override
     public void configure(Annotation viewAnnotation) {
-        this.textInputAnnotation = (com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput) viewAnnotation;
+        this.textInputAnnotation = (com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput) viewAnnotation;
     }
     
     @Override
@@ -43,15 +41,8 @@ public class TextInputGenerator implements ViewGenerator {
     
     @Override
     public Frame2View generate(Object data) {
-        TextInput textInput = new TextInput()
-                                      .setId(textInputAnnotation.id())
-                                      .setPlaceHolder(textInputAnnotation.placeHolder());
-        String nameConfigured = textInputAnnotation.name();
-        if (StringUtils.isEmpty(nameConfigured)) {
-            textInput.setName(path);
-        } else {
-            textInput.setName(nameConfigured);
-        }
+        com.dc.dcrud.web.view.query.ReadonlyTextInput textInput = new com.dc.dcrud.web.view.query.ReadonlyTextInput()
+                                                                          .setId(textInputAnnotation.id());
         String labelConfigured = textInputAnnotation.label();
         if (StringUtils.isEmpty(labelConfigured)) {
             textInput.setLabel(root.getName() + "." + path);
@@ -59,7 +50,6 @@ public class TextInputGenerator implements ViewGenerator {
             textInput.setLabel(labelConfigured);
         }
         textInput.setValue(data == null ? "" : data.toString());
-        Arrays.stream(textInputAnnotation.validators()).forEach(textInput::addValidator);
         return textInput;
     }
 }

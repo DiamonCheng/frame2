@@ -3,6 +3,8 @@ window.lang = $.extend(window.lang, {
     validator: {
         rule: {
             required: "必填项为空",
+            regex: "未通过正则表达式 {0} 校验",
+            length: "长度必须是 {0} 到 {1} 之间"
         }
     },
     pageBar: {

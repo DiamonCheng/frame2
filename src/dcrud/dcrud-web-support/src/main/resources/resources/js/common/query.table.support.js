@@ -1,6 +1,6 @@
 (function () {
 
-    $(".data-table table").click("tr td a.table-delete-btn[ajax=true]", function (e) {
+    $(".data-table table").on('click', "tr td a[ahref][ajax=true]", function (e) {
         var $this = $(e.target);
         var $tr = $this.parents(".data-table table tr");
         if ($tr.length === 0) {

@@ -11,7 +11,7 @@
                     <input type="submit" class="layui-btn query-btn"
                            value="<@spring.message 'crud.edit.submit'/>"/>
                     <input type="reset" class="layui-btn layui-btn-primary reset-btn"
-                           onclick="window.location.href=('./')"
+                           onclick="window.location.href=('${backHref}')"
                            value="<@spring.message 'crud.edit.back'/>"/>
                 </div>
             </div>

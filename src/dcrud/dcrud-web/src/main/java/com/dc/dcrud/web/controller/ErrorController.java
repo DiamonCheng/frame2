@@ -1,8 +1,12 @@
 package com.dc.dcrud.web.controller;
 
 import com.dc.frame2.core.dto.AjaxResult;
+import com.dc.frame2.core.exception.TranslatableException;
+import com.dc.frame2.util.web.MessageResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
@@ -27,6 +31,9 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
     private static final String ERROR_ATTRIBUTE = DefaultErrorAttributes.class.getName()
                                                           + ".ERROR";
     private static final String JAVAX_EX_KEY = "javax.servlet.error.exception";
+    
+    @Autowired
+    private MessageResolver messageResolver;
     
     @Override
     public String getErrorPath() {
@@ -57,13 +64,23 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
     @RequestMapping("/500")
     @ResponseBody
     public Object error500(HttpServletRequest request) {
-        AjaxResult result = new AjaxResult().setSuccess(false);
+        AjaxResult res = new AjaxResult();
+        res.setSuccess(false);
+        String message = null;
         Throwable ex = getError(request);
         if (ex != null) {
-            result.setData(printExString(ex));
-            result.setMessage(ex.getMessage());
+            if (ex instanceof TranslatableException) {
+                message = messageResolver.getMessage(((TranslatableException) ex).getCode());
+            } else if (ex instanceof NullPointerException) {
+                message = "Null Point Exception!";
+            }
+            if (StringUtils.isEmpty(message)) {
+                message = ex.getLocalizedMessage();
+            }
+            res.setMessage(message);
+            res.setData(ex);
         }
-        return result;
+        return res;
     }
     
     protected boolean getTraceParameter(HttpServletRequest request) {

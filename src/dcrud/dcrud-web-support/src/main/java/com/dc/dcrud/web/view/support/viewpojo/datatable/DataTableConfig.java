@@ -15,8 +15,6 @@ import java.lang.annotation.*;
 public @interface DataTableConfig {
     String id() default "";
     
-    int pageSize() default 10;
-    
     int[] pageSizes() default {10, 50, 100};
     
     TableColumnConfig[] columns();

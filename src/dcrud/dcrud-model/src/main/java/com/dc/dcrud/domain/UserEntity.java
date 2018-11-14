@@ -2,6 +2,7 @@ package com.dc.dcrud.domain;
 
 import com.dc.dcrud.extractor.UserEntityRoleDataExtractor;
 import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.frame2.core.domain.BaseConfigEntity;
 import com.dc.frame2.data.Extractor;
@@ -13,19 +14,22 @@ import java.util.Set;
  * @author DC
  */
 
-@EditPanelConfig(addTitle = "crud.userEntity.edit.add.title", editTitle = "crud.userEntity.edit.modify.title")
+@EditPanelConfig(
+        addTitle = "crud.userEntity.edit.add.title",
+        editTitle = "crud.userEntity.edit.modify.title"
+)
 @Entity
 @Table(name = "sys_user", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 public class UserEntity extends BaseConfigEntity {
     private static final long serialVersionUID = -6918259654521503874L;
     
-    @TextInput
+    @ReadonlyTextInput
     @Column(length = 63)
     private String username;
     @Column(length = 63)
     private String password;
     @Column(length = 63)
-    @TextInput
+    @TextInput(validators = "required")
     private String nickName;
     @ManyToMany(targetEntity = RoleEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))

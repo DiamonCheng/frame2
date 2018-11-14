@@ -14,12 +14,16 @@ $(function () {
             if (pageNo == null) pageNo = 0;
             var pageSize = $this.attr("pageSize");
             if (pageSize == null) pageSize = 0;
+            var limits = $this.attr("pageSizes").split(",");
+            for (var i in limits) {
+                limits[i] = parseInt(limits[i]);
+            }
             //执行一个laypage实例
             laypage.render({
                 elem: this,//注意，这里的 test1 是 ID，不用加 # 号
                 count: totalCount, //数据总数，从服务端得到
                 limit: pageSize,
-                limits: $this.attr("pageSizes").split(","),
+                limits: limits,
                 curr: parseInt(pageNo) + 1,
                 next: window.lang.pageBar.next,
                 prev: window.lang.pageBar.prev,
@@ -35,7 +39,7 @@ $(function () {
                         // console.log(page.curr - 1, page.limit);
                         $('#pageForm')
                             .append($("<input type='hidden' name='pageSize'>").val(page.limit))
-                            .append($("<input type='hidden' name='pageNo'>").val(page.curr))
+                            .append($("<input type='hidden' name='pageNo'>").val(page.curr - 1))
                             .submit();
                     }
                 }

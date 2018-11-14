@@ -243,6 +243,10 @@ html{
     }
 }
 
+.data-table th[sortable] {
+    cursor: pointer;
+}
+
 .edit-panel .edit-panel-head {
     padding-left: 35px;
 }

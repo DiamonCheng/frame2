@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Diamon.Cheng
  * @date 2018/5/17.
  */
-public class CheckboxCondition extends ConditionView {
+public class CheckboxInput extends ConditionView {
     
     private List<Option> options = new ArrayList<>(3);
     private Collection<String> values;
@@ -23,12 +23,12 @@ public class CheckboxCondition extends ConditionView {
     
     
     @Override
-    public CheckboxCondition setLabel(String label) {
+    public CheckboxInput setLabel(String label) {
         super.setLabel(label);
         return this;
     }
     
-    public CheckboxCondition addOption(Option option) {
+    public CheckboxInput addOption(Option option) {
         options.add(option);
         return this;
     }
@@ -37,12 +37,12 @@ public class CheckboxCondition extends ConditionView {
         return options;
     }
     
-    public CheckboxCondition setName(String name) {
+    public CheckboxInput setName(String name) {
         this.name = name;
         return this;
     }
     
-    public CheckboxCondition setValues(Collection<String> values) {
+    public CheckboxInput setValues(Collection<String> values) {
         this.values = values;
         return this;
     }

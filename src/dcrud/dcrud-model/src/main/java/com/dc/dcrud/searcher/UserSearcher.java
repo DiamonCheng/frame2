@@ -4,7 +4,7 @@ import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.web.view.support.viewpojo.datatable.DataTableConfig;
 import com.dc.dcrud.web.view.support.viewpojo.datatable.TableColumnConfig;
 import com.dc.dcrud.web.view.support.viewpojo.datatable.TableOptionButtonConfig;
-import com.dc.dcrud.web.view.support.viewpojo.inputview.InputViewPanelHead;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.ConditionViewTitle;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButton;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButtons;
@@ -45,7 +45,7 @@ import com.dc.frame2.core.dto.PageSearcher;
                 ajax = true,
                 ajaxConfirm = true)
 })
-@InputViewPanelHead("crud.userEntity.query.condition.title")
+@ConditionViewTitle("crud.userEntity.query.condition.title")
 public class UserSearcher extends PageSearcher<UserEntity> {
     @TextInput
     @Condition(operator = CompareOperator.DUP_LIKE)

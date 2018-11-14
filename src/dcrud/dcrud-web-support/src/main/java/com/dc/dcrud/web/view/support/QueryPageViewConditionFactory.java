@@ -1,7 +1,7 @@
 package com.dc.dcrud.web.view.support;
 
 import com.dc.dcrud.web.view.query.QueryPanelView;
-import com.dc.dcrud.web.view.support.viewpojo.inputview.InputViewPanelHead;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.ConditionViewTitle;
 import com.dc.frame2.core.dao.conditions.ConditionsGroup;
 import com.dc.frame2.core.dto.PageSearcher;
 import com.dc.frame2.view.Frame2View;
@@ -29,9 +29,9 @@ public class QueryPageViewConditionFactory extends InputPanelViewSupport impleme
     public QueryPageViewConditionFactory configure(PageSearcher searcher) {
         Assert.notNull(searcher, "Searcher cannot be null.");
         configBaseClass = ConditionsGroup.class;
-        InputViewPanelHead inputViewPanelHead = searcher.getClass().getAnnotation(InputViewPanelHead.class);
-        if (inputViewPanelHead != null) {
-            this.configuredTitle = inputViewPanelHead.value();
+        ConditionViewTitle conditionViewTitle = searcher.getClass().getAnnotation(ConditionViewTitle.class);
+        if (conditionViewTitle != null) {
+            this.configuredTitle = conditionViewTitle.value();
         }
         fieldViewConfigurations = new ArrayList<>(10);
         resolveConditionGroups(searcher.getClass(), Collections.emptyList(), searcher.getClass());

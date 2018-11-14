@@ -15,22 +15,28 @@
             if (validRules == null || validRules.length === 0) {
                 return true;
             }
-            validRules = validRules.split(",");
+            validRules = validRules.split("|");
             var res = true;
             for (var i in validRules) {
-                var ruleName = validRules[i];
+                var ruleConfig = validRules[i];
+                ruleConfig = ruleConfig.split(":");
+                var ruleName = ruleConfig[0];
+                var ruleArgs = ruleConfig.length > 1 ? ruleConfig[1].split(",") : null;
                 var rule = validator.rules[ruleName];
                 if (rule == null) {
-                    console.error($input, "input validate rule '" + ruleName + "' not found, cannot pass this validate. Check rule name in 'validator.list.js' file");
+                    console.error($input, "input validate rule '" + ruleConfig + "' not found, cannot pass this validate. Check rule name in 'validator.list.js' file");
                     return false;
                 }
-                if (rule.test($input.val())) {
+                if (rule.test($input.val(), ruleArgs)) {
                     validator.removeValidateTips($input);
                 } else {
-                    validator.addValidTips($input, rule.message);
+                    validator.addValidTips($input, rule.message == null ? null : rule.message.format(ruleArgs));
                     res = false;
                     break;
                 }
+            }
+            if (!res) {
+                $input.focus();
             }
             validator.onValidate($input, res);
             return res;
@@ -76,6 +82,7 @@
                         console.log($input, "valid failed, cannot submit form.");
                     }
                 });
+                $form.data("validStatus", res);
                 return res;
             });
 

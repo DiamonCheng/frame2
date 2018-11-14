@@ -1,7 +1,9 @@
 package com.dc.dcrud.web.view.query;
 
 import com.dc.frame2.view.view.freemarker.form.InputView;
+import org.springframework.util.StringUtils;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 /**
@@ -12,11 +14,20 @@ import java.util.Map;
  */
 public class TextInput extends ConditionView {
     protected InputView inputView;
-    
+    protected LinkedHashSet<String> validators;
     public TextInput() {
         inputView = new InputView();
         inputView.addCls("layui-input");
         addInput(inputView);
+    }
+    
+    public TextInput addValidator(String validator) {
+        if (validators == null) {
+            validators = new LinkedHashSet<>();
+        }
+        validators.add(validator);
+        inputView.addAttr("validator", validators.stream().reduce("", (a, b) -> StringUtils.isEmpty(a) ? b : (a + "|" + b)));
+        return this;
     }
     
     public TextInput setName(String name) {

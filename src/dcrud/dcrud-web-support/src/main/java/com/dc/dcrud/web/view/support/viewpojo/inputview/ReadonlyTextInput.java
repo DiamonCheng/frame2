@@ -12,23 +12,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-@InputViewConfigurator(TextInputGenerator.class)
-public @interface TextInput {
-    /**
-     * Not required. define the name attribute of this HTML element.
-     * In Spring MVC the input name will auto reflect to the parameter.
-     *
-     * @return a string
-     */
-    String name() default "";
-    
-    /**
-     * define placeholder of this input element.
-     *
-     * @return a string, the string will be translated when use key in i18n/message*
-     */
-    String placeHolder() default "";
-    
+@InputViewConfigurator(ReadonlyTextInputGenerator.class)
+public @interface ReadonlyTextInput {
     /**
      * define DOM id of this input element
      *
@@ -44,10 +29,4 @@ public @interface TextInput {
      */
     String label() default "";
     
-    /**
-     * Not required. using validator.js . Rules are in validator.list.js
-     *
-     * @return string array
-     */
-    String[] validators() default {};
 }

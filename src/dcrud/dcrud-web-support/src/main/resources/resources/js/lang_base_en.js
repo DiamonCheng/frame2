@@ -3,6 +3,8 @@ window.lang = $.extend(window.lang, {
     validator: {
         rule: {
             required: "This field cannot be null.",
+            regex: "Regex pattern {0} valid not passed  ",
+            length: "Value length need be {0} to {1}"
         }
     },
     pageBar: {

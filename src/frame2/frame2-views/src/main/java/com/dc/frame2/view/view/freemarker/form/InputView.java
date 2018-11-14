@@ -14,7 +14,7 @@ import java.util.Map;
 public class InputView extends AbstractInput<InputView> implements FreemarkerView {
     private static final String TEMPLATE_NAME = "/form/input.html.ftl";
     
-    private static class Type {
+    public static class Type {
         public static final String HIDDEN = "hidden";
         public static final String TEXT = "text";
         public static final String PASSWORD = "password";

@@ -1,7 +1,9 @@
 package com.dc.dcrud.web.view.support;
 
 import com.dc.dcrud.web.view.edit.EditPanelView;
+import com.dc.dcrud.web.view.query.HiddenInput;
 import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
+import com.dc.frame2.data.DataIdExtractor;
 import com.dc.frame2.view.Frame2View;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import com.dc.frame2.view.view.freemarker.page.JsResource;
@@ -23,13 +25,13 @@ import java.util.List;
 public class EditViewFactory extends InputPanelViewSupport {
     private List<Resource> headResources = new LinkedList<>();
     
-    private List<JsResource> buttonJsResources = new LinkedList<>();
+    private List<JsResource> buttonJsResources = new LinkedList<>(Collections.singleton(new JsResource().setPath("/resources/js/common/edit.support.js")));
     
     private String editTitle = "crud.query.table.option.update";
     private String addTitle = "crud.query.option.add";
     private String editSubmitPath = "save";
     private String addSubmitPath = "save";
-    
+    private String backHref = "./";
     public EditViewFactory config(Object configPojo) {
         Assert.notNull(configPojo, "ConfigPojo cannot be null.");
         configBaseClass = EditPanelConfig.class;
@@ -39,6 +41,7 @@ public class EditViewFactory extends InputPanelViewSupport {
             addTitle = editPanelConfig.addTitle();
             editSubmitPath = editPanelConfig.editSubmitPath();
             addSubmitPath = editPanelConfig.addSubmitPath();
+            backHref = editPanelConfig.backHref();
         }
         fieldViewConfigurations = new ArrayList<>(10);
         resolveConditionGroups(configPojo.getClass(), Collections.emptyList(), configPojo.getClass());
@@ -62,12 +65,14 @@ public class EditViewFactory extends InputPanelViewSupport {
     private Frame2View genEditView(String title, String submitPath, Object configPojo) {
         EditPanelView editPanelView = new EditPanelView();
         editPanelView.setTitle(title);
+        editPanelView.setBackHref(backHref);
+        DataIdExtractor.extractId(configPojo).forEach((key, value) -> editPanelView.addCondition(new HiddenInput().setName(key).setValue(value)));
         genInputViews(configPojo, editPanelView::addCondition);
         FormView formView = new FormView();
         formView.addContent(editPanelView);
         formView.setAction(submitPath);
         formView.setMethod("POST");
-        formView.setId("pageForm");
+        formView.setId("editForm");
         PageView pageView = new PageView();
         pageView.addComponent(formView);
         headResources.forEach(pageView::addHeadResource);

@@ -40,6 +40,14 @@ public class QueryPageViewDataTableFactory implements QueryViewFactory {
         DefaultDataTableView dataTableView = new DefaultDataTableView()
                                                      .setPageParameters(searcher.getPageNo(), searcher.getPageSize(), searcher.getTotalCount())
                                                      .setData(searcher.getResultList());
+        int[] pageSizes = dataTableConfig.pageSizes();
+        if (Arrays.stream(pageSizes).noneMatch(pageSize -> searcher.getPageSize() == pageSize)) {
+            pageSizes = Arrays.copyOf(pageSizes, pageSizes.length + 1);
+            pageSizes[pageSizes.length - 1] = searcher.getPageSize();
+            Arrays.sort(pageSizes);
+        }
+        dataTableView.setPageSizes(pageSizes);
+        
         Arrays.stream(dataTableConfig.columns()).forEach(tableColumnConfig -> {
             DefaultTableHeadView defaultTableHeadView = new DefaultTableHeadView();
             defaultTableHeadView.setFieldName(tableColumnConfig.path());
