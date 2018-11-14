@@ -1,6 +1,6 @@
 package com.dc.frame2.core.dto;
 
-import com.dc.frame2.core.dao.conditions.ConditionsGroup;
+import com.dc.frame2.core.dao.condition.ConditionsGroup;
 
 import java.util.List;
 

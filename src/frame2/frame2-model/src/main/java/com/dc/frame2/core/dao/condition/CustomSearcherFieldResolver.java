@@ -1,4 +1,4 @@
-package com.dc.frame2.core.dao.conditions;
+package com.dc.frame2.core.dao.condition;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

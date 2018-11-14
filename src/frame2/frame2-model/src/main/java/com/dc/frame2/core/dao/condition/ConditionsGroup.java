@@ -1,4 +1,4 @@
-package com.dc.frame2.core.dao.conditions;
+package com.dc.frame2.core.dao.condition;
 
 /**
  * for group condition: select data from table where (id=1 or id=2) and 1=1

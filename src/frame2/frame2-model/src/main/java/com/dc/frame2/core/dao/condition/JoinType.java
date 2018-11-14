@@ -1,4 +1,4 @@
-package com.dc.frame2.core.dao.conditions;
+package com.dc.frame2.core.dao.condition;
 
 /**
  * <p> Join type enum in condition.

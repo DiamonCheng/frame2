@@ -8,8 +8,8 @@ import com.dc.dcrud.web.view.support.viewpojo.inputview.ConditionViewTitle;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButton;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButtons;
-import com.dc.frame2.core.dao.conditions.CompareOperator;
-import com.dc.frame2.core.dao.conditions.Condition;
+import com.dc.frame2.core.dao.condition.CompareOperator;
+import com.dc.frame2.core.dao.condition.Condition;
 import com.dc.frame2.core.dto.PageSearcher;
 
 /**
@@ -72,6 +72,4 @@ public class UserSearcher extends PageSearcher<UserEntity> {
         this.nickName = nickName;
         return this;
     }
-    
-    
 }

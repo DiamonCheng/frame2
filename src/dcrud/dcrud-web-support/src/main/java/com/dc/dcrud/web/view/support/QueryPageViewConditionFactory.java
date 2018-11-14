@@ -2,7 +2,7 @@ package com.dc.dcrud.web.view.support;
 
 import com.dc.dcrud.web.view.query.QueryPanelView;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.ConditionViewTitle;
-import com.dc.frame2.core.dao.conditions.ConditionsGroup;
+import com.dc.frame2.core.dao.condition.ConditionsGroup;
 import com.dc.frame2.core.dto.PageSearcher;
 import com.dc.frame2.view.Frame2View;
 import org.springframework.util.Assert;

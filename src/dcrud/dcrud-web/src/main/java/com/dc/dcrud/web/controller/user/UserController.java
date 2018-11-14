@@ -54,8 +54,8 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     public Object save(UserEntity userEntity) {
-        throw new IllegalStateException(" Unknow exception occurred");
-        //return new AjaxResult();
+        //throw new IllegalStateException(" exception alert test");
+        return new AjaxResult();
     }
     
     @RequestMapping(value = "/delete")

@@ -1,6 +1,6 @@
 package com.dc.frame2.core.dao;
 
-import com.dc.frame2.core.dao.conditions.*;
+import com.dc.frame2.core.dao.condition.*;
 import com.dc.frame2.core.exception.TranslatableException;
 import com.dc.frame2.util.SpringContextUtils;
 import org.springframework.util.ReflectionUtils;
@@ -247,8 +247,8 @@ public class ConditionResolver {
             }
             
             @Override
-            public com.dc.frame2.core.dao.conditions.JoinType joinType() {
-                return com.dc.frame2.core.dao.conditions.JoinType.NONE;
+            public com.dc.frame2.core.dao.condition.JoinType joinType() {
+                return com.dc.frame2.core.dao.condition.JoinType.NONE;
             }
             
             @Override
