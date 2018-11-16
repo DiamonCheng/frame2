@@ -87,7 +87,7 @@ public class DefaultTableHeadView implements TableHeadView {
     
     @Override
     public DataCellView resolveDataCellView(List<?> dataList, Object data, int index) {
-        String content = DataFieldExtractor.extractString(data, fieldName);
+        String content = DataFieldExtractor.extractText(data, fieldName);
         return new DataCellView() {
             @Override
             public Object getCellData() {

@@ -1,6 +1,7 @@
 package com.dc.dcrud.web.shiro;
 
 import com.dc.dcrud.service.shiro.SecurityRealm;
+import com.dc.frame2.util.MapBuilder;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -16,6 +17,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -31,12 +33,15 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/resources/**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/**", "user");
+        filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/templates/error/403.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        shiroFilterFactoryBean.setFilters(
+                MapBuilder.<String, Filter>hashMap().put("authc", new AjaxFormAuthenticationFilter()).build()
+        );
         return shiroFilterFactoryBean;
     }
     

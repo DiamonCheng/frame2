@@ -3,6 +3,8 @@ package com.dc.dcrud.web.controller;
 import com.dc.frame2.core.dto.AjaxResult;
 import com.dc.frame2.core.exception.TranslatableException;
 import com.dc.frame2.util.web.MessageResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.stereotype.Controller;
@@ -32,12 +34,35 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
                                                           + ".ERROR";
     private static final String JAVAX_EX_KEY = "javax.servlet.error.exception";
     
+    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorController.class);
+    
     @Autowired
     private MessageResolver messageResolver;
     
     @Override
     public String getErrorPath() {
         return ERROR_PATH;
+    }
+    
+    @RequestMapping(produces = "text/html")
+    public Object error(HttpServletRequest request,
+                        HttpServletResponse response) {
+        Throwable e = getError(request);
+        if (e != null) {
+            LOGGER.error("ERROR " + response.getStatus(), e);
+        }
+        return "ERROR " + response.getStatus();
+    }
+    
+    @RequestMapping
+    @ResponseBody
+    public Object errorAjax(HttpServletRequest request,
+                            HttpServletResponse response) {
+        Throwable e = getError(request);
+        if (e != null) {
+            LOGGER.error("ERROR " + response.getStatus(), e);
+        }
+        return new AjaxResult().setSuccess(false).setMessage("ERROR " + response.getStatus());
     }
     
     @RequestMapping("/404")
@@ -50,7 +75,7 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
         return "error/403";
     }
     
-    @RequestMapping(value = "/500", produces = "text/html")
+    @RequestMapping(value = {"/500"}, produces = "text/html")
     public ModelAndView error500(HttpServletRequest request,
                                  HttpServletResponse response) {
         Throwable ex = getError(request);
@@ -61,7 +86,7 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
         return new ModelAndView("error/500").addObject("ex", exStr);
     }
     
-    @RequestMapping("/500")
+    @RequestMapping({"/500"})
     @ResponseBody
     public Object error500(HttpServletRequest request) {
         AjaxResult res = new AjaxResult();
@@ -74,11 +99,12 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
             } else if (ex instanceof NullPointerException) {
                 message = "Null Point Exception!";
             }
+            //TODO translate exception by config
             if (StringUtils.isEmpty(message)) {
                 message = ex.getLocalizedMessage();
             }
             res.setMessage(message);
-            res.setData(ex);
+            /*res.setData(ex);*/
         }
         return res;
     }

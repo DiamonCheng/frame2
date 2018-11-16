@@ -5,11 +5,13 @@ import com.dc.dcrud.web.view.support.viewpojo.datatable.DataTableConfig;
 import com.dc.dcrud.web.view.support.viewpojo.datatable.TableColumnConfig;
 import com.dc.dcrud.web.view.support.viewpojo.datatable.TableOptionButtonConfig;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.ConditionViewTitle;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.SelectInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButton;
 import com.dc.dcrud.web.view.support.viewpojo.optionbutton.OptionButtons;
 import com.dc.frame2.core.dao.condition.CompareOperator;
 import com.dc.frame2.core.dao.condition.Condition;
+import com.dc.frame2.core.dao.condition.JoinType;
 import com.dc.frame2.core.dto.PageSearcher;
 
 /**
@@ -53,7 +55,9 @@ public class UserSearcher extends PageSearcher<UserEntity> {
     @Condition(operator = CompareOperator.DUP_LIKE)
     @TextInput
     private String username;
-    
+    @Condition(operator = CompareOperator.EQ, value = "roles.id", joinType = JoinType.LEFT)
+    @SelectInput(placeHolder = "crud.query.condition.select.option.all", optionProvider = "HqlOptionProvider", optionProviderKey = "select name,id from RoleEntity")
+    private String roles;
     
     public String getUsername() {
         return username;
@@ -70,6 +74,15 @@ public class UserSearcher extends PageSearcher<UserEntity> {
     
     public UserSearcher setNickName(String nickName) {
         this.nickName = nickName;
+        return this;
+    }
+    
+    public String getRoles() {
+        return roles;
+    }
+    
+    public UserSearcher setRoles(String roles) {
+        this.roles = roles;
         return this;
     }
 }

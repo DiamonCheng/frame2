@@ -81,7 +81,7 @@ public class InputPanelViewSupport {
                     break;
                 }
             }
-            Frame2View conditionView = fieldViewGeneratorTracer.getViewGenerator().generate(fieldData);
+            Frame2View conditionView = fieldViewGeneratorTracer.getViewGenerator().generate(configPojo, fieldChain, fieldData);
             addTo.apply((ConditionView) conditionView);
         });
     }

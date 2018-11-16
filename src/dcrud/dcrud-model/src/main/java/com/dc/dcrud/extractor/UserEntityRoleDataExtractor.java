@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class UserEntityRoleDataExtractor implements DataFieldExtractor<UserEntity, Set<RoleEntity>> {
     @Override
-    public String extract(UserEntity data, String field, Set<RoleEntity> fieldValue) {
+    public String extractText(UserEntity data, String field, Set<RoleEntity> fieldValue) {
         StringBuilder stringBuilder = new StringBuilder();
         int index = 0;
         for (RoleEntity roleEntity : fieldValue) {
@@ -22,6 +22,19 @@ public class UserEntityRoleDataExtractor implements DataFieldExtractor<UserEntit
                 stringBuilder.append(", ");
             }
             stringBuilder.append(roleEntity.getName());
+        }
+        return stringBuilder.toString();
+    }
+    
+    @Override
+    public String extractValue(UserEntity data, String field, Set<RoleEntity> fieldValue) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int index = 0;
+        for (RoleEntity roleEntity : fieldValue) {
+            if (index++ > 0) {
+                stringBuilder.append(", ");
+            }
+            stringBuilder.append(roleEntity.getId());
         }
         return stringBuilder.toString();
     }

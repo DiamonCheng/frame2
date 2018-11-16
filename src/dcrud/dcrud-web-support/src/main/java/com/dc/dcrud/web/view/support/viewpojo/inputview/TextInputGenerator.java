@@ -8,7 +8,9 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>Descriptions...
@@ -42,7 +44,7 @@ public class TextInputGenerator implements ViewGenerator {
     }
     
     @Override
-    public Frame2View generate(Object data) {
+    public Frame2View generate(Object data1, List<Field> fieldList, Object fieldData) {
         TextInput textInput = new TextInput()
                                       .setId(textInputAnnotation.id())
                                       .setPlaceHolder(textInputAnnotation.placeHolder());
@@ -58,7 +60,7 @@ public class TextInputGenerator implements ViewGenerator {
         } else {
             textInput.setLabel(labelConfigured);
         }
-        textInput.setValue(data == null ? "" : data.toString());
+        textInput.setValue(fieldData == null ? "" : fieldData.toString());
         Arrays.stream(textInputAnnotation.validators()).forEach(textInput::addValidator);
         return textInput;
     }

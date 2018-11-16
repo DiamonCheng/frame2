@@ -3808,7 +3808,7 @@ body .layui-table-tips .layui-layer-content {
 .layui-badge, .layui-badge-dot, .layui-badge-rim {
     position: relative;
     display: inline-block;
-    padding: 0 6px;
+    padding: 0 6px !important;
     font-size: 12px;
     text-align: center;
     background-color: #FF5722;

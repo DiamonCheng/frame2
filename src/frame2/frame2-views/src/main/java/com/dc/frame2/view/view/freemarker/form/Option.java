@@ -9,6 +9,14 @@ public class Option {
     private boolean selected = false;
     private Map<String, String> attrs = new HashMap<>(3);
     
+    public Option() {
+    }
+    
+    public Option(String text, String value) {
+        this.text = text;
+        this.value = value;
+    }
+    
     public String getText() {
         return text;
     }

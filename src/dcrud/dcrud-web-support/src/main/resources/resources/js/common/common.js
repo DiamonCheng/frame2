@@ -76,6 +76,26 @@
     /**
      * Session timeout and ajax error resolve
      */
+    $.commonAjaxErrorProcess = function (xhr, status, e) {
+        console.error(e);
+        console.error("ajax请求出现异常:", xhr);
+        console.error("status:", status);
+        if (xhr.status == 500) {
+            e = JSON.parse(xhr.responseText);
+            messager.error(lang.option.failed + " " + e.message);
+        } else if (xhr.status == 404) {
+            messager.error(lang.option.failed + " HTTP 404");
+        } else if (xhr.status == 403) {
+            var sessionstatus = xhr.getResponseHeader("SESSION_STATUS"); // 通过XMLHttpRequest取得响应头，sessionstatus，
+            if (sessionstatus == "TIME_OUT") {
+                //processed
+            } else {
+                messager.error(lang.option.failed + " HTTP 403");
+            }
+        } else {
+            messager.error(lang.option.unknownError);
+        }
+    };
     $.ajaxSetup({
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType: 'JSON',
@@ -86,20 +106,8 @@
                 messager.error(lang.option.sessionTimeout, function () {
                     window.location.href = ctx + "/login";
                 });
-
             }
-        }, error: function (xhr, status, e) {
-            if (xhr.status == 500) {
-                var e = JSON.parse(xhr.responseText);
-                console.error(e);
-                messager.error(lang.option.failed + " " + e.message);
-            } else {
-                console.error("ajax请求出现异常:", xhr);
-                console.error("status:", status);
-                console.error(e);
-                messager.error(lang.option.unknownError);
-            }
-        }
+        }, error: $.commonAjaxErrorProcess
     });
 })();
 
@@ -236,6 +244,10 @@ $(function () {
 
     });
 
+    (function () {
+        var formSelects = layui.formSelects;
+        console.log(formSelects);
+    })();
     //***  validator  ***//
     validator.register();
 

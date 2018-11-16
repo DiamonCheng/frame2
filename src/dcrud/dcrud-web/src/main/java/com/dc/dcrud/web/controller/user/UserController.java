@@ -5,9 +5,11 @@ import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.dcrud.service.rbac.UserService;
 import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;
+import com.dc.dcrud.web.vo.UserEntityVO;
 import com.dc.frame2.core.dto.AjaxResult;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import com.dc.frame2.view.view.freemarker.page.PageView;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,19 +43,20 @@ public class UserController {
     
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public Object add() {
-        return editViewFactory.generateAddView(new UserEntity());
+        return editViewFactory.generateAddView(new UserEntityVO());
     }
     
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public Object edit(Long id) {
         UserEntity userEntity = userService.get(id);
-        
-        return editViewFactory.generateEditView(userEntity);
+        UserEntityVO userEntityVO = new UserEntityVO();
+        BeanUtils.copyProperties(userEntity, userEntityVO);
+        return editViewFactory.generateEditView(userEntityVO);
     }
     
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public Object save(UserEntity userEntity) {
+    public Object save(UserEntityVO userEntity) {
         //throw new IllegalStateException(" exception alert test");
         return new AjaxResult();
     }

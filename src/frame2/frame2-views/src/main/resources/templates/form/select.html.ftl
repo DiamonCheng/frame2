@@ -25,14 +25,14 @@ ${(select.name??)?string('name="'+select.name+'"',"")}
         title="<@spring.message select.title/>"
     </#if>
         class="<#list select.classes as cls>${cls} </#list>"
-<#list select.attrs as attr>
-    ${attr.key}="${attr.value}"
+<#list select.attrs?keys as key>
+    ${key}="${select.attrs[key]}"
 </#list>
        >
 <#list select.options as option>
     <option value="${option.value}" <#if option.selected>selected</#if>
-    <#list option.attrs as attr>
-        ${attr.key}="${attr.value}"
+    <#list option.attrs?keys as key>
+        ${key}="${option.attrs[key]}"
     </#list>> <@spring.message option.text/> </option>
 </#list>
 </select>

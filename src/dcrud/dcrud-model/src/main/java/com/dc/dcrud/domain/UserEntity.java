@@ -1,8 +1,8 @@
 package com.dc.dcrud.domain;
 
 import com.dc.dcrud.extractor.UserEntityRoleDataExtractor;
-import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.SelectInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.frame2.core.domain.BaseConfigEntity;
 import com.dc.frame2.data.Extractor;
@@ -14,10 +14,6 @@ import java.util.Set;
  * @author DC
  */
 
-@EditPanelConfig(
-        addTitle = "crud.userEntity.edit.add.title",
-        editTitle = "crud.userEntity.edit.modify.title"
-)
 @Entity
 @Table(name = "sys_user", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 public class UserEntity extends BaseConfigEntity {
@@ -31,6 +27,11 @@ public class UserEntity extends BaseConfigEntity {
     @Column(length = 63)
     @TextInput(validators = "required")
     private String nickName;
+    
+    @SelectInput(placeHolder = "crud.edit.field.select.option.toCheck",
+            name = "roles.id",
+            optionProvider = "HqlOptionProvider",
+            optionProviderKey = "select name,id from RoleEntity")
     @ManyToMany(targetEntity = RoleEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
     @Extractor(UserEntityRoleDataExtractor.class)

@@ -29,6 +29,8 @@ public @interface OptionButton {
     
     Class<? extends OperationPermissionCheck> permissionCheckClass() default OperationPermissionCheck.class;
     
+    //todo permission check key
+    
     com.dc.dcrud.web.view.option.OptionButton.Type type() default com.dc.dcrud.web.view.option.OptionButton.Type.DEFAULT;
     
 }

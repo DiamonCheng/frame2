@@ -82,6 +82,9 @@ public class ConditionResolver {
         try {
             switch (condition.operator()){
                 case EQ:
+                    if (StringUtils.isEmpty(value)) {
+                        return null;
+                    }
                     return builder.equal(path, value);
                 case GT:
                     return builder.gt(path, (Number) value);
@@ -137,22 +140,49 @@ public class ConditionResolver {
         if (StringUtils.isEmpty(conditionFieldPath)) {
             conditionFieldPath = field.getName().replace('$', '.');
         }
-        Path<?> path = null;
-        switch (condition.joinType()) {
-            case NONE:
-                path = root.get(conditionFieldPath);
-                break;
-            case INNER:
-                path = root.join(conditionFieldPath, JoinType.INNER);
-                break;
-            case LEFT:
-                root.join(conditionFieldPath, JoinType.LEFT);
-                break;
-            case RIGHT:
-                root.join(conditionFieldPath, JoinType.RIGHT);
-                break;
-            default:
+        if (!conditionFieldPath.contains(".")) {
+            return root.get(conditionFieldPath);
         }
+        Join<?, ?> path = null;
+        String[] paths = conditionFieldPath.split("\\.");
+        for (int i = 0; i < paths.length; i++) {
+            if (i == 0) {
+                switch (condition.joinType()) {
+                    case NONE:
+                        path = root.join(paths[i]);
+                        break;
+                    case INNER:
+                        path = root.join(paths[i], JoinType.INNER);
+                        break;
+                    case LEFT:
+                        path = root.join(paths[i], JoinType.LEFT);
+                        break;
+                    case RIGHT:
+                        path = root.join(paths[i], JoinType.RIGHT);
+                        break;
+                    default:
+                }
+            } else if (i == paths.length - 1) {
+                return path.get(paths[i]);
+            } else {
+                switch (condition.joinType()) {
+                    case INNER:
+                        path = path.join(paths[i], JoinType.INNER);
+                        break;
+                    case LEFT:
+                        path = path.join(paths[i], JoinType.LEFT);
+                        break;
+                    case RIGHT:
+                        path = path.join(paths[i], JoinType.RIGHT);
+                        break;
+                    case NONE:
+                        path = path.join(paths[i]);
+                        break;
+                    default:
+                }
+            }
+        }
+        
         return path;
     }
     

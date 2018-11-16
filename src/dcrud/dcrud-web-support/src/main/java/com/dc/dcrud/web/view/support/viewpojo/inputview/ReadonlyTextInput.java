@@ -3,7 +3,7 @@ package com.dc.dcrud.web.view.support.viewpojo.inputview;
 import java.lang.annotation.*;
 
 /**
- * <p>Mark a field in ConditionsGroup display as a Text Input View
+ * <p>Mark a field in ConditionsGroup display as a Readonly Text Input View
  *
  * @author Diamon.Cheng
  * @date 2018/9/18.

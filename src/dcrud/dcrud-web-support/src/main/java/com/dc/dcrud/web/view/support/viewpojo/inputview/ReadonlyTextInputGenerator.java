@@ -7,6 +7,8 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * <p>Descriptions...
@@ -40,7 +42,7 @@ public class ReadonlyTextInputGenerator implements ViewGenerator {
     }
     
     @Override
-    public Frame2View generate(Object data) {
+    public Frame2View generate(Object data1, List<Field> fieldList, Object fieldData) {
         com.dc.dcrud.web.view.query.ReadonlyTextInput textInput = new com.dc.dcrud.web.view.query.ReadonlyTextInput()
                                                                           .setId(textInputAnnotation.id());
         String labelConfigured = textInputAnnotation.label();
@@ -49,7 +51,7 @@ public class ReadonlyTextInputGenerator implements ViewGenerator {
         } else {
             textInput.setLabel(labelConfigured);
         }
-        textInput.setValue(data == null ? "" : data.toString());
+        textInput.setValue(fieldData == null ? "" : fieldData.toString());
         return textInput;
     }
 }

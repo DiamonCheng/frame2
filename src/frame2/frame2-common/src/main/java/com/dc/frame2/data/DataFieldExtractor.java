@@ -7,8 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * to extract a field value to string
- * <p>Use @Extractor on field to customer extract
+ * to extractText a field value to string
+ * <p>Use @Extractor on field to customer extractText
  *
  * @author Diamon.Cheng
  * @date 2018/6/5.
@@ -16,10 +16,10 @@ import java.util.Date;
 public interface DataFieldExtractor<T, TT> {
     
     /**
-     * given entity data and field name, to transfer field value to a string value
+     * given entity data and field name, to transfer field value to a readable string text
      */
     @SuppressWarnings("unchecked")
-    static String extractString(Object data, String field) {
+    static String extractText(Object data, String field) {
         if (data == null) {
             return null;
         }
@@ -27,7 +27,7 @@ public interface DataFieldExtractor<T, TT> {
         try {
             value = ReflectionUtils.getValueByField(data, field);
         } catch (Exception e) {
-            throw new IllegalStateException("Try extract data field failed. Maybe this field not exists in entity. data:" + data + ", field:" + field, e);
+            throw new IllegalStateException("Try extractText data field failed. Maybe this field not exists in entity. data:" + data + ", field:" + field, e);
         }
         if (value == null) {
             return null;
@@ -36,7 +36,7 @@ public interface DataFieldExtractor<T, TT> {
         if (extractor != null) {
             Class<? extends DataFieldExtractor> dataFiledExtractorClass = extractor.value();
             DataFieldExtractor dataFiledExtractor;
-            IllegalStateException exception = new IllegalStateException("Try extract data field failed. data:" + data + ", field:" + field);
+            IllegalStateException exception = new IllegalStateException("Try extractText data field failed. data:" + data + ", field:" + field);
             try {
                 try {
                     dataFiledExtractor = SpringContextUtils.getBean(dataFiledExtractorClass);
@@ -44,7 +44,7 @@ public interface DataFieldExtractor<T, TT> {
                     exception.addSuppressed(e);
                     dataFiledExtractor = dataFiledExtractorClass.newInstance();
                 }
-                return dataFiledExtractor.extract(data, field, value);
+                return dataFiledExtractor.extractText(data, field, value);
             } catch (Exception e) {
                 exception.addSuppressed(e);
                 throw exception;
@@ -56,5 +56,48 @@ public interface DataFieldExtractor<T, TT> {
         return value.toString();
     }
     
-    String extract(T data, String field, TT fieldValue);
+    /**
+     * given entity data and field name, to transfer field value to a string value
+     */
+    @SuppressWarnings("unchecked")
+    static String extractValue(Object data, String field) {
+        if (data == null) {
+            return null;
+        }
+        Object value = null;
+        try {
+            value = ReflectionUtils.getValueByField(data, field);
+        } catch (Exception e) {
+            throw new IllegalStateException("Try extractValue data field failed. Maybe this field not exists in entity. data:" + data + ", field:" + field, e);
+        }
+        if (value == null) {
+            return null;
+        }
+        Extractor extractor = ReflectionUtils.getFieldAnnotation(data.getClass(), field, Extractor.class);
+        if (extractor != null) {
+            Class<? extends DataFieldExtractor> dataFiledExtractorClass = extractor.value();
+            DataFieldExtractor dataFiledExtractor;
+            IllegalStateException exception = new IllegalStateException("Try extractValue data field failed. data:" + data + ", field:" + field);
+            try {
+                try {
+                    dataFiledExtractor = SpringContextUtils.getBean(dataFiledExtractorClass);
+                } catch (Exception e) {
+                    exception.addSuppressed(e);
+                    dataFiledExtractor = dataFiledExtractorClass.newInstance();
+                }
+                return dataFiledExtractor.extractValue(data, field, value);
+            } catch (Exception e) {
+                exception.addSuppressed(e);
+                throw exception;
+            }
+        }
+        if (value instanceof Date) {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(value);
+        }
+        return value.toString();
+    }
+    
+    String extractText(T data, String field, TT fieldValue);
+    
+    String extractValue(T data, String field, TT fieldValue);
 }

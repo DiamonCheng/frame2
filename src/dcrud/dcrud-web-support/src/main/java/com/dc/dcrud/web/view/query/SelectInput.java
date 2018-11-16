@@ -2,7 +2,9 @@ package com.dc.dcrud.web.view.query;
 
 import com.dc.frame2.view.view.freemarker.form.Option;
 import com.dc.frame2.view.view.freemarker.form.SelectView;
+import org.springframework.util.StringUtils;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -14,15 +16,12 @@ import java.util.Map;
  */
 public class SelectInput extends ConditionView {
     protected SelectView selectView;
-    
+    protected LinkedHashSet<String> validators;
     private String value;
-    
     public SelectInput() {
         selectView = new SelectView();
-        selectView.addOption(new Option().setValue("").setText("crud.query.condition.select.option.all"));
         addInput(selectView);
     }
-    
     public SelectInput addOption(Option option) {
         selectView.addOption(option);
         return this;
@@ -30,6 +29,15 @@ public class SelectInput extends ConditionView {
     
     public List<Option> getOptions() {
         return selectView.getOptions();
+    }
+    
+    public SelectInput multipleSelect(boolean flag) {
+        if (flag) {
+            selectView.addAttr("xm-select", "").addAttr("xm-select-search", "").addAttr("multiple", "multiple");
+        } else {
+            selectView.removeAttr("xm-select").removeAttr("xm-select-search").removeAttr("multiple");
+        }
+        return this;
     }
     
     public SelectInput setName(String name) {
@@ -54,6 +62,14 @@ public class SelectInput extends ConditionView {
         return this;
     }
     
+    public SelectInput addValidator(String validator) {
+        if (validators == null) {
+            validators = new LinkedHashSet<>();
+        }
+        validators.add(validator);
+        selectView.addAttr("validator", validators.stream().reduce("", (a, b) -> StringUtils.isEmpty(a) ? b : (a + "|" + b)));
+        return this;
+    }
     @Override
     public Map<String, Object> getParam() {
         List<Option> options = getOptions();

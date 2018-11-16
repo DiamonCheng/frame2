@@ -38,7 +38,7 @@ public interface DataIdExtractor<T> {
         Map<String, String> result = new HashMap<>(3);
         org.springframework.util.ReflectionUtils.doWithFields(
                 data.getClass(),
-                field -> result.put(field.getName(), DataFieldExtractor.extractString(data, field.getName())),
+                field -> result.put(field.getName(), DataFieldExtractor.extractText(data, field.getName())),
                 field -> field.getAnnotation(javax.persistence.Id.class) != null
         );
         return result;
