@@ -7,8 +7,10 @@
 > <@spring.message head.name/>
     <#if head.sortable>
         <span class="layui-table-sort layui-inline" lay-sort="${head.sort}">
-            <i class="layui-edge layui-table-sort-asc sort-btn" sortFieldName="${head.sortFieldName}" order="ASC"></i>
-            <i class="layui-edge layui-table-sort-desc sort-btn" sortFieldName="${head.sortFieldName}" order="DESC"></i>
+            <i class="layui-edge layui-table-sort-asc sort-btn" sortFieldName="${head.sortFieldName}"
+               sortOrder="ASC"></i>
+            <i class="layui-edge layui-table-sort-desc sort-btn" sortFieldName="${head.sortFieldName}"
+               sortOrder="DESC"></i>
         </span>
     </#if>
 </th>

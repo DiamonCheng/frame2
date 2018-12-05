@@ -13,11 +13,6 @@ public class ReadonlyTextInput extends TextInput {
     }
     
     @Override
-    public ReadonlyTextInput setName(String name) {
-        return this;
-    }
-    
-    @Override
     public ReadonlyTextInput addValidator(String validator) {
         return this;
     }

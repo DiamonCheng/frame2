@@ -1,8 +1,13 @@
 package com.dc.dcrud.web.controller;
 
+import com.dc.dcrud.pojo.Menu;
+import com.dc.dcrud.service.rbac.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * <p>Descriptions...
@@ -12,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class IndexController {
+    @Autowired
+    private MenuService menuService;
     
     @RequestMapping({"/", "/index"})
     public Object index() {
@@ -20,7 +27,8 @@ public class IndexController {
     
     @RequestMapping("/decorator")
     public Object decorator(){
-        return new ModelAndView("common/decorator");
+        List<Menu> menus = menuService.loadUserMenu();
+        return new ModelAndView("common/decorator").addObject("menus", menus);
     }
     
 }

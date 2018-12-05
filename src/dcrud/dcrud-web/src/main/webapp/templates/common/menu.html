@@ -1,0 +1,13 @@
+<dl class="menu" xmlns:th="http://www.thymeleaf.org"
+    th:fragment="menu(menuList)"
+    th:unless="${#lists.isEmpty(menuList)}"
+>
+    <dd class="menu-item" th:each="menu : ${menuList}">
+        <a th:href="${menu.uri}==null?'javascript:':${menu.uri}" href="javascript:">
+            <i th:if="${menu.icon!=null && menu.icon!=''}" th:class="${menu.icon}"
+               class="layui-icon layui-icon-home"></i>
+            <cite th:utext="${menu.name}"></cite>
+        </a>
+        <div th:replace="common/menu::menu(menuList=${menu.children})"></div>
+    </dd>
+</dl>

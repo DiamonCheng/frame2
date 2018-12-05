@@ -39,7 +39,7 @@ public interface DataIdExtractor<T> {
         org.springframework.util.ReflectionUtils.doWithFields(
                 data.getClass(),
                 field -> result.put(field.getName(), DataFieldExtractor.extractText(data, field.getName())),
-                field -> field.getAnnotation(javax.persistence.Id.class) != null
+                field -> field.getAnnotation(javax.persistence.Id.class) != null || field.getAnnotation(javax.persistence.Version.class) != null
         );
         return result;
     }

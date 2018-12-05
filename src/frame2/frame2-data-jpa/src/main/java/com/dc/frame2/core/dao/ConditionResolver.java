@@ -82,9 +82,6 @@ public class ConditionResolver {
         try {
             switch (condition.operator()){
                 case EQ:
-                    if (StringUtils.isEmpty(value)) {
-                        return null;
-                    }
                     return builder.equal(path, value);
                 case GT:
                     return builder.gt(path, (Number) value);

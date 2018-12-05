@@ -96,12 +96,10 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
         if (ex != null) {
             if (ex instanceof TranslatableException) {
                 message = messageResolver.getMessage(((TranslatableException) ex).getCode());
-            } else if (ex instanceof NullPointerException) {
-                message = "Null Point Exception!";
             }
             //TODO translate exception by config
             if (StringUtils.isEmpty(message)) {
-                message = ex.getLocalizedMessage();
+                message = ex.getClass().getSimpleName() + ":" + ex.getLocalizedMessage();
             }
             res.setMessage(message);
             /*res.setData(ex);*/

@@ -16,8 +16,8 @@ import java.util.List;
  * @author Diamon.Cheng
  * @date 2018/9/18.
  */
-public class ReadonlyTextInputGenerator implements ViewGenerator {
-    private com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput textInputAnnotation;
+public class HiddenInputGenerator implements ViewGenerator {
+    private HiddenInput textInputAnnotation;
     private String path;
     private Class<?> root;
     
@@ -33,7 +33,7 @@ public class ReadonlyTextInputGenerator implements ViewGenerator {
     
     @Override
     public void configure(Annotation viewAnnotation) {
-        this.textInputAnnotation = (com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput) viewAnnotation;
+        this.textInputAnnotation = (HiddenInput) viewAnnotation;
     }
     
     @Override
@@ -43,24 +43,14 @@ public class ReadonlyTextInputGenerator implements ViewGenerator {
     
     @Override
     public Frame2View generate(Object data1, List<Field> fieldList, Object fieldData) {
-        com.dc.dcrud.web.view.query.ReadonlyTextInput textInput = new com.dc.dcrud.web.view.query.ReadonlyTextInput()
-                                                                          .setId(textInputAnnotation.id());
+        com.dc.dcrud.web.view.query.HiddenInput textInput = new com.dc.dcrud.web.view.query.HiddenInput().setId(textInputAnnotation.id());
         String nameConfigured = textInputAnnotation.name();
         if (StringUtils.isEmpty(nameConfigured)) {
             textInput.setName(path);
         } else {
             textInput.setName(nameConfigured);
         }
-        String labelConfigured = textInputAnnotation.label();
-        if (StringUtils.isEmpty(labelConfigured)) {
-            textInput.setLabel(root.getName() + "." + path);
-        } else {
-            textInput.setLabel(labelConfigured);
-        }
         textInput.setValue(fieldData == null ? "" : fieldData.toString());
-        if (textInputAnnotation.disabled()) {
-            textInput.getInputs().get(0).addAttr("disabled", "disabled");
-        }
         return textInput;
     }
 }

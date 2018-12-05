@@ -2,8 +2,10 @@ package com.dc.frame2.data;
 
 import com.dc.frame2.ReflectionUtils;
 import com.dc.frame2.util.SpringContextUtils;
+import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -93,6 +95,9 @@ public interface DataFieldExtractor<T, TT> {
         }
         if (value instanceof Date) {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(value);
+        }
+        if (value.getClass().isArray()) {
+            return Arrays.stream((Object[]) value).map(Object::toString).reduce("", (a, b) -> StringUtils.isEmpty(a) ? b : a + "," + b);
         }
         return value.toString();
     }

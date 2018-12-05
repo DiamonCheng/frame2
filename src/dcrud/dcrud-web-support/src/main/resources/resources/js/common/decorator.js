@@ -27,9 +27,12 @@
 $(function menu_option() {
     $(".side-menu a[href]").each(function () {
         var $this = $(this);
-        if (window.location.pathname.indexOf($this.attr("href")) !== -1) {
+        if (window.location.pathname === $this.attr("href")) {
             $this.parent("dd.menu-item")
                 .addClass("active")
+        }
+        if (window.location.pathname.indexOf($this.attr("href")) !== -1) {
+            $this.parent("dd.menu-item")
                 .parents("dd.menu-item")
                 .removeClass("close")
                 .addClass("open");

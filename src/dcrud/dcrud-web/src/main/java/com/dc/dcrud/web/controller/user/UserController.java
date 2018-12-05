@@ -1,11 +1,13 @@
 package com.dc.dcrud.web.controller.user;
 
+import com.dc.dcrud.domain.RoleEntity;
 import com.dc.dcrud.domain.UserEntity;
 import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.dcrud.service.rbac.UserService;
 import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;
-import com.dc.dcrud.web.vo.UserEntityVO;
+import com.dc.dcrud.web.vo.user.UserEntityEditVO;
+import com.dc.frame2.core.domain.BaseConfigEntity;
 import com.dc.frame2.core.dto.AjaxResult;
 import com.dc.frame2.view.view.freemarker.form.FormView;
 import com.dc.frame2.view.view.freemarker.page.PageView;
@@ -15,6 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * <p>Descriptions...
@@ -29,6 +34,7 @@ public class UserController {
     private QueryPageViewFactory queryPageViewFactory = new QueryPageViewFactory();
     
     private EditViewFactory editViewFactory = new EditViewFactory();
+    private EditViewFactory addViewFactory = new EditViewFactory();
     
     @Autowired
     private UserService userService;
@@ -43,27 +49,34 @@ public class UserController {
     
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public Object add() {
-        return editViewFactory.generateAddView(new UserEntityVO());
+        return addViewFactory.generateAddView(new UserEntity());
     }
     
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public Object edit(Long id) {
         UserEntity userEntity = userService.get(id);
-        UserEntityVO userEntityVO = new UserEntityVO();
+        UserEntityEditVO userEntityVO = new UserEntityEditVO();
         BeanUtils.copyProperties(userEntity, userEntityVO);
+        userEntityVO.setRoles(userEntity.getRoles().stream().map(BaseConfigEntity::getId).toArray(Long[]::new));
         return editViewFactory.generateEditView(userEntityVO);
     }
     
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = {"/add", "/edit"}, method = RequestMethod.POST)
     @ResponseBody
-    public Object save(UserEntityVO userEntity) {
-        //throw new IllegalStateException(" exception alert test");
+    public Object save(UserEntityEditVO editVO) {
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(editVO, userEntity);
+        userEntity.setRoles(Arrays.stream(editVO.getRoles()).map(s -> new RoleEntity() {{
+            setId(s);
+        }}).collect(Collectors.toSet()));
+        userService.saveOrUpdate(userEntity);
         return new AjaxResult();
     }
     
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST, RequestMethod.DELETE})
     @ResponseBody
-    public Object delete(long id) {
+    public Object delete(UserEntity userEntity) {
+        userService.delete(userEntity);
         return new AjaxResult();
     }
 

@@ -33,7 +33,8 @@ import com.dc.frame2.core.dto.PageSearcher;
                         path = "nickName", headName = "com.dc.dcrud.domain.UserEntity.nickName"
                 ),
                 @TableColumnConfig(
-                        path = "roles", headName = "com.dc.dcrud.domain.UserEntity.roles"
+                        path = "roles", headName = "com.dc.dcrud.domain.UserEntity.roles",
+                        sortable = false
                 ),
                 @TableColumnConfig(
                         path = "createDateTime", headName = "com.dc.dcrud.domain.createDateTime"
@@ -57,7 +58,7 @@ public class UserSearcher extends PageSearcher<UserEntity> {
     private String username;
     @Condition(operator = CompareOperator.EQ, value = "roles.id", joinType = JoinType.LEFT)
     @SelectInput(placeHolder = "crud.query.condition.select.option.all", optionProvider = "HqlOptionProvider", optionProviderKey = "select name,id from RoleEntity")
-    private String roles;
+    private Long roles;
     
     public String getUsername() {
         return username;
@@ -77,11 +78,11 @@ public class UserSearcher extends PageSearcher<UserEntity> {
         return this;
     }
     
-    public String getRoles() {
+    public Long getRoles() {
         return roles;
     }
     
-    public UserSearcher setRoles(String roles) {
+    public UserSearcher setRoles(Long roles) {
         this.roles = roles;
         return this;
     }

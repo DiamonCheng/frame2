@@ -80,7 +80,7 @@ $(function () {
     $('#pageForm').append($sort);
     $('#pageForm').find(".data-table table th[sortable] .sort-btn").click(function (e) {
         var sortField = $(this).attr("sortFieldName");
-        var order = $(this).attr("order");
+        var order = $(this).attr("sortOrder");
         $sort.find("input[name=orderBy][fieldName='" + sortField + "']").remove();
         $('<input type="hidden" name="orderBy">').attr("fieldname", sortField).val(sortField + " " + order).prependTo($sort);
         $('#pageForm')
@@ -106,4 +106,8 @@ $(function () {
             .append($("<input type='hidden' name='pageSize'>").val($("#page-bar").attr("pageSize")))
             .submit();
     });
+    $('.query-panel-head')
+    // .attr('unselectable', 'on')
+    // .css('user-select', 'none')
+        .on('selectstart', false);
 });

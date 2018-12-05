@@ -2,7 +2,6 @@ package com.dc.frame2.core.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.Version;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -18,4 +18,6 @@ form .danger-tip {
 
 form .danger-tip > .layui-badge {
     line-height: 19px;
+    padding-left: 6px;
+    padding-right: 6px;
 }

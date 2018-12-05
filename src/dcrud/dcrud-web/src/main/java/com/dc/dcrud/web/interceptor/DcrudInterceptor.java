@@ -54,7 +54,7 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
                 try {
                     String userName = (String) realm.iterator().next();
                     UserEntity userEntity = userDao.getUserEntityByUsername(userName);
-                    user = new User().setUsername(userName).setNickName(userEntity.getNickName());
+                    user = new User().setUsername(userName).setNickName(userEntity.getNickName()).setId(userEntity.getId());
                     session.setAttribute(User.USER_KEY, user);
                 } catch (Exception e) {
                     LOGGER.warn("Failed to refresh user state, it may cause other exception.", e);
@@ -66,6 +66,9 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
     
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (!request.getRequestURI().contains("decorator")) {
+            LOGGER.info("access url:{}, handler:{}", request.getRequestURI(), handler);
+        }
         checkSessionUser();
         return true;
     }
@@ -76,10 +79,9 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
     
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        if (!request.getRequestURI().contains("decorator")) {
-            LOGGER.info("access url:{}, handler:{}", request.getRequestURI(), handler);
+        if (ex != null) {
+            LOGGER.error("ERROR catched in interceptor", ex);
         }
-    
     }
     
 }

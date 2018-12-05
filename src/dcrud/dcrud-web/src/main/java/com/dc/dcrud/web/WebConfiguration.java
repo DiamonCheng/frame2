@@ -9,6 +9,8 @@ import com.dc.frame2.view.support.Frame2ViewSpringConfiguration;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -18,12 +20,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
+import org.springframework.web.bind.support.WebBindingInitializer;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -129,5 +138,64 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public Frame2ViewConfiguration frame2ViewConfiguration(@Value("${debug:false}") boolean debug) {
         return new Frame2ViewConfiguration().setDebug(debug);
+    }
+    
+    @Bean
+    public WebBindingInitializer configurableWebBindingInitializer() {
+        return new ConfigurableWebBindingInitializer() {
+            @Override
+            public void initBinder(WebDataBinder binder, WebRequest request) {
+                super.initBinder(binder, request);
+                bindingDateEditor(binder);
+                bindingArrayEditor(binder);
+            }
+        };
+    }
+    
+    private void bindingDateEditor(WebDataBinder binder) {
+        CustomDateEditor dataEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"), true) {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                try {
+                    super.setAsText(text);
+                } catch (IllegalArgumentException e) {
+                    DateFormat[] dateFormats = new DateFormat[]{
+                            new SimpleDateFormat("yyyy-MM-dd"),
+                            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"),
+                            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"),
+                            new SimpleDateFormat("yyyy/MM/dd"),
+                            new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"),
+                            new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS"),
+                    };
+                    for (DateFormat df : dateFormats) {
+                        try {
+                            setValue(df.parse(text));
+                            return;
+                        } catch (Exception e2) {
+                            e.addSuppressed(e2);
+                        }
+                    }
+                    try {
+                        setValue(new Date(Long.parseLong(text)));
+                        return;
+                    } catch (Exception e2) {
+                        e.addSuppressed(e2);
+                    }
+                    
+                    throw e;
+                }
+            }
+        };
+        binder.registerCustomEditor(Date.class, dataEditor);
+    }
+    
+    private void bindingArrayEditor(WebDataBinder binder) {
+        StringArrayPropertyEditor sae = new StringArrayPropertyEditor();
+        binder.registerCustomEditor(long[].class, sae);
+        binder.registerCustomEditor(int[].class, sae);
+        binder.registerCustomEditor(short[].class, sae);
+        binder.registerCustomEditor(Long[].class, sae);
+        binder.registerCustomEditor(Integer[].class, sae);
+        binder.registerCustomEditor(Short[].class, sae);
     }
 }

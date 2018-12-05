@@ -1,11 +1,12 @@
-package com.dc.dcrud.web.vo;
+package com.dc.dcrud.web.vo.user;
 
 import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.HiddenInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.SelectInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 
-import javax.persistence.Id;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -15,17 +16,16 @@ import java.util.Date;
  * @date 2018/11/16.
  */
 @EditPanelConfig(
-        addTitle = "crud.userEntity.edit.add.title",
         editTitle = "crud.userEntity.edit.modify.title"
 )
-public class UserEntityVO {
+public class UserEntityEditVO {
     private static final long serialVersionUID = -6918259654521503874L;
-    @Id
+    @HiddenInput
     private Long id;
-    
+    @HiddenInput
+    private Integer version;
     @ReadonlyTextInput
     private String username;
-    private String password;
     @TextInput(validators = "required")
     private String nickName;
     
@@ -33,7 +33,7 @@ public class UserEntityVO {
             validators = "required",
             optionProvider = "HqlOptionProvider",
             optionProviderKey = "select name,id from RoleEntity")
-    private String[] roles;
+    private Long[] roles;
     
     @ReadonlyTextInput(label = "com.dc.dcrud.domain.createDateTime")
     private Date createDateTime;
@@ -44,7 +44,7 @@ public class UserEntityVO {
         return id;
     }
     
-    public UserEntityVO setId(Long id) {
+    public UserEntityEditVO setId(Long id) {
         this.id = id;
         return this;
     }
@@ -53,7 +53,7 @@ public class UserEntityVO {
         return createDateTime;
     }
     
-    public UserEntityVO setCreateDateTime(Date createDateTime) {
+    public UserEntityEditVO setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
         return this;
     }
@@ -62,7 +62,7 @@ public class UserEntityVO {
         return updateDateTime;
     }
     
-    public UserEntityVO setUpdateDateTime(Date updateDateTime) {
+    public UserEntityEditVO setUpdateDateTime(Date updateDateTime) {
         this.updateDateTime = updateDateTime;
         return this;
     }
@@ -71,17 +71,8 @@ public class UserEntityVO {
         return username;
     }
     
-    public UserEntityVO setUsername(String username) {
+    public UserEntityEditVO setUsername(String username) {
         this.username = username;
-        return this;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-    
-    public UserEntityVO setPassword(String password) {
-        this.password = password;
         return this;
     }
     
@@ -89,17 +80,42 @@ public class UserEntityVO {
         return nickName;
     }
     
-    public UserEntityVO setNickName(String nickName) {
+    public UserEntityEditVO setNickName(String nickName) {
         this.nickName = nickName;
         return this;
     }
     
-    public String[] getRoles() {
+    public Long[] getRoles() {
         return roles;
     }
     
-    public UserEntityVO setRoles(String[] roles) {
+    public UserEntityEditVO setRoles(Long[] roles) {
         this.roles = roles;
         return this;
+    }
+    
+    public Integer getVersion() {
+        return version;
+    }
+    
+    public UserEntityEditVO setVersion(Integer version) {
+        this.version = version;
+        return this;
+    }
+    
+    /**
+     * toString
+     */
+    @Override
+    public String toString() {
+        return "UserEntityEditVO{" +
+                       "id=" + id +
+                       ", version=" + version +
+                       ", username='" + username + '\'' +
+                       ", nickName='" + nickName + '\'' +
+                       ", roles=" + Arrays.toString(roles) +
+                       ", createDateTime=" + createDateTime +
+                       ", updateDateTime=" + updateDateTime +
+                       '}';
     }
 }

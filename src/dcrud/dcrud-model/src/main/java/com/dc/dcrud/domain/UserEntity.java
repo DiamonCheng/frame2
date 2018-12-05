@@ -1,7 +1,7 @@
 package com.dc.dcrud.domain;
 
 import com.dc.dcrud.extractor.UserEntityRoleDataExtractor;
-import com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput;
+import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.SelectInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.frame2.core.domain.BaseConfigEntity;
@@ -15,21 +15,24 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "sys_user", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
+@Table(name = "sys_user", uniqueConstraints = @UniqueConstraint(name = "unique_username", columnNames = {"username"}))
+@EditPanelConfig(
+        addTitle = "crud.userEntity.edit.add.title"
+)
 public class UserEntity extends BaseConfigEntity {
     private static final long serialVersionUID = -6918259654521503874L;
     
-    @ReadonlyTextInput
-    @Column(length = 63)
+    @Column(length = 63, nullable = false)
+    @TextInput(validators = "required")
     private String username;
-    @Column(length = 63)
+    @Column(length = 63, nullable = false)
     private String password;
-    @Column(length = 63)
+    @Column(length = 63, nullable = false)
     @TextInput(validators = "required")
     private String nickName;
     
     @SelectInput(placeHolder = "crud.edit.field.select.option.toCheck",
-            name = "roles.id",
+            name = "roles",
             optionProvider = "HqlOptionProvider",
             optionProviderKey = "select name,id from RoleEntity")
     @ManyToMany(targetEntity = RoleEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

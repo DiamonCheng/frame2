@@ -110,9 +110,9 @@ NOTICE:
         <!-- 侧边菜单 -->
         <div class="side-menu">
             <div class="menu-container">
-                <dl class="menu">
+                <!--<dl class="menu">
                     <dd class="menu-item">
-                        <a href="javascript:;">
+                        <a href="javascript:">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>主页</cite>
                         </a>
@@ -121,31 +121,6 @@ NOTICE:
                                 <a href="home/console.html">控制台</a>
                             </dd>
                         </dl>
-                    </dd>
-                    <dd class="menu-item">
-                        <a href="javascript:;" >
-                            <i class="layui-icon layui-icon-component"></i>
-                            <cite>组件</cite>
-                        </a>
-                        <dl class="menu">
-                            <dd class="menu-item">
-                                <a href="javascript:;">栅格</a>
-                                <dl class="menu">
-                                    <dd class="menu-item"><a href="component/grid/list.html">等比例列表排列</a></dd>
-                                    <dd class="menu-item"><a href="component/grid/mobile.html">按移动端排列</a></dd>
-                                    <dd class="menu-item"><a href="component/grid/mobile-pc.html">移动桌面端组合</a> </dd>
-                                    <dd class="menu-item"><a href="component/grid/all.html">全端复杂组合</a></dd>
-                                    <dd class="menu-item"><a href="component/grid/stack.html">低于桌面堆叠排列</a></dd>
-                                    <dd class="menu-item"><a href="component/grid/speed-dial.html">九宫格</a></dd>
-                                </dl>
-                            </dd>
-                            <dd class="menu-item">
-                                <a href="component/button/index.html">
-                                    按钮
-                                </a>
-                            </dd>
-                        </dl>
-
                     </dd>
                     <dd class="menu-item">
                         <a href="javascript:;" >
@@ -204,13 +179,8 @@ NOTICE:
                         </dl>
 
                     </dd>
-                    <dd class="menu-item">
-                        <a href="javascript:;" href="system/get.html">
-                            <i class="layui-icon layui-icon-auz"></i>
-                            <cite>授权</cite>
-                        </a>
-                    </dd>
-                </dl>
+                </dl>-->
+                <div th:replace="common/menu::menu(menuList=${menus})"></div>
             </div>
         </div>
         <!-- 主体内容 -->

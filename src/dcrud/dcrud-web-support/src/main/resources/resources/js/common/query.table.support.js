@@ -11,8 +11,9 @@
         var href = $this.attr("ahref");
         var postFunction = function () {
             $.post(href, data, function () {
-                messager.message(lang.option.success);
-                window.location.reload();
+                messager.message(lang.option.success, function () {
+                    window.location.reload();
+                });
             }, "JSON");
         };
         if (confirm == "true") {

@@ -1,6 +1,7 @@
 package com.dc.dcrud.domain;
 
 import com.dc.frame2.core.domain.BaseConfigEntity;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -8,15 +9,17 @@ import java.util.Set;
 /**
  * @author DC
  */
-@Table(name = "sys_role")
+@Table(name = "sys_role", uniqueConstraints = @UniqueConstraint(name = "sys_role_code_unique", columnNames = "code"))
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RoleEntity extends BaseConfigEntity {
     private static final long serialVersionUID = -1742694681527083908L;
-    @Column(length = 63)
+    @Column(length = 63, nullable = false)
     private String code;
-    @Column(length = 63)
+    @Column(length = 63, nullable = false)
     private String name;
-    @Column(length = 255)
+    @Column
     private String description;
     @ManyToMany(targetEntity = OperationEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))

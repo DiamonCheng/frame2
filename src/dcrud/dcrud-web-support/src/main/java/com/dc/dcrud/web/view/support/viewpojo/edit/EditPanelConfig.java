@@ -17,9 +17,9 @@ public @interface EditPanelConfig {
     
     String addTitle() default "crud.query.option.add";
     
-    String editSubmitPath() default "save";
+    String editSubmitPath() default "?";
     
-    String addSubmitPath() default "save";
+    String addSubmitPath() default "?";
     
     String backHref() default "./";
 }

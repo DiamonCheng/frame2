@@ -246,7 +246,7 @@ $(function () {
 
     (function () {
         var formSelects = layui.formSelects;
-        console.log(formSelects);
+        // console.log(formSelects);
     })();
     //***  validator  ***//
     validator.register();
