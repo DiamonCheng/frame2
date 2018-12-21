@@ -1,5 +1,7 @@
 package com.dc.dcrud.domain;
 
+import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.frame2.core.domain.BaseConfigEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,17 +15,23 @@ import java.util.Set;
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@EditPanelConfig(
+        addTitle = "crud.roleEntity.edit.add.title"
+)
 public class RoleEntity extends BaseConfigEntity {
     private static final long serialVersionUID = -1742694681527083908L;
     @Column(length = 63, nullable = false)
+    @TextInput(validators = "required")
     private String code;
     @Column(length = 63, nullable = false)
+    @TextInput(validators = "required")
     private String name;
     @Column
+    @TextInput()
     private String description;
-    @ManyToMany(targetEntity = OperationEntity.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = ResourceEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
-    private Set<OperationEntity> permissions;
+    private Set<ResourceEntity> resources;
     
     public String getCode() {
         return code;
@@ -52,12 +60,12 @@ public class RoleEntity extends BaseConfigEntity {
         return this;
     }
     
-    public Set<OperationEntity> getPermissions() {
-        return permissions;
+    public Set<ResourceEntity> getResources() {
+        return resources;
     }
     
-    public RoleEntity setPermissions(Set<OperationEntity> permissions) {
-        this.permissions = permissions;
+    public RoleEntity setResources(Set<ResourceEntity> resources) {
+        this.resources = resources;
         return this;
     }
     
@@ -70,7 +78,7 @@ public class RoleEntity extends BaseConfigEntity {
                        "code='" + code + '\'' +
                        ", name='" + name + '\'' +
                        ", description='" + description + '\'' +
-                       ", permissions=" + permissions +
+                       ", resources=" + resources +
                        "} " + super.toString();
     }
     

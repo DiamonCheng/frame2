@@ -1,4 +1,4 @@
-package com.dc.dcrud.web.controller.user;
+package com.dc.dcrud.web.controller.rbac;
 
 import com.dc.dcrud.domain.RoleEntity;
 import com.dc.dcrud.domain.UserEntity;
@@ -6,7 +6,7 @@ import com.dc.dcrud.searcher.UserSearcher;
 import com.dc.dcrud.service.rbac.UserService;
 import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;
-import com.dc.dcrud.web.vo.user.UserEntityEditVO;
+import com.dc.dcrud.web.vo.rbac.UserEntityEditVO;
 import com.dc.frame2.core.domain.BaseConfigEntity;
 import com.dc.frame2.core.dto.AjaxResult;
 import com.dc.frame2.view.view.freemarker.form.FormView;
@@ -66,9 +66,11 @@ public class UserController {
     public Object save(UserEntityEditVO editVO) {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(editVO, userEntity);
-        userEntity.setRoles(Arrays.stream(editVO.getRoles()).map(s -> new RoleEntity() {{
-            setId(s);
-        }}).collect(Collectors.toSet()));
+        if (editVO.getRoles() != null) {
+            userEntity.setRoles(Arrays.stream(editVO.getRoles()).map(s -> new RoleEntity() {{
+                setId(s);
+            }}).collect(Collectors.toSet()));
+        }
         userService.saveOrUpdate(userEntity);
         return new AjaxResult();
     }
@@ -79,5 +81,12 @@ public class UserController {
         userService.delete(userEntity);
         return new AjaxResult();
     }
-
+    
+    @RequestMapping(value = "/resetPassword", method = {RequestMethod.POST})
+    @ResponseBody
+    public Object resetPassword(UserEntity userEntity) {
+        userService.resetPassword(userEntity);
+        return new AjaxResult();
+    }
+    
 }

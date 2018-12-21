@@ -58,6 +58,13 @@ public class UserService {
         }
     }
     
+    public void resetPassword(UserEntity userEntity) {
+        //update
+        UserEntity userEntity1 = userDao.findOne(userEntity.getId());
+        OptimisticLockCheckUtil.checkOptimisticLock(userEntity1, userEntity);
+        userEntity.setPassword(new Sha1Hash(defaultPasswd, userEntity.getUsername()).toHex());
+        userDao.save(userEntity1);
+    }
     public void delete(UserEntity userEntity) {
         UserEntity userEntity1 = get(userEntity.getId());
         OptimisticLockCheckUtil.checkOptimisticLock(userEntity1, userEntity);

@@ -6,7 +6,7 @@ import com.dc.dcrud.web.view.option.OperationPermissionCheck;
 import java.lang.annotation.*;
 
 /**
- * <p>Descriptions...
+ * <p>Annotation in DataTableConfig to define row option buttons
  *
  * @author Diamon.Cheng
  * @date 2018/11/1.
@@ -30,19 +30,43 @@ public @interface TableOptionButtonConfig {
      */
     boolean ajaxConfirm() default false;
     
+    /**
+     * @return text description of this button
+     */
     String name();
     
+    /**
+     * @return title text when mouse hover on this button, default same as name
+     */
     String title() default "";
     
+    /**
+     * @return DOM id
+     */
     String id() default "";
     
+    /**
+     * @return DOM class
+     */
     String[] classes() default {};
     
+    /**
+     * @return link to another page, will append data id and version parameter automatically
+     */
     String href() default "javascript:";
     
+    /**
+     * @return call back called when render this table, decide whether show this button
+     */
     Class<? extends OperationPermissionCheck> permissionCheckClass() default OperationPermissionCheck.class;
     
+    /**
+     * @return Button type with style
+     */
     com.dc.dcrud.web.view.option.OptionButton.Type type() default com.dc.dcrud.web.view.option.OptionButton.Type.DEFAULT;
     
+    /**
+     * @return call back called when render row, decide whether show this button, by row data.
+     */
     Class<? extends TableOptionButtonFilter> filter() default TableOptionButtonFilter.class;
 }

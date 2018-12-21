@@ -1,4 +1,4 @@
-package com.dc.dcrud.web.vo.user;
+package com.dc.dcrud.web.vo.rbac;
 
 import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.HiddenInput;

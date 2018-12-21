@@ -41,7 +41,7 @@ public class SecurityRealm extends AuthorizingRealm {
         Set<String> permissions = new HashSet<>();
         roles.forEach(roleEntity -> {
             roleCodes.add(roleEntity.getCode());
-            roleEntity.getPermissions().forEach(operationEntity -> permissions.add(operationEntity.getCode()));
+            roleEntity.getResources().forEach(operationEntity -> permissions.add(operationEntity.getCode()));
         });
         authorizationInfo.setRoles(roleCodes);
         authorizationInfo.setStringPermissions(permissions);

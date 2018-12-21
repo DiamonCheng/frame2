@@ -1,7 +1,7 @@
 package com.dc.dcrud.service.rbac;
 
-import com.dc.dcrud.dao.OperationDao;
-import com.dc.dcrud.domain.OperationEntity;
+import com.dc.dcrud.dao.ResourceDao;
+import com.dc.dcrud.domain.ResourceEntity;
 import com.dc.dcrud.pojo.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,23 +18,23 @@ import java.util.stream.Collectors;
 @Service
 public class MenuService {
     @Autowired
-    private OperationDao operationDao;
+    private ResourceDao resourceDao;
     
     public List<Menu> loadUserMenu() {
-        List<OperationEntity> list = operationDao.findRootMenu();
+        List<ResourceEntity> list = resourceDao.findRootMenu();
         return traverse(list);
     }
     
-    private List<Menu> traverse(List<OperationEntity> operationEntities) {
+    private List<Menu> traverse(List<ResourceEntity> operationEntities) {
         //TODO 1 translate code to name; 2 filter menu by role operation
         return operationEntities.stream()
-                       .map(operationEntity ->
+                       .map(resourceEntity ->
                                     new Menu()
-                                            .setName(operationEntity.getCode())
-                                            .setCode(operationEntity.getCode())
-                                            .setIcon(operationEntity.getIconClass())
-                                            .setUri(operationEntity.getRequestURI())
-                                            .setChildren(traverse(operationEntity.getChildren()))
+                                            .setName(resourceEntity.getCode())
+                                            .setCode(resourceEntity.getCode())
+                                            .setIcon(resourceEntity.getIconClass())
+                                            .setUri(resourceEntity.getRequestURI())
+                                            .setChildren(traverse(resourceEntity.getChildren()))
                        ).collect(Collectors.toList());
         
     }

@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * @author DC
  */
-@Table(name = "sys_operation", uniqueConstraints = @UniqueConstraint(name = "sys_operation_code_unique", columnNames = "code"))
+@Table(name = "sys_resource", uniqueConstraints = @UniqueConstraint(name = "sys_resource_code_unique", columnNames = "code"))
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-
-public class OperationEntity extends BaseConfigEntity {
+public class ResourceEntity extends BaseConfigEntity {
     public static class Type {
         public static final String MENU = "menu";
     }
@@ -27,18 +26,18 @@ public class OperationEntity extends BaseConfigEntity {
     private String iconClass;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
-    private OperationEntity parent;
+    private ResourceEntity parent;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "none"))
     @OrderBy("sortOrder")
-    private List<OperationEntity> children;
+    private List<ResourceEntity> children;
     
     public String getCode() {
         
         return code;
     }
     
-    public OperationEntity setCode(String code) {
+    public ResourceEntity setCode(String code) {
         this.code = code;
         return this;
     }
@@ -47,7 +46,7 @@ public class OperationEntity extends BaseConfigEntity {
         return requestURI;
     }
     
-    public OperationEntity setRequestURI(String requestURI) {
+    public ResourceEntity setRequestURI(String requestURI) {
         this.requestURI = requestURI;
         return this;
     }
@@ -57,25 +56,25 @@ public class OperationEntity extends BaseConfigEntity {
         return type;
     }
     
-    public OperationEntity setType(String type) {
+    public ResourceEntity setType(String type) {
         this.type = type;
         return this;
     }
     
-    public OperationEntity getParent() {
+    public ResourceEntity getParent() {
         return parent;
     }
     
-    public OperationEntity setParent(OperationEntity parent) {
+    public ResourceEntity setParent(ResourceEntity parent) {
         this.parent = parent;
         return this;
     }
     
-    public List<OperationEntity> getChildren() {
+    public List<ResourceEntity> getChildren() {
         return children;
     }
     
-    public OperationEntity setChildren(List<OperationEntity> children) {
+    public ResourceEntity setChildren(List<ResourceEntity> children) {
         this.children = children;
         return this;
     }
@@ -84,7 +83,7 @@ public class OperationEntity extends BaseConfigEntity {
         return sortOrder;
     }
     
-    public OperationEntity setSortOrder(Integer sortOrder) {
+    public ResourceEntity setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
         return this;
     }
@@ -93,7 +92,7 @@ public class OperationEntity extends BaseConfigEntity {
         return iconClass;
     }
     
-    public OperationEntity setIconClass(String iconClass) {
+    public ResourceEntity setIconClass(String iconClass) {
         this.iconClass = iconClass;
         return this;
     }
@@ -113,7 +112,7 @@ public class OperationEntity extends BaseConfigEntity {
      */
     @Override
     public String toString() {
-        return "OperationEntity{" +
+        return "ResourceEntity{" +
                        "code='" + code + '\'' +
                        ", requestURI='" + requestURI + '\'' +
                        ", type='" + type + '\'' +
