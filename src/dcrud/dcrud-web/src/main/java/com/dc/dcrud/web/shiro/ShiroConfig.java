@@ -3,6 +3,7 @@ package com.dc.dcrud.web.shiro;
 import com.dc.dcrud.service.shiro.SecurityRealm;
 import com.dc.frame2.util.MapBuilder;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -10,6 +11,7 @@ import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
@@ -36,14 +38,18 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/resources/**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/**", "authc");
+        //or authc
+        filterChainDefinitionMap.put("/**", "user");
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/templates/error/403.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         shiroFilterFactoryBean.setFilters(
-                MapBuilder.<String, Filter>hashMap().put("authc", new AjaxFormAuthenticationFilter()).build()
+                MapBuilder.<String, Filter>hashMap()
+                        .put("authc", new AjaxFormAuthenticationFilter())
+                        .put("user", new AjaxFormAuthenticationFilter())
+                        .build()
         );
         return shiroFilterFactoryBean;
     }
@@ -65,12 +71,11 @@ public class ShiroConfig {
         return enterpriseCacheSessionDAO;
     }
     
-    @Bean
-    public Cookie cookie() {
+    public Cookie cookie(String name) {
         Cookie cookie = new SimpleCookie();
-        cookie.setName("FRAME2-COOKIE");
+        cookie.setName("FRAME2-COOKIE-" + name);
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(3600 * 20);
+        cookie.setMaxAge(3600 * 24 * 10);
         return cookie;
     }
     
@@ -78,7 +83,7 @@ public class ShiroConfig {
     public SessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionIdCookieEnabled(true);
-        sessionManager.setSessionIdCookie(cookie());
+        sessionManager.setSessionIdCookie(cookie("SESSION"));
         sessionManager.setSessionDAO(sessionDAO());
         sessionManager.setGlobalSessionTimeout(1000 * 3600);
         sessionManager.setDeleteInvalidSessions(true);
@@ -92,6 +97,11 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm());
         securityManager.setSessionManager(sessionManager());
+        CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
+        rememberMeManager.setCookie(cookie("REMEMBER_ME"));
+        String cipherKey = "HoTP07fJPKIRLOWoVXmv+Q==";
+        rememberMeManager.setCipherKey(Base64.decode(cipherKey));
+        securityManager.setRememberMeManager(rememberMeManager);
         return securityManager;
     }
 }

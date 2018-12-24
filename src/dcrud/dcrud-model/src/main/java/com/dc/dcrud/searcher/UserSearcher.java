@@ -60,7 +60,9 @@ public class UserSearcher extends PageSearcher<UserEntity> {
     @TextInput
     private String username;
     @Condition(operator = CompareOperator.EQ, value = "roles.id", joinType = JoinType.LEFT)
-    @SelectInput(placeHolder = "crud.query.condition.select.option.all", optionProvider = "HqlOptionProvider", optionProviderKey = "select name,id from RoleEntity")
+    @SelectInput(placeHolder = "crud.query.condition.select.option.all",
+            optionProvider = "HqlOptionProvider",
+            optionProviderKey = "select name as text,id as value from RoleEntity")
     private Long roles;
     
     public String getUsername() {

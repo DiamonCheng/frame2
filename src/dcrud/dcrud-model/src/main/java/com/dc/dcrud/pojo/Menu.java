@@ -1,5 +1,6 @@
 package com.dc.dcrud.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @author Diamon.Cheng
  * @date 2018/12/5.
  */
-public class Menu {
+public class Menu implements Serializable {
     private String name;
     private String code;
     private String uri;

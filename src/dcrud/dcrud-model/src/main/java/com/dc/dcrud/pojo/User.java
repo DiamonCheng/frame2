@@ -1,12 +1,14 @@
 package com.dc.dcrud.pojo;
 
+import java.io.Serializable;
+
 /**
  * <p>Descriptions...
  *
  * @author Diamon.Cheng
  * @date 2018/5/4.
  */
-public class User {
+public class User implements Serializable {
     public static final String USER_KEY = "USER";
     private Long id;
     private String username;

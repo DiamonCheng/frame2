@@ -3,7 +3,8 @@
     th:unless="${#lists.isEmpty(menuList)}"
 >
     <dd class="menu-item" th:each="menu : ${menuList}">
-        <a th:href="${menu.uri}==null?'javascript:':${menu.uri}" href="javascript:">
+        <a th:href="${not #lists.isEmpty(menu.children) or #strings.isEmpty(menu.uri)} ?'javascript:':${menu.uri}"
+           href="javascript:">
             <i th:if="${menu.icon!=null && menu.icon!=''}" th:class="${menu.icon}"
                class="layui-icon layui-icon-home"></i>
             <cite th:utext="${menu.name}"></cite>

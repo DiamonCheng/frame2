@@ -14,6 +14,6 @@ import java.util.List;
  * @date 2018/12/5.
  */
 public interface ResourceDao extends JpaRepository<ResourceEntity, Long>, SearcherJpaRepository<ResourceEntity, Long> {
-    @Query("from ResourceEntity where type=:#{T(com.dc.dcrud.domain.ResourceEntity.Type).MENU} and parent is null order by sortOrder")
+    @Query("from ResourceEntity where type=:#{T(com.dc.dcrud.domain.ResourceEntity.Type).MENU.getValue()} and parent is null order by sortOrder")
     List<ResourceEntity> findRootMenu();
 }

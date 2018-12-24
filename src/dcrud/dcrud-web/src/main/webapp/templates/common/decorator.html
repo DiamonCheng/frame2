@@ -92,11 +92,11 @@ NOTICE:
                         <!--<dd><a lay-href="set/user/info.html">基本资料</a></dd>
                         <dd><a lay-href="set/user/password.html">修改密码</a></dd>
                         <hr>-->
-                        <dd th:if="#{common.lang}!='en'" style="text-align: center;"><a href="javascript:" class="lang"
-                                                                                        lang="en"
-                                                                                        th:utext="English"></a></dd>
-                        <dd th:if="#{common.lang}!='zh'" style="text-align: center;"><a href="javascript:" class="lang"
-                                                                                        lang="zh" th:utext="中文"></a>
+                        <dd th:if="#{common.lang}!='en'" style="text-align: center;">
+                            <a href="javascript:" class="lang" lang="en" th:utext="English"></a>
+                        </dd>
+                        <dd th:if="#{common.lang}!='zh'" style="text-align: center;">
+                            <a href="javascript:" class="lang" lang="zh" th:utext="中文"></a>
                         </dd>
                     </dl>
                 </li>

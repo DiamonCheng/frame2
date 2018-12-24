@@ -2,6 +2,9 @@ package com.dc.dcrud.service.dict;
 
 import com.dc.dcrud.web.view.support.viewpojo.inputview.OptionProvider;
 import com.dc.frame2.view.view.freemarker.form.Option;
+import org.hibernate.transform.Transformers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * <p>Descriptions...
@@ -19,6 +23,7 @@ import java.util.Locale;
  */
 @Service("HqlOptionProvider")
 public class HqlOptionProvider implements OptionProvider {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HqlOptionProvider.class);
     
     @Autowired
     private EntityManager entityManager;
@@ -35,11 +40,28 @@ public class HqlOptionProvider implements OptionProvider {
     public List<Option> listOptions(String optionKey, Locale locale) {
         try {
             Query query = entityManager.createQuery(optionKey);
+            //hibernate 专用
+            query.unwrap(org.hibernate.internal.QueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
             List res = query.getResultList();
             List<Option> resOptions = new ArrayList<>(res.size());
             for (Object obj : res) {
-                Object[] objs = (Object[]) obj;
-                resOptions.add(new Option().setText(objs[0].toString()).setValue(objs[1].toString()));
+                Map<String, Object> map = (Map<String, Object>) obj;
+                String value;
+                if (map.get("value") == null) {
+                    value = "";
+                    LOGGER.warn("For HQL {} alias \"value\" not present.", optionKey);
+                } else {
+                    value = map.get("value").toString();
+                }
+                String text = "";
+                if (map.get("text_" + locale.getLanguage()) != null) {
+                    text = map.get("text_" + locale.getLanguage()).toString();
+                } else if (map.get("text") != null) {
+                    text = map.get("text").toString();
+                } else {
+                    LOGGER.warn("For HQL {} alias \"text\" and \"text_{}\" not present.", optionKey, locale.getLanguage());
+                }
+                resOptions.add(new Option().setText(text).setValue(value));
             }
             return resOptions;
         } catch (Exception e) {

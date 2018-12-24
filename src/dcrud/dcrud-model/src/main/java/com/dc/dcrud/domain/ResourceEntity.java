@@ -1,6 +1,13 @@
 package com.dc.dcrud.domain;
 
+import com.dc.dcrud.extractor.ResourceEntityDataExtractor;
+import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.NumberInput;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.SelectInput;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 import com.dc.frame2.core.domain.BaseConfigEntity;
+import com.dc.frame2.data.Extractor;
+import com.dc.frame2.dict.TranslatableEnum;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -13,17 +20,50 @@ import java.util.List;
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@EditPanelConfig(
+        addTitle = "crud.resourceEntity.edit.add.title"
+)
 public class ResourceEntity extends BaseConfigEntity {
-    public static class Type {
-        public static final String MENU = "menu";
+    public enum Type implements TranslatableEnum {
+        MENU("menu");
+        
+        Type(String code) {
+            this.code = code;
+        }
+        
+        private String code;
+        
+        @Override
+        public String getCode() {
+            return "com.dc.dcrud.domain.ResourceEntity.type." + code;
+        }
+        
+        @Override
+        public String getValue() {
+            return code;
+        }
     }
     private static final long serialVersionUID = 2283028973673917967L;
     @Column(nullable = false)
+    @TextInput(validators = "required")
     private String code;
+    @TextInput(validators = "required")
+    private String nameZh;
+    @TextInput(validators = "required")
+    private String nameEn;
+    @TextInput()
     private String requestURI;
+    @Extractor(ResourceEntityDataExtractor.class)
+    @SelectInput(optionProvider = "EnumOptionProvider", optionProviderKey = "com.dc.dcrud.domain.ResourceEntity$Type")
     private String type;
+    @NumberInput
     private Integer sortOrder;
+    @TextInput
     private String iconClass;
+    @SelectInput(placeHolder = "crud.edit.field.select.option.toCheck",
+            optionProvider = "HqlOptionProvider",
+            optionProviderKey = "select nameZh as text,nameZh as text_zh,nameEn as text_en,id as value from ResourceEntity res")
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
     private ResourceEntity parent;
@@ -97,6 +137,24 @@ public class ResourceEntity extends BaseConfigEntity {
         return this;
     }
     
+    public String getNameZh() {
+        return nameZh;
+    }
+    
+    public ResourceEntity setNameZh(String nameZh) {
+        this.nameZh = nameZh;
+        return this;
+    }
+    
+    public String getNameEn() {
+        return nameEn;
+    }
+    
+    public ResourceEntity setNameEn(String nameEn) {
+        this.nameEn = nameEn;
+        return this;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
@@ -114,15 +172,14 @@ public class ResourceEntity extends BaseConfigEntity {
     public String toString() {
         return "ResourceEntity{" +
                        "code='" + code + '\'' +
+                       ", nameZh='" + nameZh + '\'' +
+                       ", nameEn='" + nameEn + '\'' +
                        ", requestURI='" + requestURI + '\'' +
                        ", type='" + type + '\'' +
                        ", sortOrder=" + sortOrder +
-                       ", iconClass=" + iconClass +
-                       ", children=" + children +
-                       ", id=" + id +
-                       ", version=" + version +
-                       ", createDateTime=" + createDateTime +
-                       ", updateDateTime=" + updateDateTime +
+                       ", iconClass='" + iconClass + '\'' +
+                       ", parent=" + parent +
+                       ", children=" + children.size() +
                        '}';
     }
 }

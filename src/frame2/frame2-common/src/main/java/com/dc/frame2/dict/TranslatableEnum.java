@@ -1,4 +1,4 @@
-package com.dc.dcrud.service.dict;
+package com.dc.frame2.dict;
 
 /**
  * <p>Descriptions...

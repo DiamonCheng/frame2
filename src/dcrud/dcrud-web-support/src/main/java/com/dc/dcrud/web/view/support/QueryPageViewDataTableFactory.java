@@ -37,6 +37,8 @@ public class QueryPageViewDataTableFactory implements QueryViewFactory {
         if (dataTableConfig == null) {
             configure(searcher);
         }
+        Assert.notNull(searcher.getTotalCount(), "searcher.totalCount is null , please invoke page search first.");
+        Assert.notNull(searcher.getResultList(), "searcher.resultList is null , please invoke page search first.");
         DefaultDataTableView dataTableView = new DefaultDataTableView()
                                                      .setPageParameters(searcher.getPageNo(), searcher.getPageSize(), searcher.getTotalCount())
                                                      .setData(searcher.getResultList());

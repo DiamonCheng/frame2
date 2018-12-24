@@ -12,6 +12,7 @@ import com.dc.frame2.core.dao.condition.CompareOperator;
 import com.dc.frame2.core.dao.condition.Condition;
 import com.dc.frame2.core.dto.PageSearcher;
 
+
 /**
  * <p>Descriptions...
  *

@@ -29,8 +29,8 @@ public class EditViewFactory extends InputPanelViewSupport {
     
     private String editTitle = "crud.query.table.option.update";
     private String addTitle = "crud.query.option.add";
-    private String editSubmitPath = "save";
-    private String addSubmitPath = "save";
+    private String editSubmitPath = "?";
+    private String addSubmitPath = "?";
     private String backHref = "./";
     public EditViewFactory config(Object configPojo) {
         Assert.notNull(configPojo, "ConfigPojo cannot be null.");

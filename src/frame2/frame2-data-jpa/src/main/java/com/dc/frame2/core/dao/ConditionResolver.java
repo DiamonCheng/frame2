@@ -207,7 +207,9 @@ public class ConditionResolver {
                     if (condition == null && null == field.getAnnotation(NotCondition.class)) {
                         condition = defaultCondition(field.getName());
                     }
-                    conditionList.add(new ConditionPojo().setCondition(condition).setField(field));
+                    if (condition != null) {
+                        conditionList.add(new ConditionPojo().setCondition(condition).setField(field));
+                    }
                 },
                 field -> ConditionsGroup.class.isAssignableFrom(field.getDeclaringClass())
         );

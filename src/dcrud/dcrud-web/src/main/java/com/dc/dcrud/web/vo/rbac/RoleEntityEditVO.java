@@ -1,6 +1,7 @@
 package com.dc.dcrud.web.vo.rbac;
 
 import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.HiddenInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
 
@@ -17,11 +18,15 @@ import java.util.Date;
         editTitle = "crud.roleEntity.edit.modify.title"
 )
 public class RoleEntityEditVO {
-    @TextInput(name = "com.dc.dcrud.domain.RoleEntity.code", validators = "required")
+    @HiddenInput
+    private Long id;
+    @HiddenInput
+    private Integer version;
+    @TextInput(label = "com.dc.dcrud.domain.RoleEntity.code", validators = "required")
     private String code;
-    @TextInput(name = "com.dc.dcrud.domain.RoleEntity.name", validators = "required")
+    @TextInput(label = "com.dc.dcrud.domain.RoleEntity.name", validators = "required")
     private String name;
-    @TextInput(name = "com.dc.dcrud.domain.RoleEntity.description")
+    @TextInput(label = "com.dc.dcrud.domain.RoleEntity.description")
     private String description;
     
     private Long[] resources;
@@ -86,13 +91,33 @@ public class RoleEntityEditVO {
         return this;
     }
     
+    public Long getId() {
+        return id;
+    }
+    
+    public RoleEntityEditVO setId(Long id) {
+        this.id = id;
+        return this;
+    }
+    
+    public Integer getVersion() {
+        return version;
+    }
+    
+    public RoleEntityEditVO setVersion(Integer version) {
+        this.version = version;
+        return this;
+    }
+    
     /**
      * toString
      */
     @Override
     public String toString() {
         return "RoleEntityEditVO{" +
-                       "code='" + code + '\'' +
+                       "id=" + id +
+                       ", version=" + version +
+                       ", code='" + code + '\'' +
                        ", name='" + name + '\'' +
                        ", description='" + description + '\'' +
                        ", resources=" + Arrays.toString(resources) +

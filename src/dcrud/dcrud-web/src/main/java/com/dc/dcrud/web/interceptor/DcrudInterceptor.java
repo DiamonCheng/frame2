@@ -80,7 +80,7 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         if (ex != null) {
-            LOGGER.error("ERROR catched in interceptor", ex);
+            LOGGER.error("ERROR caught in interceptor", ex);
         }
     }
     

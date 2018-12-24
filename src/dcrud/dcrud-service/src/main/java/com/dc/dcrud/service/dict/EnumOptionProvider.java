@@ -1,6 +1,7 @@
 package com.dc.dcrud.service.dict;
 
 import com.dc.dcrud.web.view.support.viewpojo.inputview.OptionProvider;
+import com.dc.frame2.dict.TranslatableEnum;
 import com.dc.frame2.view.view.freemarker.form.Option;
 import org.springframework.stereotype.Service;
 

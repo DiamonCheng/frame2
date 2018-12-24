@@ -3,6 +3,7 @@ package com.dc.dcrud.extractor;
 import com.dc.dcrud.domain.RoleEntity;
 import com.dc.dcrud.domain.UserEntity;
 import com.dc.frame2.data.DataFieldExtractor;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import java.util.Set;
  * @author Diamon.Cheng
  * @date 2018/6/6.
  */
+@Service
 public class UserEntityRoleDataExtractor implements DataFieldExtractor<UserEntity, Set<RoleEntity>> {
     @Override
     public String extractText(UserEntity data, String field, Set<RoleEntity> fieldValue) {

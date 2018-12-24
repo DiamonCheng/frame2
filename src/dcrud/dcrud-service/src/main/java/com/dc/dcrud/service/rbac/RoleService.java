@@ -46,7 +46,9 @@ public class RoleService {
             //update
             RoleEntity roleEntity1 = roleDao.findOne(roleEntity.getId());
             OptimisticLockCheckUtil.checkOptimisticLock(roleEntity1, roleEntity);
-            roleEntity1.setName(roleEntity.getName()).setCode(roleEntity.getCode());
+            roleEntity1.setName(roleEntity.getName())
+                    .setCode(roleEntity.getCode())
+                    .setDescription(roleEntity.getDescription());
             if (roleEntity.getResources() != null) {
                 roleEntity1.setResources(
                         roleEntity.getResources().stream()

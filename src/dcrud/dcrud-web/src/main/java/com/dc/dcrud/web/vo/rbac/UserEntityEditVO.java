@@ -32,7 +32,7 @@ public class UserEntityEditVO {
     @SelectInput(placeHolder = "crud.edit.field.select.option.toCheck",
             validators = "required",
             optionProvider = "HqlOptionProvider",
-            optionProviderKey = "select name,id from RoleEntity")
+            optionProviderKey = "select name as text,id as value from RoleEntity")
     private Long[] roles;
     
     @ReadonlyTextInput(label = "com.dc.dcrud.domain.createDateTime")
