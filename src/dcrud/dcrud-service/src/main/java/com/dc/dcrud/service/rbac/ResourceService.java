@@ -5,6 +5,8 @@ import com.dc.dcrud.domain.ResourceEntity;
 import com.dc.dcrud.pojo.Menu;
 import com.dc.dcrud.searcher.ResourceSearcher;
 import com.dc.dcrud.service.util.OptimisticLockCheckUtil;
+import com.dc.dcrud.web.view.query.TreeSelectInputNode;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.TreeNodeProvider;
 import com.dc.frame2.core.exception.TranslatableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -20,8 +22,8 @@ import java.util.stream.Collectors;
  * @author Diamon.Cheng
  * @date 2018/12/5.
  */
-@Service
-public class ResourceService {
+@Service("resourceService")
+public class ResourceService implements TreeNodeProvider {
     @Autowired
     private ResourceDao resourceDao;
     
@@ -32,6 +34,7 @@ public class ResourceService {
     
     private List<Menu> traverse(List<ResourceEntity> operationEntities) {
         //TODO 2 filter menu by role operation
+        // hibernate 只会返回空集合所以不需要判空
         return operationEntities.stream()
                        .map(resourceEntity ->
                                     new Menu()
@@ -42,6 +45,26 @@ public class ResourceService {
                                             .setChildren(traverse(resourceEntity.getChildren()))
                        ).collect(Collectors.toList());
         
+    }
+    
+    private List<TreeSelectInputNode.TreeNode> traverse2(List<ResourceEntity> operationEntities) {
+        // hibernate 只会返回空集合所以不需要判空
+        return operationEntities.stream()
+                       .map(resourceEntity ->
+                                    new TreeSelectInputNode.TreeNode()
+                                            .setNodeText(chooseFieldByLocal(resourceEntity))
+                                            .setNodeTitle(resourceEntity.getRequestURI())
+                                            .setNodeValue(resourceEntity.getId().toString())
+                                            .setNodeIcon(resourceEntity.getIconClass())
+                                            .setChildren(traverse2(resourceEntity.getChildren()))
+                       ).collect(Collectors.toList());
+        
+    }
+    
+    @Override
+    public List<TreeSelectInputNode.TreeNode> listRootTreeNode() {
+        List<ResourceEntity> list = resourceDao.findAllByParentIsNullOrderBySortOrder();
+        return traverse2(list);
     }
     
     private static String chooseFieldByLocal(ResourceEntity resourceEntity) {
@@ -97,4 +120,5 @@ public class ResourceService {
         }
         resourceDao.save(resourceEntity1);
     }
+    
 }

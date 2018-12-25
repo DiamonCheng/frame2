@@ -63,9 +63,9 @@ public class SelectInputGenerator implements ViewGenerator {
         } else {
             selectInput.setLabel(labelConfigured);
         }
-        
+    
         Arrays.stream(selectInputAnnotation.validators()).forEach(selectInput::addValidator);
-        
+    
         //placeHolder -- options
         String className = selectInputAnnotation.optionProvider();
         OptionProvider optionProvider = null;
@@ -91,12 +91,34 @@ public class SelectInputGenerator implements ViewGenerator {
             }
             throw ex2;
         }
-        
+    
         Locale locale = LocaleContextHolder.getLocale();
         List<Option> options = optionProvider.listOptions(selectInputAnnotation.optionProviderKey(), locale);
         if (!StringUtils.isEmpty(selectInputAnnotation.placeHolder())) {
             selectInput.addOption(new Option().setText(selectInputAnnotation.placeHolder()).setValue(""));
         }
+        String valueStr = null;
+        valueStr = extractValueStrByFieldChain(data1, fieldChain, value);
+    
+        Set<String> values = new HashSet<>();
+        if (valueStr != null) {
+            values.addAll(Arrays.asList(valueStr.split(",")));
+        }
+        options.forEach(option -> {
+            if (values.contains(option.getValue())) {
+                option.setSelected(true);
+            }
+            selectInput.addOption(option);
+        });
+        // multi select check
+        Field f = fieldChain.get(fieldChain.size() - 1);
+        if (Collection.class.isAssignableFrom(f.getType()) || f.getType().isArray()) {
+            selectInput.multipleSelect(true);
+        }
+        return selectInput;
+    }
+    
+    public static String extractValueStrByFieldChain(Object data1, List<Field> fieldChain, Object value) {
         String valueStr = null;
         if (value != null) {
             int index = 0;
@@ -116,22 +138,6 @@ public class SelectInputGenerator implements ViewGenerator {
                 valueStr = DataFieldExtractor.extractValue(fieldData, fieldName);
             }
         }
-        
-        Set<String> values = new HashSet<>();
-        if (valueStr != null) {
-            values.addAll(Arrays.asList(valueStr.split(",")));
-        }
-        options.forEach(option -> {
-            if (values.contains(option.getValue())) {
-                option.setSelected(true);
-            }
-            selectInput.addOption(option);
-        });
-        // multi select check
-        Field f = fieldChain.get(fieldChain.size() - 1);
-        if (Collection.class.isAssignableFrom(f.getType()) || f.getType().isArray()) {
-            selectInput.multipleSelect(true);
-        }
-        return selectInput;
+        return valueStr;
     }
 }

@@ -1,8 +1,11 @@
 package com.dc.dcrud.domain;
 
+import com.dc.dcrud.extractor.RoleEntityDataExtractor;
 import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.TreeSelectInput;
 import com.dc.frame2.core.domain.BaseConfigEntity;
+import com.dc.frame2.data.Extractor;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -31,6 +34,8 @@ public class RoleEntity extends BaseConfigEntity {
     private String description;
     @ManyToMany(targetEntity = ResourceEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
+    @Extractor(RoleEntityDataExtractor.class)
+    @TreeSelectInput(optionProvider = "resourceService")
     private Set<ResourceEntity> resources;
     
     public String getCode() {

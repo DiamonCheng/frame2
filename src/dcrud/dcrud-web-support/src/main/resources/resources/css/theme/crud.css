@@ -24,3 +24,94 @@
 .layui-card-body.option-buttons {
     position: static;
 }
+
+/* tree select */
+
+.tree-select dd.tree-select-node dd.tree-select-node {
+    padding-left: 30px;
+}
+
+.tree-select dd.tree-select-node > * {
+}
+
+.tree-select dd.tree-select-node > span.tree-select-expand:not(:nth-last-child(2)):before {
+    content: '\e602';
+    font-family: layui-icon;
+}
+
+.tree-select dd.tree-select-node > span.tree-select-expand:not(:nth-last-child(2)):hover {
+    background-color: #d2d2d2;
+}
+
+.tree-select dd.tree-select-node > span.tree-select-expand {
+    display: block;
+    transform: rotate(0deg);
+    width: 30px;
+    /* height: 30px; */
+    /* line-height: 30px; */
+    padding: 3px 0px;
+    float: left;
+    margin-right: 2px;
+    font-weight: bolder;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.tree-select dd.tree-select-node.close dd.tree-select-node, .tree-select dd.tree-select-node dd.tree-select-node {
+    height: 0;
+    overflow: hidden;
+}
+
+.tree-select dd.tree-select-node.open dd.tree-select-node {
+    height: 32px;
+}
+
+.tree-select dd.tree-select-node.open > span.tree-select-expand:not(:nth-last-child(2)) {
+    transform: rotate(90deg);
+}
+
+.tree-select div.tree-select-node-wrap {
+    display: inline-block;
+    padding: 3px 5px 3px 5px;
+    color: white;
+    background-color: #d2d2d2;
+    margin-bottom: 2px;
+    border-radius: 2px;
+}
+
+.tree-select div.tree-select-node-wrap:before {
+    content: "\e618";
+    font-family: layui-icon !important;
+    display: block;
+    background-color: white;
+    color: #d2d2d2;
+    float: left;
+    margin-left: -2px;
+    margin-right: 3px;
+    width: 24px;
+}
+
+.tree-select input[type=checkbox] {
+    display: none !important;
+}
+
+/*.tree-select input[type=checkbox]:checked{*/
+/*width: 18px;*/
+/*height: 18px;*/
+/*}*/
+.tree-select div.tree-select-node-wrap:hover:before {
+    color: #c2c2c2;
+}
+
+.tree-select input[type=checkbox]:checked + div.tree-select-node-wrap:before {
+    color: #5FB878;
+}
+
+.tree-select div.tree-select-node-wrap:hover {
+    background-color: #c2c2c2;
+}
+
+.tree-select input[type=checkbox]:checked + div.tree-select-node-wrap {
+    background-color: #5FB878;
+}

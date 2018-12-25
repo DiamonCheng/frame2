@@ -77,6 +77,7 @@ public class QueryTestController {
                                ).addCondition(
                                        new CheckboxInput()
                                                .setValues(Arrays.asList("1", "2"))
+                                               .setName("CheckBoxInput")
                                                .addOption(new Option().setText("crud.query.test.checkboxView.option.text.1").setValue("1"))
                                                .addOption(new Option().setText("crud.query.test.checkboxView.option.text.2").setValue("2"))
                                                .addOption(new Option().setText("crud.query.test.checkboxView.option.text.3").setValue("3"))

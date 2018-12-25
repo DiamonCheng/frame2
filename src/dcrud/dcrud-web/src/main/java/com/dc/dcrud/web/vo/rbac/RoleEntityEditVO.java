@@ -4,6 +4,7 @@ import com.dc.dcrud.web.view.support.viewpojo.edit.EditPanelConfig;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.HiddenInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.ReadonlyTextInput;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TextInput;
+import com.dc.dcrud.web.view.support.viewpojo.inputview.TreeSelectInput;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class RoleEntityEditVO {
     @TextInput(label = "com.dc.dcrud.domain.RoleEntity.description")
     private String description;
     
+    @TreeSelectInput(optionProvider = "resourceService", label = "com.dc.dcrud.domain.RoleEntity.resources")
     private Long[] resources;
     
     @ReadonlyTextInput(label = "com.dc.dcrud.domain.createDateTime")

@@ -22,4 +22,5 @@ public interface ViewGenerator {
     void configure(String path);
     
     Frame2View generate(Object data, List<Field> fieldChain, Object fieldData);
+    
 }
