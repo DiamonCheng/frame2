@@ -8,6 +8,7 @@ import com.dc.dcrud.service.util.OptimisticLockCheckUtil;
 import org.apache.shiro.crypto.hash.Sha1Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
  * @date 2018/4/21.
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserService {
     
     @Autowired

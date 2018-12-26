@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.bind.support.WebBindingInitializer;
@@ -102,8 +103,14 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         return new DcrudInterceptor();
     }
     
+    @Bean
+    public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
+        return new OpenEntityManagerInViewInterceptor();
+    }
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
         registry.addInterceptor(webContextBinder());
         registry.addInterceptor(localeChangeInterceptor());
         registry.addInterceptor(dcrudInterceptor());

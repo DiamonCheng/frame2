@@ -1,9 +1,11 @@
 package com.dc.dcrud.web.interceptor;
 
 
-import com.dc.dcrud.dao.UserDao;
 import com.dc.dcrud.domain.UserEntity;
+import com.dc.dcrud.pojo.Menu;
 import com.dc.dcrud.pojo.User;
+import com.dc.dcrud.service.rbac.ResourceService;
+import com.dc.dcrud.service.rbac.UserService;
 import com.dc.dcrud.service.shiro.SecurityRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>Descriptions...
@@ -28,8 +31,9 @@ import java.util.Collection;
 public class DcrudInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(DcrudInterceptor.class);
     @Autowired
-    private UserDao userDao;
-    
+    private UserService userService;
+    @Autowired
+    private ResourceService resourceService;
 
     /**
      * 如果记住用户了 但是session里面的用户超时了，就重新查询用户信息
@@ -53,12 +57,17 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
             if (user == null) {
                 try {
                     String userName = (String) realm.iterator().next();
-                    UserEntity userEntity = userDao.getUserEntityByUsername(userName);
+                    UserEntity userEntity = userService.getUserByUsername(userName);
                     user = new User().setUsername(userName).setNickName(userEntity.getNickName()).setId(userEntity.getId());
                     session.setAttribute(User.USER_KEY, user);
                 } catch (Exception e) {
                     LOGGER.warn("Failed to refresh user state, it may cause other exception.", e);
                 }
+            }
+            List<?> menuList = (List<?>) session.getAttribute(Menu.MENU_KEY);
+            if (menuList == null) {
+                menuList = resourceService.loadUserMenu();
+                session.setAttribute(Menu.MENU_KEY, menuList);
             }
         }
         

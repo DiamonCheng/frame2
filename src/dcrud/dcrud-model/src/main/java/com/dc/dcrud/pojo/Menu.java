@@ -10,6 +10,7 @@ import java.util.List;
  * @date 2018/12/5.
  */
 public class Menu implements Serializable {
+    public static final String MENU_KEY = "MENU";
     private String name;
     private String code;
     private String uri;

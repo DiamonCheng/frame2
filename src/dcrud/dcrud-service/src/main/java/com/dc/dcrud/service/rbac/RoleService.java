@@ -7,6 +7,7 @@ import com.dc.dcrud.searcher.RoleSearcher;
 import com.dc.dcrud.service.util.OptimisticLockCheckUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
  * @date 2018/12/21.
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class RoleService {
     @Autowired
     private RoleDao roleDao;

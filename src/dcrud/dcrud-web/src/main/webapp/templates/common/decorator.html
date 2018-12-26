@@ -180,7 +180,7 @@ NOTICE:
 
                     </dd>
                 </dl>-->
-                <div th:replace="common/menu::menu(menuList=${menus})"></div>
+                <div th:replace="common/menu::menu(menuList=${session['MENU']})"></div>
             </div>
         </div>
         <!-- 主体内容 -->

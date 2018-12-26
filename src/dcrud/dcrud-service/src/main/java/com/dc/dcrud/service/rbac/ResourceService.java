@@ -8,9 +8,11 @@ import com.dc.dcrud.service.util.OptimisticLockCheckUtil;
 import com.dc.dcrud.web.view.query.TreeSelectInputNode;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.TreeNodeProvider;
 import com.dc.frame2.core.exception.TranslatableException;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
  * @date 2018/12/5.
  */
 @Service("resourceService")
+@Transactional(rollbackFor = Exception.class)
 public class ResourceService implements TreeNodeProvider {
     @Autowired
     private ResourceDao resourceDao;
@@ -32,10 +35,10 @@ public class ResourceService implements TreeNodeProvider {
         return traverse(list);
     }
     
-    private List<Menu> traverse(List<ResourceEntity> operationEntities) {
-        //TODO 2 filter menu by role operation
+    private List<Menu> traverse(List<ResourceEntity> resourceEntities) {
         // hibernate 只会返回空集合所以不需要判空
-        return operationEntities.stream()
+        return resourceEntities.stream()
+                       .filter(resourceEntity -> SecurityUtils.getSubject().isPermitted(resourceEntity.getCode()))
                        .map(resourceEntity ->
                                     new Menu()
                                             .setName(chooseFieldByLocal(resourceEntity))
