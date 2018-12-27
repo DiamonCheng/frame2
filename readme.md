@@ -1,5 +1,9 @@
 # frame2 crud framework
-
+## Guide
+* 代码位置 src/frame2 src/dcrud
+* 数据库初试数据位置 doc\init_sql\init_data.sql
+* 登录用户 DC/101010
+* 创建用户之后初始密码 233333
 ## 定义
 JavaEE 页面编码框架。
 
