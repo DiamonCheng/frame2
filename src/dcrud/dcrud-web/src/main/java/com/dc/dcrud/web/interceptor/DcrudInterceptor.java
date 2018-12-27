@@ -14,6 +14,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>Descriptions...
@@ -65,9 +67,12 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
                 }
             }
             List<?> menuList = (List<?>) session.getAttribute(Menu.MENU_KEY);
-            if (menuList == null) {
+            Object langMenu = session.getAttribute(Menu.MENU_LANG_KEY);
+            Object langPage = LocaleContextHolder.getLocale().getLanguage();
+            if (menuList == null || !Objects.equals(langMenu, langPage)) {
                 menuList = resourceService.loadUserMenu();
                 session.setAttribute(Menu.MENU_KEY, menuList);
+                session.setAttribute(Menu.MENU_LANG_KEY, langPage);
             }
         }
         

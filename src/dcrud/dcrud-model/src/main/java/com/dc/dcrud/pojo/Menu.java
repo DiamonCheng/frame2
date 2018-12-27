@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Menu implements Serializable {
     public static final String MENU_KEY = "MENU";
+    public static final String MENU_LANG_KEY = "MENU_LANG";
     private String name;
     private String code;
     private String uri;
