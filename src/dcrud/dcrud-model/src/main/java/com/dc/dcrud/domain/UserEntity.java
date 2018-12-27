@@ -34,7 +34,7 @@ public class UserEntity extends BaseConfigEntity {
     @SelectInput(placeHolder = "crud.edit.field.select.option.toCheck",
             name = "roles",
             optionProvider = "HqlOptionProvider",
-            optionProviderKey = "select name,id from RoleEntity")
+            optionProviderKey = "select name as text,id as value from RoleEntity")
     @ManyToMany(targetEntity = RoleEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "none"))
     @Extractor(UserEntityRoleDataExtractor.class)

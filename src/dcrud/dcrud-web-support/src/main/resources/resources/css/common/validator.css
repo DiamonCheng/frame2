@@ -13,6 +13,7 @@ form .danger-text {
 form .danger-tip {
     margin-top: 1px;
     line-height: 19px;
+    position: absolute;
     /* padding-left: 10px; */
 }
 
