@@ -20,5 +20,8 @@ $(function () {
         var checked = $this.prop("checked");
         // console.log("onchange",this,$this.prop("checked"));
         $this.parent().next().find(":checkbox").prop("checked", checked);
+        if (checked) {
+            $this.parent().parent().parents("dd.tree-select-node").children("label.tree-select-node-label").children(":checkbox").prop("checked", checked);
+        }
     });
 });
