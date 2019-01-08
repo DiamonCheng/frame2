@@ -13,6 +13,13 @@
     text-align: right;
 }
 
+.data-table {
+    overflow-x: auto;
+}
+
+.data-table table, .data-table table * {
+    transition: none !important;
+}
 .page-bar > .layui-laypage {
     margin: 0;
 }

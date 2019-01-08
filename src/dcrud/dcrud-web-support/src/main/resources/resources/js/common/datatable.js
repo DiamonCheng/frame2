@@ -88,9 +88,9 @@ $(function () {
             .submit();
         e.stopPropagation();
     });
-    $('#pageForm').find(".data-table table th[sortable]").click(function () {
-        var sortField = $(this).attr("sortFieldName");
-        var order = $(this).attr("sort");
+    var changeSortFunction = function (e) {
+        var sortField = $(e).attr("sortFieldName");
+        var order = $(e).attr("sort");
         if (order == null || order === "") {
             order = "ASC"
         } else if (order.toUpperCase() === "ASC") {
@@ -105,8 +105,76 @@ $(function () {
         $('#pageForm')
             .append($("<input type='hidden' name='pageSize'>").val($("#page-bar").attr("pageSize")))
             .submit();
+    };
+    $('#pageForm').find(".data-table table th[sortable]").click(function () {
+        // 由于拖拽和排序点击冲突，故直接把排序的单击事件写进拖拽里面
+        //changeSortFunction(this);
     });
     $('.query-panel-head')
+    // .attr('unselectable', 'on')
+    // .css('user-select', 'none')
+        .on('selectstart', false);
+
+    // data table column draggable
+    // 由于拖拽和排序点击冲突，故直接把排序的单击事件写进拖拽里面
+    /**
+     * Created by ywj on 2017/10/24.
+     */
+    var tabSize = tabSize || {};
+    tabSize.init = function (elem) {
+        var i,
+            self,
+            table = elem,
+            header = table.rows[0],
+            tableX = header.clientWidth,
+            length = header.cells.length;
+
+        for (i = 0; i < length; i++) {
+            header.cells[i].onmousedown = function (e) {
+                self = this;
+                if (event.offsetX > self.offsetWidth - 10) {
+                    self.mouseDown = true;
+                    self.oldX = event.x;
+                    self.oldWidth = self.offsetWidth;
+                }
+            };
+            header.cells[i].onmousemove = function (e) {
+                if (event.offsetX > this.offsetWidth - 10) {
+                    this.style.cursor = 'col-resize';
+                } else {
+                    this.style.cursor = 'default';
+                }
+                if (self == undefined) {
+                    self = this;
+                }
+                if (self.mouseDown != null && self.mouseDown == true) {
+                    self.style.cursor = 'default';
+                    if (self.oldWidth + (event.x - self.oldX) > 0) {
+                        self.width = self.oldWidth + (event.x - self.oldX);
+                    }
+                    self.style.width = self.width;
+                    table.style.width = tableX + (event.x - self.oldX) + 'px';
+                    self.style.cursor = 'col-resize';
+                }
+            };
+            table.onmouseup = function (e) {
+                if (self == undefined) {
+                    self = this;
+                }
+                if (self.mouseDown != null && self.mouseDown == true) {
+                    self.mouseDown = false;
+                    self.style.cursor = 'default';
+                    tableX = header.clientWidth;
+                } else if ($(e.target).is("#pageForm .data-table table th[sortable]")) {
+                    changeSortFunction(e.target);
+                }
+
+
+            };
+        }
+    };
+    tabSize.init($('#pageForm').find(".data-table>table")[0]);
+    $('.data-table>table th')
     // .attr('unselectable', 'on')
     // .css('user-select', 'none')
         .on('selectstart', false);

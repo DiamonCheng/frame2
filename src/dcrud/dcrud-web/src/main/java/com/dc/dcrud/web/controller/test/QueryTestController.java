@@ -106,6 +106,7 @@ public class QueryTestController {
         
                 ).addContent(
                         new DefaultDataTableView()
+                                .setId("t1")
                                 .setPageParameters(3, 10, 233)
                                 .setData(Arrays.asList(
                                         new UserEntity()
