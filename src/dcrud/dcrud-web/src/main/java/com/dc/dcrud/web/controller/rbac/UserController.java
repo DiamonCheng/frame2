@@ -1,8 +1,8 @@
 package com.dc.dcrud.web.controller.rbac;
 
-import com.dc.dcrud.domain.RoleEntity;
-import com.dc.dcrud.domain.UserEntity;
-import com.dc.dcrud.searcher.UserSearcher;
+import com.dc.dcrud.model.domain.RoleEntity;
+import com.dc.dcrud.model.domain.UserEntity;
+import com.dc.dcrud.model.searcher.UserSearcher;
 import com.dc.dcrud.service.rbac.UserService;
 import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;

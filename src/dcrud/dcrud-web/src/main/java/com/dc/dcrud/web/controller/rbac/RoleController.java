@@ -1,8 +1,8 @@
 package com.dc.dcrud.web.controller.rbac;
 
-import com.dc.dcrud.domain.ResourceEntity;
-import com.dc.dcrud.domain.RoleEntity;
-import com.dc.dcrud.searcher.RoleSearcher;
+import com.dc.dcrud.model.domain.ResourceEntity;
+import com.dc.dcrud.model.domain.RoleEntity;
+import com.dc.dcrud.model.searcher.RoleSearcher;
 import com.dc.dcrud.service.rbac.RoleService;
 import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;

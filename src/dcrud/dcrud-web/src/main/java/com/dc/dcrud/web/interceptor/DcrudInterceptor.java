@@ -1,12 +1,13 @@
 package com.dc.dcrud.web.interceptor;
 
 
-import com.dc.dcrud.domain.UserEntity;
-import com.dc.dcrud.pojo.Menu;
-import com.dc.dcrud.pojo.User;
+import com.dc.dcrud.model.domain.UserEntity;
+import com.dc.dcrud.api.pojo.Menu;
+import com.dc.dcrud.api.pojo.User;
 import com.dc.dcrud.service.rbac.ResourceService;
 import com.dc.dcrud.service.rbac.UserService;
 import com.dc.dcrud.service.shiro.SecurityRealm;
+import com.dc.frame2.util.web.WebContextBinder;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -63,6 +64,7 @@ public class DcrudInterceptor extends HandlerInterceptorAdapter {
                     UserEntity userEntity = userService.getUserByUsername(userName);
                     user = new User().setUsername(userName).setNickName(userEntity.getNickName()).setId(userEntity.getId());
                     session.setAttribute(User.USER_KEY, user);
+                    WebContextBinder.getSession().setAttribute(User.USER_KEY, user);
                 } catch (Exception e) {
                     LOGGER.warn("Failed to refresh user state, it may cause other exception.", e);
                 }

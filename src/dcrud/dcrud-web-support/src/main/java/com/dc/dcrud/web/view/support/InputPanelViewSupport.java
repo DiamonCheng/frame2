@@ -3,7 +3,7 @@ package com.dc.dcrud.web.view.support;
 import com.dc.dcrud.web.view.query.ConditionView;
 import com.dc.dcrud.web.view.support.viewpojo.ViewGenerator;
 import com.dc.dcrud.web.view.support.viewpojo.inputview.InputViewConfigurator;
-import com.dc.frame2.ReflectionUtils;
+import com.dc.frame2.util.ReflectionUtils;
 import com.dc.frame2.view.Frame2View;
 import org.springframework.util.StringUtils;
 

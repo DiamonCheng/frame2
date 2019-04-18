@@ -1,7 +1,8 @@
 package com.dc.dcrud.web.view.support.viewpojo.inputview;
 
 import com.dc.dcrud.web.view.support.viewpojo.ViewGenerator;
-import com.dc.frame2.ReflectionUtils;
+import com.dc.frame2.dict.OptionProvider;
+import com.dc.frame2.util.ReflectionUtils;
 import com.dc.frame2.data.DataFieldExtractor;
 import com.dc.frame2.util.SpringContextUtils;
 import com.dc.frame2.view.Frame2View;

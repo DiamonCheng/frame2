@@ -1,18 +1,21 @@
 package com.dc.dcrud.web;
 
 import com.dc.dcrud.web.interceptor.DcrudInterceptor;
+import com.dc.frame2.dict.HqlOptionProvider;
 import com.dc.frame2.util.SpringContextUtils;
 import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
 import com.dc.frame2.view.support.Frame2ViewConfiguration;
 import com.dc.frame2.view.support.Frame2ViewSpringConfiguration;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.web.servlet.ErrorPage;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.ErrorPageRegistrar;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -24,13 +27,13 @@ import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.bind.support.WebBindingInitializer;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import javax.servlet.Filter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,13 +47,10 @@ import java.util.Locale;
  */
 @Configuration
 @Import({Frame2ViewSpringConfiguration.class})
-public class WebConfiguration extends WebMvcConfigurerAdapter {
-    private static final String[] MESSAGE_SOURCE_LOCATIONS = {
-            "classpath:/i18n/messages",
-            "classpath:/i18n/messages_page",
-            "classpath:/i18n/messages_base",
-            "classpath:/i18n/messages_page_base"
-    };
+public class WebConfiguration implements WebMvcConfigurer {
+    
+    @Value("${spring.messages.basename}")
+    private String[] messageSourceBaseNames;
     
     @Value("${debug:false}")
     private boolean debug;
@@ -60,7 +60,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource=new ReloadableResourceBundleMessageSource();
         reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
         reloadableResourceBundleMessageSource.setUseCodeAsDefaultMessage(true);
-        reloadableResourceBundleMessageSource.setBasenames(MESSAGE_SOURCE_LOCATIONS);
+        reloadableResourceBundleMessageSource.setBasenames(messageSourceBaseNames);
         if (debug) {
             reloadableResourceBundleMessageSource.setCacheMillis(0);
         }
@@ -113,12 +113,12 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
         registry.addInterceptor(webContextBinder());
         registry.addInterceptor(localeChangeInterceptor());
-        registry.addInterceptor(dcrudInterceptor());
+        registry.addInterceptor(dcrudInterceptor()).excludePathPatterns("/error/*");
     }
     
     @Bean
     public FilterRegistrationBean getConfigurableSiteMeshFilter(){
-        FilterRegistrationBean registrationBean=new FilterRegistrationBean();
+        FilterRegistrationBean<Filter> registrationBean=new FilterRegistrationBean<>();
         registrationBean.setFilter(new ConfigurableSiteMeshFilter(){
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
@@ -129,16 +129,26 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
             }
         });
         registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(1000);
         return registrationBean;
     }
     
     @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer() {
-        return container -> {
-            container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
-            container.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, "/error/403"));
-            container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500"));
-            container.addErrorPages(new ErrorPage(Throwable.class, "/error/500"));
+    public FilterRegistrationBean getShiroFilter(ShiroFilterFactoryBean shiroFilterFactoryBean) throws Exception {
+        FilterRegistrationBean<Filter> registrationBean=new FilterRegistrationBean<>();
+        registrationBean.setFilter((Filter) shiroFilterFactoryBean.getObject());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(10);
+        return registrationBean;
+    }
+    
+    @Bean
+    public ErrorPageRegistrar containerCustomizer() {
+        return registry -> {
+                    registry.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
+                    registry.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, "/error/403"));
+                    registry.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500"));
+                    registry.addErrorPages(new ErrorPage(Throwable.class, "/error/500"));
         };
     }
     
@@ -151,8 +161,8 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public WebBindingInitializer configurableWebBindingInitializer() {
         return new ConfigurableWebBindingInitializer() {
             @Override
-            public void initBinder(WebDataBinder binder, WebRequest request) {
-                super.initBinder(binder, request);
+            public void initBinder(WebDataBinder binder) {
+                super.initBinder(binder);
                 bindingDateEditor(binder);
                 bindingArrayEditor(binder);
             }
@@ -204,5 +214,10 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         binder.registerCustomEditor(Long[].class, sae);
         binder.registerCustomEditor(Integer[].class, sae);
         binder.registerCustomEditor(Short[].class, sae);
+    }
+    
+    @Bean(name = "HqlOptionProvider")
+    public HqlOptionProvider hqlOptionProvider(){
+        return new HqlOptionProvider();
     }
 }

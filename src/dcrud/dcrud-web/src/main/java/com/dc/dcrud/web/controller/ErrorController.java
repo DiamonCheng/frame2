@@ -6,7 +6,7 @@ import com.dc.frame2.util.web.MessageResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,7 @@ import java.io.StringWriter;
  */
 @Controller
 @RequestMapping("/error")
-public class ErrorController implements org.springframework.boot.autoconfigure.web.ErrorController {
+public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
     private static final String ERROR_PATH = "error";
     private static final String ERROR_ATTRIBUTE = DefaultErrorAttributes.class.getName()
                                                           + ".ERROR";

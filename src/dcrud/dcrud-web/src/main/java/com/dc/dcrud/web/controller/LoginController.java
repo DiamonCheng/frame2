@@ -1,6 +1,6 @@
 package com.dc.dcrud.web.controller;
 
-import com.dc.dcrud.domain.UserEntity;
+import com.dc.dcrud.model.domain.UserEntity;
 import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
 import org.apache.shiro.SecurityUtils;

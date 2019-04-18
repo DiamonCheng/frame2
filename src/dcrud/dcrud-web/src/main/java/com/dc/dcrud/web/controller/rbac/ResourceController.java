@@ -1,7 +1,7 @@
 package com.dc.dcrud.web.controller.rbac;
 
-import com.dc.dcrud.domain.ResourceEntity;
-import com.dc.dcrud.searcher.ResourceSearcher;
+import com.dc.dcrud.model.domain.ResourceEntity;
+import com.dc.dcrud.model.searcher.ResourceSearcher;
 import com.dc.dcrud.service.rbac.ResourceService;
 import com.dc.dcrud.web.view.support.EditViewFactory;
 import com.dc.dcrud.web.view.support.QueryPageViewFactory;

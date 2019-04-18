@@ -1,5 +1,6 @@
 package com.dc.dcrud.web.view.data;
 
+import com.dc.frame2.util.ReflectionUtils;
 import com.dc.frame2.data.DataFieldExtractor;
 import com.dc.frame2.util.MapBuilder;
 
@@ -87,7 +88,7 @@ public class DefaultTableHeadView implements TableHeadView {
     
     @Override
     public DataCellView resolveDataCellView(List<?> dataList, Object data, int index) {
-        String content = DataFieldExtractor.extractText(data, fieldName);
+        String content = extractText(data,fieldName);
         return new DataCellView() {
             @Override
             public Object getCellData() {
@@ -110,5 +111,12 @@ public class DefaultTableHeadView implements TableHeadView {
                 ).build();
             }
         };
+    }
+    private String extractText(Object data,String fieldName){
+        String[] fields=fieldName.split("\\.");
+        for(int i=0;i<fields.length-1 && data!=null;i++){
+            data=ReflectionUtils.getValueByField(data,fields[i]);
+        }
+        return DataFieldExtractor.extractText(data, fields[fields.length-1]);
     }
 }

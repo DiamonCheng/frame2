@@ -1,8 +1,8 @@
 package com.dc.dcrud.web.controller.test;
 
 import com.dc.dcrud.dao.UserDao;
-import com.dc.dcrud.domain.UserEntity;
-import com.dc.dcrud.searcher.UserSearcher;
+import com.dc.dcrud.model.domain.UserEntity;
+import com.dc.dcrud.model.searcher.UserSearcher;
 import com.dc.frame2.core.dto.AjaxResult;
 import com.dc.frame2.view.view.freemarker.ListContentView;
 import com.dc.frame2.view.view.freemarker.SimpleContentView;

@@ -25,6 +25,7 @@
  */
 
 $(function menu_option() {
+    $(".side-menu").addClass("no-transition");
     $(".side-menu a[href]").each(function () {
         var $this = $(this);
         if (window.location.pathname === $this.attr("href")) {
@@ -38,6 +39,10 @@ $(function menu_option() {
                 .addClass("open");
         }
     });
+    setTimeout(function(){
+        $(".side-menu").removeClass("no-transition");
+    },200);
+
     /*menu click event*/
     $(document).on("click", ".side-menu dd.menu-item>a", function () {
         // console.log(this);

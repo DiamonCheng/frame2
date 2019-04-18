@@ -77,8 +77,11 @@ $(function () {
             $sort.append($('<input type="hidden" name="orderBy">').attr("fieldname", sort.fieldName).val(sort.fieldName + " " + sort.sort));
         }
     }
+    var sortBtnClick=false;
     $('#pageForm').append($sort);
     $('#pageForm').find(".data-table table th[sortable] .sort-btn").click(function (e) {
+        if (sortBtnClick){return;}
+        sortBtnClick=true;
         var sortField = $(this).attr("sortFieldName");
         var order = $(this).attr("sortOrder");
         $sort.find("input[name=orderBy][fieldName='" + sortField + "']").remove();
@@ -89,6 +92,8 @@ $(function () {
         e.stopPropagation();
     });
     var changeSortFunction = function (e) {
+        if (sortBtnClick){return;}
+        sortBtnClick=true;
         var sortField = $(e).attr("sortFieldName");
         var order = $(e).attr("sort");
         if (order == null || order === "") {
