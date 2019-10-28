@@ -36,7 +36,7 @@ public class UserEntity extends BaseConfigEntity {
             optionProvider = "HqlOptionProvider",
             optionProviderKey = "select name as text,id as value from RoleEntity")
     @ManyToMany(targetEntity = RoleEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(foreignKey = @ForeignKey(name = "none"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_role"))
     @Extractor(UserEntityRoleDataExtractor.class)
     private Set<RoleEntity> roles;
     

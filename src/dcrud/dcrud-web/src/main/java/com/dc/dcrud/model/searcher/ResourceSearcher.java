@@ -88,17 +88,19 @@ public class ResourceSearcher extends PageSearcher<ResourceEntity> {
         }
     }
     
-    @TextInput
+    @TextInput( label = "com.dc.dcrud.searcher.ResourceSearcher.code")
     @Condition(operator = CompareOperator.DUP_LIKE)
     private String code;
-    @TextInput
+    @TextInput( label = "com.dc.dcrud.searcher.ResourceSearcher.name")
     @NotCondition
     private String name;
     
     private NameGroup nameGroup = new NameGroup();
     
     @Condition(joinType = JoinType.LEFT, value = "parent.id")
-    @SelectInput(placeHolder = "crud.query.condition.select.option.all",
+    @SelectInput(
+            label = "com.dc.dcrud.searcher.ResourceSearcher.parentId",
+            placeHolder = "crud.query.condition.select.option.all",
             optionProvider = "HqlOptionProvider",
             optionProviderKey = "select nameZh as text,nameZh as text_zh,nameEn as text_en,id as value from ResourceEntity res where res.children is not empty")
     private Long parentId;

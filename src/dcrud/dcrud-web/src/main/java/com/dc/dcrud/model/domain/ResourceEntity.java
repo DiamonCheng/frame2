@@ -24,8 +24,12 @@ import java.util.List;
         addTitle = "crud.resourceEntity.edit.add.title"
 )
 public class ResourceEntity extends BaseConfigEntity {
+    /**
+     * Code 字段枚举，表明资源类型
+     */
     public enum Type implements TranslatableEnum {
-        MENU("menu");
+    
+        /*菜单类型*/ MENU("menu");
         
         Type(String code) {
             this.code = code;
@@ -65,10 +69,10 @@ public class ResourceEntity extends BaseConfigEntity {
             optionProviderKey = "select nameZh as text,nameZh as text_zh,nameEn as text_en,id as value from ResourceEntity res")
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "none"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_resource_self"))
     private ResourceEntity parent;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "none"))
+    @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "fk_resource_self"))
     @OrderBy("sortOrder")
     private List<ResourceEntity> children;
     

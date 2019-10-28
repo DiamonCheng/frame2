@@ -33,7 +33,7 @@ public class RoleEntity extends BaseConfigEntity {
     @TextInput()
     private String description;
     @ManyToMany(targetEntity = ResourceEntity.class, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "none"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_role_resources"))
     @Extractor(RoleEntityDataExtractor.class)
     @TreeSelectInput(optionProvider = "resourceService")
     private Set<ResourceEntity> resources;

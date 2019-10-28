@@ -6,10 +6,12 @@ import com.dc.frame2.util.SpringContextUtils;
 import com.dc.frame2.util.web.MessageResolver;
 import com.dc.frame2.util.web.WebContextBinder;
 import com.dc.frame2.view.support.Frame2ViewConfiguration;
+import com.dc.frame2.view.support.Frame2ViewHandler;
 import com.dc.frame2.view.support.Frame2ViewSpringConfiguration;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -27,6 +29,7 @@ import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.bind.support.WebBindingInitializer;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -37,6 +40,7 @@ import javax.servlet.Filter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -52,8 +56,11 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Value("${spring.messages.basename}")
     private String[] messageSourceBaseNames;
     
-    @Value("${debug:false}")
-    private boolean debug;
+    @Value("${debug}")
+    private String debug;
+    
+    @Autowired
+    private Frame2ViewHandler frame2ViewHandler;
     
     @Bean
     public MessageSource messageSource(){
@@ -61,7 +68,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
         reloadableResourceBundleMessageSource.setUseCodeAsDefaultMessage(true);
         reloadableResourceBundleMessageSource.setBasenames(messageSourceBaseNames);
-        if (debug) {
+        if ("true".equalsIgnoreCase(debug)||"enabled".equalsIgnoreCase(debug)) {
             reloadableResourceBundleMessageSource.setCacheMillis(0);
         }
         return reloadableResourceBundleMessageSource;
@@ -152,9 +159,17 @@ public class WebConfiguration implements WebMvcConfigurer {
         };
     }
     
+    @Override
+    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
+        returnValueHandlers.add(frame2ViewHandler);
+    }
     @Bean
-    public Frame2ViewConfiguration frame2ViewConfiguration(@Value("${debug:false}") boolean debug) {
-        return new Frame2ViewConfiguration().setDebug(debug);
+    public Frame2ViewConfiguration frame2ViewConfiguration(@Value("${debug:false}") String debug) {
+        if ("true".equalsIgnoreCase(debug)||"enabled".equalsIgnoreCase(debug)) {
+            return new Frame2ViewConfiguration().setDebug(true);
+        }else{
+            return new Frame2ViewConfiguration().setDebug(false);
+        }
     }
     
     @Bean

@@ -48,13 +48,13 @@ import com.dc.frame2.core.dto.PageSearcher;
 })
 @ConditionViewTitle("crud.userEntity.query.condition.title")
 public class RoleSearcher extends PageSearcher<RoleEntity> {
-    @TextInput
+    @TextInput(label = "com.dc.dcrud.searcher.RoleSearcher.name")
     @Condition(operator = CompareOperator.DUP_LIKE)
     private String name;
-    @TextInput
+    @TextInput(label = "com.dc.dcrud.searcher.RoleSearcher.code")
     @Condition(operator = CompareOperator.DUP_LIKE)
     private String code;
-    @TextInput
+    @TextInput(label="com.dc.dcrud.searcher.RoleSearcher.description")
     @Condition(operator = CompareOperator.DUP_LIKE)
     private String description;
     

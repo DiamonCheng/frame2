@@ -53,11 +53,11 @@ import com.dc.frame2.core.dto.PageSearcher;
 })
 @ConditionViewTitle("crud.userEntity.query.condition.title")
 public class UserSearcher extends PageSearcher<UserEntity> {
-    @TextInput
+    @TextInput(label = "com.dc.dcrud.searcher.UserSearcher.nickName")
     @Condition(operator = CompareOperator.DUP_LIKE)
     private String nickName;
     @Condition(operator = CompareOperator.DUP_LIKE)
-    @TextInput
+    @TextInput(label = "com.dc.dcrud.searcher.UserSearcher.roles")
     private String username;
     @Condition(operator = CompareOperator.EQ, value = "roles.id", joinType = JoinType.LEFT)
     @SelectInput(placeHolder = "crud.query.condition.select.option.all",
